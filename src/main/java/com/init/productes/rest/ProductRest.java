@@ -1,19 +1,32 @@
 package com.init.productes.rest;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.entity.Product;
+
 @RestController
-@RequestMapping("/")
+@RequestMapping("/products")
 public class ProductRest {
 
+	@GetMapping
+	public ResponseEntity<Product> sgetProduct(){
+		Product product = new Product();
+		product.setId(1L);
+		product.setName("holi");
+		return ResponseEntity.ok(product);
+		
+		
+	}
 
-	//@GetMapping
+	/*//@GetMapping
 	@RequestMapping(value= "hello", method=RequestMethod.GET)
 	public String hello() {
 		return "Hello world";
-	}
+	}*/
 	
 	/*
 	@GetMapping
