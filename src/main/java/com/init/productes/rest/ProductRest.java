@@ -1,16 +1,13 @@
 package com.init.productes.rest;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.init.productes.entity.Product;
-
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/")
 public class ProductRest {
+<<<<<<< HEAD
  
 	/*
 	@GetMapping
@@ -24,10 +21,19 @@ public class ProductRest {
 	}*/
 
 	@GetMapping
+=======
+
+
+	//@GetMapping
+>>>>>>> parent of 98932a8 (producte fet)
 	@RequestMapping(value= "hello", method=RequestMethod.GET)
 	public String hello() {
 		return "Hello world";
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> parent of 98932a8 (producte fet)
 	/*
 	@GetMapping
 	public ResponseEntity<List<Product>> getProduct(){
