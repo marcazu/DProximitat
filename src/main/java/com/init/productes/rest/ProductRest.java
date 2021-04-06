@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class ProductRest {
 <<<<<<< HEAD
+<<<<<<< HEAD
  
 	/*
 	@GetMapping
@@ -26,12 +27,20 @@ public class ProductRest {
 
 	//@GetMapping
 >>>>>>> parent of 98932a8 (producte fet)
+=======
+
+
+	//@GetMapping
+>>>>>>> parent of 98932a8 (producte fet)
 	@RequestMapping(value= "hello", method=RequestMethod.GET)
 	public String hello() {
 		return "Hello world";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 98932a8 (producte fet)
 	
 >>>>>>> parent of 98932a8 (producte fet)
 	/*
