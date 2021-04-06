@@ -1,5 +1,7 @@
 package com.init.productes.rest;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,8 @@ import com.init.productes.entity.Product;
 @RestController
 @RequestMapping("/products")
 public class ProductRest {
-
+ 
+	/*
 	@GetMapping
 	public ResponseEntity<Product> sgetProduct(){
 		Product product = new Product();
@@ -20,20 +23,19 @@ public class ProductRest {
 		return ResponseEntity.ok(product);
 		
 		
-	}
+	}*/
 
-	/*//@GetMapping
+	@GetMapping
 	@RequestMapping(value= "hello", method=RequestMethod.GET)
 	public String hello() {
 		return "Hello world";
-	}*/
-	
+	}
 	/*
 	@GetMapping
 	public ResponseEntity<List<Product>> getProduct(){
 
-		return ResponseEntity.ok(product);
-	}
-	*/
+		return null;
+		//return ResponseEntity.ok(product);
+	}*/
 
 }
