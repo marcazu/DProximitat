@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="products")
 public class Product {
-
+//heroku siusplau funciona
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
