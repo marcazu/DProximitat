@@ -23,7 +23,6 @@ public class ProducteController {
 	public ResponseEntity<List<Producte>> sgetProduct(){
 		List<Producte> productes = productRepository.findAll();
 		return ResponseEntity.ok(productes);
-		//return ResponseEntity.ok();
 		
 		
 	}
