@@ -1,16 +1,21 @@
 package com.init.productes.rest;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.ProductesRespository;
+
 
 @RestController
 @RequestMapping("/productes")
@@ -20,11 +25,21 @@ public class ProducteController {
 	private ProductesRespository productRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Producte>> sgetProduct(){
+	public ResponseEntity<List<Producte>> getProduct(){
 		List<Producte> productes = productRepository.findAll();
-		return ResponseEntity.ok(productes);
-		
-		
+		return ResponseEntity.ok(productes);	
+	}
+	
+	@RequestMapping(value ="{productId}")
+	public ResponseEntity<Producte>getProductById(@PathVariable("productId")Long productId){
+		Optional<Producte> optionalProduct = productRepository.findById(productId);		
+		if(optionalProduct.isPresent()) return ResponseEntity.ok(optionalProduct.get()); // no troba el objecte
+		else return ResponseEntity.noContent().build();
+	}
+	@PostMapping
+	public ResponseEntity<Producte> createProducte(@RequestBody Producte producte){
+		Producte newProducte = productRepository.save(producte);
+		return ResponseEntity.ok(newProducte);
 	}
 	/*
 	@GetMapping
