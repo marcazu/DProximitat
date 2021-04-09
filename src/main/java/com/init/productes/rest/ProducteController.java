@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,12 @@ public class ProducteController {
 	public ResponseEntity<Producte> createProducte(@RequestBody Producte producte){
 		Producte newProducte = productRepository.save(producte);
 		return ResponseEntity.ok(newProducte);
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<Void> deleteProducte(@PathVariable("productId")Long productId){
+		productRepository.deleteById(productId);
+		return ResponseEntity.ok(null);
 	}
 	/*
 	@GetMapping
