@@ -17,7 +17,7 @@ public class Producte {
 	private long id;
 	@Column(name="nom", nullable=false, length=30)
 	private String nom;
-	@Column(name="descripcio", length=30)
+	@Column(name="descripcio")
 	private String descripció;
 	@Column(name="tipus", nullable=false, length=30)
 	private String tipus;

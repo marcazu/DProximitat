@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +35,8 @@ public class ProducteController {
 	@RequestMapping(value ="{productId}")
 	public ResponseEntity<Producte>getProductById(@PathVariable("productId")Long productId){
 		Optional<Producte> optionalProduct = productRepository.findById(productId);		
-		if(optionalProduct.isPresent()) return ResponseEntity.ok(optionalProduct.get()); // no troba el objecte
-		else return ResponseEntity.noContent().build();
+		if(optionalProduct.isPresent()) return ResponseEntity.ok(optionalProduct.get()); 
+		else return ResponseEntity.noContent().build();// no troba el objecte
 	}
 	@PostMapping
 	public ResponseEntity<Producte> createProducte(@RequestBody Producte producte){
@@ -47,6 +48,20 @@ public class ProducteController {
 	public ResponseEntity<Void> deleteProducte(@PathVariable("productId")Long productId){
 		productRepository.deleteById(productId);
 		return ResponseEntity.ok(null);
+	}
+		
+	@PutMapping
+	public ResponseEntity<Producte> updateProducte(@RequestBody Producte producte){
+		Optional<Producte> optionalProduct = productRepository.findById(producte.getId());		
+		if(optionalProduct.isPresent()) {
+			Producte updateProducte = optionalProduct.get();
+			updateProducte.setNom(producte.getNom());
+			updateProducte.setDescripció(producte.getDescripció());
+			updateProducte.setTipus(producte.getTipus());
+			productRepository.save(updateProducte);
+			return ResponseEntity.ok(updateProducte);  
+		}
+		else return ResponseEntity.notFound().build();// no troba el objecte
 	}
 	/*
 	@GetMapping
