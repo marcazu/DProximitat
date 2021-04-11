@@ -18,7 +18,7 @@ public class Producte {
 	@Column(name="nom", nullable=false, length=30)
 	private String nom;
 	@Column(name="descripcio")
-	private String descripció;
+	private String descripcio;
 	@Column(name="tipus", nullable=false, length=30)
 	private String tipus;
 	public long getId() {
@@ -33,11 +33,11 @@ public class Producte {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getDescripció() {
-		return descripció;
+	public String getDescripcio() {
+		return descripcio;
 	}
-	public void setDescripció(String descripció) {
-		this.descripció = descripció;
+	public void setDescripcio(String descripció) {
+		this.descripcio = descripció;
 	}
 	public String getTipus() {
 		return tipus;

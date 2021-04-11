@@ -56,7 +56,7 @@ public class ProducteController {
 		if(optionalProduct.isPresent()) {
 			Producte updateProducte = optionalProduct.get();
 			updateProducte.setNom(producte.getNom());
-			updateProducte.setDescripció(producte.getDescripció());
+			updateProducte.setDescripcio(producte.getDescripcio());
 			updateProducte.setTipus(producte.getTipus());
 			productRepository.save(updateProducte);
 			return ResponseEntity.ok(updateProducte);  
