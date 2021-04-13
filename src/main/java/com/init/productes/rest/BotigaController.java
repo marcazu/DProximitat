@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.BotiguesRepository;
+import com.init.productes.repository.ProductesRespository;
 
 @RestController
 @RequestMapping("/botigues")
@@ -24,6 +25,9 @@ public class BotigaController {
 	
 	@Autowired
 	private BotiguesRepository botiguesRepository;
+	
+	@Autowired
+	private ProductesRespository productesRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Botiga>> getBotiga(){
@@ -66,6 +70,41 @@ public class BotigaController {
 		}
 		else return ResponseEntity.notFound().build();// no troba el objecte
 	}
+	//
+	//afegir un producte a la botiga
+	@RequestMapping(value ="/{botigaId}/add/{productId}")
+	public ResponseEntity<Producte>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
+		Optional<Producte> optionalProducte = productesRepository.findById(productId); //obtenir botiga
+		
+		if (optionalBotiga.isPresent()) {
+			Botiga botiga = optionalBotiga.get(); //optenim la botiga
+			if(optionalProducte.isPresent()) {
+				Producte producte = optionalProducte.get();
+				botiga.getProductesBotiga().add(producte);
+				return ResponseEntity.ok(producte);			
+			}
+			else {
+				//falta tractar error millor 
+				return ResponseEntity.noContent().build();
+			}
+		}
+		else {
+			return ResponseEntity.noContent().build();
+			//Botiga no existeix, falta tractar millor els errors
+		}
+		
+	}
+	@RequestMapping(value = "/{botigaId}/productes")
+	public ResponseEntity<List<Producte>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
+		if (optionalBotiga.isPresent()) {
+			Botiga botiga = optionalBotiga.get(); //optenim la botiga
+			return ResponseEntity.ok(botiga.getProductesBotiga());
+		}
+		else return ResponseEntity.noContent().build();
+	}
+	
 	
 	
 }
