@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Botiga;
@@ -72,8 +73,8 @@ public class BotigaController {
 	}
 	//
 	//afegir un producte a la botiga
-	@RequestMapping(value ="/{botigaId}/add/{productId}")
-	public ResponseEntity<Producte>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
+	@RequestMapping(value ="/{botigaId}/add/{productId}", method =RequestMethod.PUT)
+	public ResponseEntity<List<Producte>>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
 		Optional<Producte> optionalProducte = productesRepository.findById(productId); //obtenir botiga
 		
@@ -82,7 +83,8 @@ public class BotigaController {
 			if(optionalProducte.isPresent()) {
 				Producte producte = optionalProducte.get();
 				botiga.getProductesBotiga().add(producte);
-				return ResponseEntity.ok(producte);			
+				
+				return ResponseEntity.ok(botiga.getProductesBotiga());			
 			}
 			else {
 				//falta tractar error millor 
@@ -95,7 +97,7 @@ public class BotigaController {
 		}
 		
 	}
-	@RequestMapping(value = "/{botigaId}/productes")
+	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<Producte>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
 		if (optionalBotiga.isPresent()) {
