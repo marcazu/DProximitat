@@ -82,7 +82,7 @@ public class BotigaController {
 			Botiga botiga = optionalBotiga.get(); //optenim la botiga
 			if(optionalProducte.isPresent()) {
 				Producte producte = optionalProducte.get();
-				botiga.getProductesBotiga().add(producte);
+				botiga.addProducteBotiga(producte);
 				botiguesRepository.save(botiga);
 				
 				return ResponseEntity.ok(botiga.getProductesBotiga());			

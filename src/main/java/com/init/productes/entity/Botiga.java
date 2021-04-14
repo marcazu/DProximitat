@@ -84,6 +84,9 @@ public class Botiga {
 	public void setProductesBotiga(List<Producte> productesBotiga) {
 		this.productesBotiga = productesBotiga;
 	}
+	public void addProducteBotiga(Producte producte) {
+		productesBotiga.add(producte);
+	}
 	
 	
 
