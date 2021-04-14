@@ -106,8 +106,7 @@ public class BotigaController {
 			return ResponseEntity.ok(botiga.getProductesBotiga());
 		}
 		else return ResponseEntity.noContent().build();
-	}
-	
+	}	
 	
 	
 }

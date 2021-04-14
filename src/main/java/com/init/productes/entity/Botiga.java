@@ -1,5 +1,6 @@
 package com.init.productes.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class Botiga {
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Producte> productesBotiga;
+	private List<Producte> productesBotiga = new ArrayList<Producte>();
 	
 	public long getId() {
 		return id;
