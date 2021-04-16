@@ -30,32 +30,32 @@ public class BotigaController {
 	@Autowired
 	private ProductesRespository productesRepository;
 
-	@GetMapping
+	@GetMapping // get all botigues
 	public ResponseEntity<List<Botiga>> getBotiga(){
 		List<Botiga> botigues = botiguesRepository.findAll();
 		return ResponseEntity.ok(botigues);	
 	}
 	
-	@RequestMapping(value ="{botigaId}")
+	@RequestMapping(value ="{botigaId}") // get botiga concreta
 	public ResponseEntity<Botiga>getBotigaById(@PathVariable("botigaId")Long botigaId){
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);		
 		if(optionalBotiga.isPresent()) return ResponseEntity.ok(optionalBotiga.get()); 
 		else return ResponseEntity.noContent().build();// no troba el objecte
 	}
 	
-	@PostMapping
+	@PostMapping // post botiga
 	public ResponseEntity<Botiga> createBotiga(@RequestBody Botiga botiga){
 		Botiga newBotiga = botiguesRepository.save(botiga);
 		return ResponseEntity.ok(newBotiga);
 	}
 	
-	@DeleteMapping(value ="{botigaId}")
+	@DeleteMapping(value ="{botigaId}") // delete botiga
 	public ResponseEntity<Void> deleteBotiga(@PathVariable("botigaId")Long botigaId){
 		botiguesRepository.deleteById(botigaId);
 		return ResponseEntity.ok(null);
 	}
 	
-	@PutMapping
+	@PutMapping // modificar botiga
 	public ResponseEntity<Botiga> updateBotiga(@RequestBody Botiga botiga){
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botiga.getId());		
 		if(optionalBotiga.isPresent()) {
