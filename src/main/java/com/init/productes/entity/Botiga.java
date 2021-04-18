@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +32,10 @@ public class Botiga {
 	private double longitud;
 	@Column(name="latitud")
 	private double latitud;
+	
+	
+	@JoinColumn(name="botiguerId")
+	private User BotiguerId;
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.ALL)

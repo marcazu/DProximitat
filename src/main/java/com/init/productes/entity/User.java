@@ -3,11 +3,13 @@ package com.init.productes.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +29,13 @@ public class User {
 	@Column(name="Botiguer",columnDefinition = "boolean default false")
 	private Boolean esBotiguer;
 	
+	@OneToMany(mappedBy = "BotiguerId")
 	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
-	//private List<String> comandesUsuari = new ArrayList<int>; //futura llista de comandes
+	
+	/*
+	@OneToMany(mappedBy ="UserId", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
+	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
+	*/
 
 	public long getId() {
 		return id;
