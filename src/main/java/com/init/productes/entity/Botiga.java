@@ -46,7 +46,7 @@ public class Botiga {
 		return id;
 	}
 	public void setId(long id) {
-		this.id = id;
+		this.id = id; 
 	}
 	public String getNom() {
 		return nom;
@@ -92,6 +92,12 @@ public class Botiga {
 	}
 	public void addProducteBotiga(Producte producte) {
 		productesBotiga.add(producte);
+	}
+	public User getBotiguerId() {
+		return BotiguerId;
+	}
+	public void setBotiguerId(User botiguerId) {
+		BotiguerId = botiguerId;
 	}
 	
 	

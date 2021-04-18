@@ -26,7 +26,7 @@ public class User {
 	private String telefon;
 	@Column(name="email")
 	private String email;
-	@Column(name="Botiguer",columnDefinition = "boolean default false")
+	@Column(name="Botiguer",columnDefinition = "boolean default false") // no posa en false
 	private Boolean esBotiguer;
 	
 	@OneToMany(mappedBy = "BotiguerId")
