@@ -84,6 +84,10 @@ public class User {
 	public void setBotiguesUsuari(List<Botiga> botiguesUsuari) {
 		this.botiguesUsuari = botiguesUsuari;
 	}
+	
+	public void addBotigaUser(Botiga botiga) {
+		botiguesUsuari.add(botiga);
+	}
 
 	
 }

@@ -73,7 +73,7 @@ public class BotigaController {
 	}
 	//
 	//afegir un producte a la botiga
-	@RequestMapping(value ="/{botigaId}/add/{productId}", method =RequestMethod.PUT)
+	@RequestMapping(value ="/{botigaId}/addProducte/{productId}", method =RequestMethod.PUT)
 	public ResponseEntity<List<Producte>>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
 		Optional<Producte> optionalProducte = productesRepository.findById(productId); //obtenir botiga
