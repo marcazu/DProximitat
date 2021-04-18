@@ -24,7 +24,7 @@ import com.init.productes.repository.UserRepository;
 
 
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
