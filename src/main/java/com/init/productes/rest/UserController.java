@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,6 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private ComandaRepository comandaRepository;
 	@Autowired
 	private BotiguesRepository botigaRepository;
 	
@@ -67,6 +66,13 @@ public class UserController {
 		}
 		else return ResponseEntity.notFound().build();// no troba el objecte
 	}
+	
+	@PostMapping
+	public ResponseEntity<User> createProducte(@RequestBody User user){
+		User newUser = userRepository.save(user);
+		return ResponseEntity.ok(newUser);
+	}
+	
 	
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
 	public ResponseEntity<User>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
