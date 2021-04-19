@@ -2,15 +2,14 @@ package com.init.productes.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-
+import org.springframework.stereotype.Service;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ProductesRespository;
 
+@Service
 public class BotigaService {
 	
 	@Autowired
