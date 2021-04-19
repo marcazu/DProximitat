@@ -24,57 +24,44 @@ import com.init.productes.entity.User;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ComandaRepository;
 import com.init.productes.repository.UserRepository;
+import com.init.productes.services.UserService;
 
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private BotiguesRepository botigaRepository;
+	private UserService userService;
 	
 	@GetMapping // get all users
 	public ResponseEntity<List<User>> getUsers(){
-		List<User> users = userRepository.findAll();
-		return ResponseEntity.ok(users);	
+		return ResponseEntity.ok(userService.getUsers());
 	}
 	@RequestMapping(value ="{userId}") // get user concret
 	public ResponseEntity<User>getUserById(@PathVariable("userId")Long userId){
-		Optional<User> optionalUser = userRepository.findById(userId);		
-		if(optionalUser.isPresent()) return ResponseEntity.ok(optionalUser.get()); 
-		else return ResponseEntity.noContent().build();// no troba el objecte
+		 return ResponseEntity.ok(userService.getUser(userId));
 	}
 	
 	@DeleteMapping(value ="{userId}") // delete user
 	public ResponseEntity<Void> deleteUser(@PathVariable("userId")Long userId){
-		userRepository.deleteById(userId);
+		userService.deleteUser(userId);
 		return ResponseEntity.ok(null);
 	}
 	
 	@PutMapping // modificar user
 	public ResponseEntity<User> updateUser(@RequestBody User user){
-		Optional<User> optionalUser = userRepository.findById(user.getId());		
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			updateUser.setNom(user.getNom());
-			updateUser.setEmail(user.getEmail());
-			updateUser.setTelefon(user.getTelefon());
-			updateUser.setEsBotiguer(user.getEsBotiguer());
-			updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
-			userRepository.save(updateUser);
-			return ResponseEntity.ok(updateUser);  
-		}
-		else return ResponseEntity.notFound().build();// no troba el objecte
+		int response = userService.updateUser(user);
+		if (response == 1)return ResponseEntity.ok().build();  
+		else return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<User> createProducte(@RequestBody User user){
-		User newUser = userRepository.save(user);
-		return ResponseEntity.ok(newUser);
+		userService.crearUser(user);
+		return ResponseEntity.ok(user);
 	}
 	
+	/*
 	
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
 	public ResponseEntity<User>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
@@ -101,4 +88,5 @@ public class UserController {
 		}
 		
 	}	
+	*/
 }

@@ -12,24 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.ComandaRepository;
+import com.init.productes.services.ComandaService;
 
 @RestController
 @RequestMapping("/comandes")
 public class coamandaController {
 	
-	private ComandaRepository comandaRepository;
+	
+	private ComandaService comandaService;
+	
 	
 	@GetMapping // get all botigues
 	public ResponseEntity<List<Comanda>> getComandes(){
-		List<Comanda> comandes = comandaRepository.findAll();
-		return ResponseEntity.ok(comandes);	
+		return ResponseEntity.ok(comandaService.getComandes());	
 	}
 	
 	@RequestMapping(value ="{comandaId}") // get comanda concreta by id
 	public ResponseEntity<Comanda>getcomandaById(@PathVariable("comandaId")Long comandaId){
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);		
-		if(optionalComanda.isPresent()) return ResponseEntity.ok(optionalComanda.get()); 
-		else return ResponseEntity.noContent().build();// no troba el objecte
+		
+		if(comandaService.getProducteById(comandaId) != null) return ResponseEntity.ok(comandaService.getProducteById(comandaId));
+		else return ResponseEntity.noContent().build();
 	}
 
 }
