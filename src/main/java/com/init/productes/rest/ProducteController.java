@@ -1,8 +1,6 @@
 package com.init.productes.rest;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Producte;
-import com.init.productes.repository.ProductesRespository;
 import com.init.productes.services.ProducteService;
 
 
@@ -24,6 +20,7 @@ import com.init.productes.services.ProducteService;
 @RequestMapping("/productes")
 public class ProducteController {
 	
+	@Autowired
 	private ProducteService producteService;
 	
 	@GetMapping

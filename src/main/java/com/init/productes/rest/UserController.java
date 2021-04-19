@@ -1,10 +1,6 @@
 package com.init.productes.rest;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,16 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.init.productes.entity.Botiga;
-import com.init.productes.entity.Comanda;
-import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
-import com.init.productes.repository.BotiguesRepository;
-import com.init.productes.repository.ComandaRepository;
-import com.init.productes.repository.UserRepository;
 import com.init.productes.services.UserService;
 
 
@@ -31,6 +20,7 @@ import com.init.productes.services.UserService;
 @RequestMapping("/users")
 public class UserController {
 	
+	@Autowired
 	private UserService userService;
 	
 	@GetMapping // get all users
