@@ -17,6 +17,7 @@ public class ProducteService {
 	private ProductesRespository productRepository;
 	
 	public List<Producte> getProductes() {
+		System.out.println("arribo al service");
 		return productRepository.findAll();
 	}
 	

@@ -29,6 +29,7 @@ public class BotigaController {
 
 	@GetMapping // get all botigues
 	public ResponseEntity<List<Botiga>> getBotiga(){
+		System.out.println("Hello, logs!");
 		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
 	
