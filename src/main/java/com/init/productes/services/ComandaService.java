@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.init.productes.entity.Comanda;
-import com.init.productes.entity.Producte;
 import com.init.productes.repository.ComandaRepository;
 
 public class ComandaService {
@@ -24,6 +23,10 @@ public class ComandaService {
 		if(optionalComanda.isPresent()) return optionalComanda.get(); 
 		return null;
 
+	}
+
+	public void createComanda(Comanda comanda) {
+		comandaRepository.save(comanda);	
 	}
 
 }

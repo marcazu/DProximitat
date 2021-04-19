@@ -17,11 +17,18 @@ public class Comanda {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	@Column(name="entregada")
+	private Boolean entregada;
+	
 
 	protected Comanda() {
-		
 	}
 	
+	public Comanda(Boolean entregada) {
+		super();
+		this.entregada = entregada;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -29,5 +36,15 @@ public class Comanda {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public Boolean getEntregada() {
+		return entregada;
+	}
+
+	public void setEntregada(Boolean entregada) {
+		this.entregada = entregada;
+	}
+	
+	
 
 }
