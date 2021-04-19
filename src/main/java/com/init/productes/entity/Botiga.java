@@ -42,6 +42,24 @@ public class Botiga {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Producte> productesBotiga = new ArrayList<Producte>();
 	
+	protected Botiga() {
+		
+	}
+	
+	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
+			User botiguerId, List<Producte> productesBotiga) {
+		super();
+		this.nom = nom;
+		this.descripcio = descripcio;
+		this.email = email;
+		this.telefon = telefon;
+		this.longitud = longitud;
+		this.latitud = latitud;
+		BotiguerId = botiguerId;
+		this.productesBotiga = productesBotiga;
+	}
+
+
 	public long getId() {
 		return id;
 	}

@@ -21,6 +21,17 @@ public class Producte {
 	private String descripcio;
 	@Column(name="tipus", nullable=false, length=30)
 	private String tipus;
+	
+	protected Producte() {
+		
+	}
+	
+	public Producte(String nom, String descripcio, String tipus) {
+		super();
+		this.nom = nom;
+		this.descripcio = descripcio;
+		this.tipus = tipus;
+	}
 	public long getId() {
 		return id;
 	}

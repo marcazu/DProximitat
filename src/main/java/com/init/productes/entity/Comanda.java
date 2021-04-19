@@ -18,6 +18,10 @@ public class Comanda {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 
+	protected Comanda() {
+		
+	}
+	
 	public long getId() {
 		return id;
 	}

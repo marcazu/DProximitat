@@ -36,7 +36,20 @@ public class User {
 	@OneToMany(mappedBy ="UserId", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	*/
-
+	
+	protected User() {
+		
+	}
+	
+	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari) {
+		super();
+		this.nom = nom;
+		this.telefon = telefon;
+		this.email = email;
+		this.esBotiguer = esBotiguer;
+		this.botiguesUsuari = botiguesUsuari;
+	}
+	
 	public long getId() {
 		return id;
 	}
