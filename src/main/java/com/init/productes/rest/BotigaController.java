@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
-import com.init.productes.services.Botigaservice;
+import com.init.productes.services.BotigaService;
 
 @RestController
 @RequestMapping("/botigues")
 public class BotigaController {
 	
 	@Autowired
-	private Botigaservice botigaService;
+	private BotigaService botigaService;
 
 	@GetMapping // get all botigues
 	public ResponseEntity<List<Botiga>> getBotiga(){

@@ -11,7 +11,7 @@ import com.init.productes.entity.Producte;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ProductesRespository;
 
-public class Botigaservice {
+public class BotigaService {
 	
 	@Autowired
 	private BotiguesRepository botiguesRepository;
