@@ -19,94 +19,54 @@ import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ProductesRespository;
+import com.init.productes.services.Botigaservice;
 
 @RestController
 @RequestMapping("/botigues")
 public class BotigaController {
 	
-	@Autowired
-	private BotiguesRepository botiguesRepository;
-	
-	@Autowired
-	private ProductesRespository productesRepository;
+	private Botigaservice botigaService;
 
 	@GetMapping // get all botigues
 	public ResponseEntity<List<Botiga>> getBotiga(){
-		List<Botiga> botigues = botiguesRepository.findAll();
-		return ResponseEntity.ok(botigues);	
+		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
 	
 	@RequestMapping(value ="{botigaId}") // get botiga concreta
 	public ResponseEntity<Botiga>getBotigaById(@PathVariable("botigaId")Long botigaId){
-		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);		
-		if(optionalBotiga.isPresent()) return ResponseEntity.ok(optionalBotiga.get()); 
+		if(botigaService.getBotigaById(botigaId) != null) return ResponseEntity.ok(botigaService.getBotigaById(botigaId));
 		else return ResponseEntity.noContent().build();// no troba el objecte
 	}
 	
 	@PostMapping // post botiga
 	public ResponseEntity<Botiga> createBotiga(@RequestBody Botiga botiga){
-		Botiga newBotiga = botiguesRepository.save(botiga);
-		return ResponseEntity.ok(newBotiga);
+		botigaService.creteBotiga(botiga);
+		return ResponseEntity.ok(botiga);
 	}
 	
 	@DeleteMapping(value ="{botigaId}") // delete botiga
 	public ResponseEntity<Void> deleteBotiga(@PathVariable("botigaId")Long botigaId){
-		botiguesRepository.deleteById(botigaId);
+		botigaService.deleteById(botigaId);
 		return ResponseEntity.ok(null);
 	}
 	
 	@PutMapping // modificar botiga
 	public ResponseEntity<Botiga> updateBotiga(@RequestBody Botiga botiga){
-		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botiga.getId());		
-		if(optionalBotiga.isPresent()) {
-			Botiga updateBotiga = optionalBotiga.get();
-			updateBotiga.setNom(botiga.getNom());
-			updateBotiga.setDescripcio(botiga.getDescripcio());
-			updateBotiga.setEmail(botiga.getEmail());
-			updateBotiga.setLatitud(botiga.getLatitud());
-			updateBotiga.setLongitud(botiga.getLongitud());
-			updateBotiga.setTelefon(botiga.getTelefon());
-			botiguesRepository.save(updateBotiga);
-			return ResponseEntity.ok(updateBotiga);  
-		}
+		int response = botigaService.updateBotiga(botiga);
+		if (response == 1)return ResponseEntity.ok().build();  
 		else return ResponseEntity.notFound().build();// no troba el objecte
 	}
 	//
 	//afegir un producte a la botiga
 	@RequestMapping(value ="/{botigaId}/addProducte/{productId}", method =RequestMethod.PUT)
-	public ResponseEntity<List<Producte>>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
-		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
-		Optional<Producte> optionalProducte = productesRepository.findById(productId); //obtenir botiga
-		
-		if (optionalBotiga.isPresent()) {
-			Botiga botiga = optionalBotiga.get(); //optenim la botiga
-			if(optionalProducte.isPresent()) {
-				Producte producte = optionalProducte.get();
-				botiga.addProducteBotiga(producte);
-				botiguesRepository.save(botiga);
-				
-				return ResponseEntity.ok(botiga.getProductesBotiga());			
-			}
-			else {
-				//falta tractar error millor 
-				return ResponseEntity.noContent().build();
-			}
-		}
-		else {
-			return ResponseEntity.noContent().build();
-			//Botiga no existeix, falta tractar millor els errors
-		}
-		
+	public ResponseEntity<Void>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
+		int response = botigaService.afegirProducte(botigaId, productId);
+		if (response == 1)return ResponseEntity.ok().build();
+		else return ResponseEntity.noContent().build();
+
 	}
 	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<Producte>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
-		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
-		if (optionalBotiga.isPresent()) {
-			Botiga botiga = optionalBotiga.get(); //optenim la botiga
-			return ResponseEntity.ok(botiga.getProductesBotiga());
-		}
-		else return ResponseEntity.noContent().build();
-	}	
-	
-	
+		return ResponseEntity.ok(botigaService.getProductesBotiga(botigaId));
+	}
 }

@@ -17,64 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Producte;
 import com.init.productes.repository.ProductesRespository;
+import com.init.productes.services.ProducteService;
 
 
 @RestController
 @RequestMapping("/productes")
 public class ProducteController {
 	
-	@Autowired
-	private ProductesRespository productRepository;
+	private ProducteService producteService;
 	
 	@GetMapping
 	public ResponseEntity<List<Producte>> getProduct(){
-		List<Producte> productes = productRepository.findAll();
-		return ResponseEntity.ok(productes);	
+		return ResponseEntity.ok(producteService.getProductes());	
 	}
 	
 	@RequestMapping(value ="{productId}")
 	public ResponseEntity<Producte>getProductById(@PathVariable("productId")Long productId){
-		Optional<Producte> optionalProduct = productRepository.findById(productId);		
-		if(optionalProduct.isPresent()) return ResponseEntity.ok(optionalProduct.get()); 
-		else return ResponseEntity.noContent().build();// no troba el objecte
+		if(producteService.getProducteById(productId) != null) return ResponseEntity.ok(producteService.getProducteById(productId));
+		else return ResponseEntity.noContent().build();
 	}
+	
 	@PostMapping
 	public ResponseEntity<Producte> createProducte(@RequestBody Producte producte){
-		Producte newProducte = productRepository.save(producte);
-		return ResponseEntity.ok(newProducte);
+		producteService.createProducte(producte);
+		return ResponseEntity.ok(producte);
 	}
 	
 	@DeleteMapping(value ="{productId}")
 	public ResponseEntity<Void> deleteProducte(@PathVariable("productId")Long productId){
-		productRepository.deleteById(productId);
+		producteService.deleteById(productId);
 		return ResponseEntity.ok(null);
 	}
 		
 	@PutMapping
-	public ResponseEntity<Producte> updateProducte(@RequestBody Producte producte){
-		Optional<Producte> optionalProduct = productRepository.findById(producte.getId());		
-		if(optionalProduct.isPresent()) {
-			Producte updateProducte = optionalProduct.get();
-			updateProducte.setNom(producte.getNom());
-			updateProducte.setDescripcio(producte.getDescripcio());
-			updateProducte.setTipus(producte.getTipus());
-			productRepository.save(updateProducte);
-			return ResponseEntity.ok(updateProducte);  
-		}
+	public ResponseEntity<Void> updateProducte(@RequestBody Producte producte){
+		int response = producteService.updateProducte(producte);
+		if (response == 1)return ResponseEntity.ok().build();  
 		else return ResponseEntity.notFound().build();// no troba el objecte
 	}
-	/*
-	@GetMapping
-	@RequestMapping(value= "hello", method=RequestMethod.GET)
-	public String hello() {
-		return "Hello world";
-	}
-	/*
-	@GetMapping
-	public ResponseEntity<List<Product>> getProduct(){
 
-		return null;
-		//return ResponseEntity.ok(product);
-	}*/
 
 }
