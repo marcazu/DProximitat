@@ -15,7 +15,8 @@ public class ProducteService {
 	private ProductesRespository productRepository;
 	
 	public List<Producte> getProductes() {
-		System.out.println("arribo al service");
+		List<Producte> productes = productRepository.findAll();
+		if(productes.isEmpty()) throw new ApiRequestException("No hi ha cap producte insertat a la BD");
 		return productRepository.findAll();
 	}
 	
@@ -32,10 +33,13 @@ public class ProducteService {
 	}
 
 	public void deleteById(Long productId) {
-		productRepository.deleteById(productId);
+		Optional<Producte> optionalProduct = productRepository.findById(productId);	
+		if(optionalProduct.isPresent()) productRepository.deleteById(productId);
+		else throw new ApiRequestException("No hi ha cap producte amb aquesta id");
+		
 	}
 
-	public int updateProducte(Producte producte) {
+	public void updateProducte(Producte producte) {
 		Optional<Producte> optionalProduct = productRepository.findById(producte.getId());		
 		if(optionalProduct.isPresent()) {
 			Producte updateProducte = optionalProduct.get();
@@ -43,9 +47,8 @@ public class ProducteService {
 			updateProducte.setDescripcio(producte.getDescripcio());
 			updateProducte.setTipus(producte.getTipus());
 			productRepository.save(updateProducte);
-			return 1; 
 		}
-		return 0;
+		else throw new ApiRequestException("No hi ha cap producte amb aquesta ID");
 	}
 
 }

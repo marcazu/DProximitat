@@ -30,27 +30,28 @@ public class ProducteController {
 	
 	@RequestMapping(value ="{productId}")
 	public ResponseEntity<Producte>getProductById(@PathVariable("productId")Long productId){
-		if(producteService.getProducteById(productId) != null) return ResponseEntity.ok(producteService.getProducteById(productId));
-		else return ResponseEntity.noContent().build();
+		return ResponseEntity.ok(producteService.getProducteById(productId));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Producte> createProducte(@RequestBody Producte producte){
+	public ResponseEntity<String> createProducte(@RequestBody Producte producte){
 		producteService.createProducte(producte);
-		return ResponseEntity.ok(producte);
+		String result = "S'ha creat un producte amb id: " + producte.getId();
+		return ResponseEntity.ok(result);
 	}
 	
 	@DeleteMapping(value ="{productId}")
-	public ResponseEntity<Void> deleteProducte(@PathVariable("productId")Long productId){
+	public ResponseEntity<String> deleteProducte(@PathVariable("productId")Long productId){
 		producteService.deleteById(productId);
-		return ResponseEntity.ok(null);
+		String result = "S'ha eliminat el producte amb Id: "+ productId;
+		return ResponseEntity.ok(result);
 	}
 		
 	@PutMapping
-	public ResponseEntity<Void> updateProducte(@RequestBody Producte producte){
-		int response = producteService.updateProducte(producte);
-		if (response == 1)return ResponseEntity.ok().build();  
-		else return ResponseEntity.notFound().build();// no troba el objecte
+	public ResponseEntity<String> updateProducte(@RequestBody Producte producte){
+		producteService.updateProducte(producte);
+		String result = "S'ha modificat el producte amb Id: " + producte.getId();
+		return ResponseEntity.ok(result);  
 	}
 
 
