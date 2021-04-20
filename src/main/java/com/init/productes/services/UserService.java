@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.init.productes.entity.User;
+import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.UserRepository;
 
@@ -16,6 +17,8 @@ public class UserService {
 	@Autowired
 	private BotiguesRepository botigaRepository;
 	
+	private String ExceptionString;
+	
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
@@ -23,14 +26,22 @@ public class UserService {
 	public User getUser(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);		
 		if(optionalUser.isPresent()) return optionalUser.get();
-		return null;
+		else {
+			ExceptionString = "No hi ha cap user amb ID:" + userId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
 	public void deleteUser(Long userId) {
-		userRepository.deleteById(userId);	
+		Optional<User> optionalUser = userRepository.findById(userId);		
+		if(optionalUser.isPresent())userRepository.deleteById(userId);	 
+		else {
+			ExceptionString = "No hi ha cap user amb ID:" + userId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
-	public int updateUser(User user) {
+	public void updateUser(User user) {
 		Optional<User> optionalUser = userRepository.findById(user.getId());		
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
@@ -40,9 +51,11 @@ public class UserService {
 			updateUser.setEsBotiguer(user.getEsBotiguer());
 			updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
 			userRepository.save(updateUser);
-			return 1;  
 		}
-		return 0;// no troba el objecte
+		else {
+			ExceptionString = "No hi ha cap user amb ID:" + user.getId();
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
 	public void crearUser(User user) {

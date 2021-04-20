@@ -30,14 +30,14 @@ public class ComandaController {
 	@RequestMapping(value ="{comandaId}") // get comanda concreta by id
 	public ResponseEntity<Comanda>getcomandaById(@PathVariable("comandaId")Long comandaId){
 		
-		if(comandaService.getProducteById(comandaId) != null) return ResponseEntity.ok(comandaService.getProducteById(comandaId));
-		else return ResponseEntity.noContent().build();
+		return ResponseEntity.ok(comandaService.getProducteById(comandaId));
 	}
 	
 	@PostMapping // post botiga
-	public ResponseEntity<Comanda> createBotiga(@RequestBody Comanda comanda){
+	public ResponseEntity<String> createBotiga(@RequestBody Comanda comanda){
 		comandaService.createComanda(comanda);
-		return ResponseEntity.ok(comanda);
+		String result ="S'ha creat la comanda amb Id: " + comanda.getId();
+		return ResponseEntity.ok(result);
 	}
 
 }

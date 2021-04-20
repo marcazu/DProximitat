@@ -33,22 +33,25 @@ public class UserController {
 	}
 	
 	@DeleteMapping(value ="{userId}") // delete user
-	public ResponseEntity<Void> deleteUser(@PathVariable("userId")Long userId){
+	public ResponseEntity<String> deleteUser(@PathVariable("userId")Long userId){
 		userService.deleteUser(userId);
-		return ResponseEntity.ok(null);
+		String response = "s'ha eliminat el user amb ID: " + userId;
+		return ResponseEntity.ok(response);
 	}
 	
 	@PutMapping // modificar user
-	public ResponseEntity<User> updateUser(@RequestBody User user){
-		int response = userService.updateUser(user);
-		if (response == 1)return ResponseEntity.ok().build();  
-		else return ResponseEntity.notFound().build();
+	public ResponseEntity<String> updateUser(@RequestBody User user){
+		userService.updateUser(user);
+		String response = "s'ha modificat el user amb ID: " + user.getId();
+		return ResponseEntity.ok(response);  
+
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> createProducte(@RequestBody User user){
+	public ResponseEntity<String> createProducte(@RequestBody User user){
 		userService.crearUser(user);
-		return ResponseEntity.ok(user);
+		String response = "s'ha creat el user amb ID: " + user.getId();
+		return ResponseEntity.ok(response);
 	}
 	
 	/*
