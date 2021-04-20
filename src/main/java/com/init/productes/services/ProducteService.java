@@ -14,6 +14,8 @@ public class ProducteService {
 	@Autowired
 	private ProductesRespository productRepository;
 	
+	private String ExceptionString;
+	
 	public List<Producte> getProductes() {
 		List<Producte> productes = productRepository.findAll();
 		if(productes.isEmpty()) throw new ApiRequestException("No hi ha cap producte insertat a la BD");
@@ -23,8 +25,11 @@ public class ProducteService {
 	public Producte getProducteById(Long productId) {
 
 		Optional<Producte> optionalProduct = productRepository.findById(productId);	
-		if(optionalProduct.isPresent()) return optionalProduct.get(); 
-		throw new ApiRequestException("No hi ha cap producte amb aquesta id");
+		if(optionalProduct.isPresent()) return optionalProduct.get();
+		else {
+			ExceptionString = "No hi ha cap producte amb ID:" + productId;
+			throw new ApiRequestException(ExceptionString);
+		}
 		
 	}
 
@@ -35,7 +40,10 @@ public class ProducteService {
 	public void deleteById(Long productId) {
 		Optional<Producte> optionalProduct = productRepository.findById(productId);	
 		if(optionalProduct.isPresent()) productRepository.deleteById(productId);
-		else throw new ApiRequestException("No hi ha cap producte amb aquesta id");
+		else {
+			ExceptionString = "No hi ha cap producte amb ID:" + productId;
+			throw new ApiRequestException(ExceptionString);
+		}
 		
 	}
 
@@ -48,7 +56,10 @@ public class ProducteService {
 			updateProducte.setTipus(producte.getTipus());
 			productRepository.save(updateProducte);
 		}
-		else throw new ApiRequestException("No hi ha cap producte amb aquesta ID");
+		else {
+			ExceptionString = "No hi ha cap producte amb ID:" + producte.getId();
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
 }

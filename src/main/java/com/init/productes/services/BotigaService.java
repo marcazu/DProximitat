@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
+import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ProductesRespository;
 
@@ -19,13 +20,15 @@ public class BotigaService {
 	private ProductesRespository productesRepository;
 
 	public List<Botiga> getbotigues() {
-		return botiguesRepository.findAll();
+		List<Botiga> botigues = botiguesRepository.findAll();
+		if(botigues.isEmpty()) throw new ApiRequestException("No hi ha cap botiga insertada a la BD");
+		return botigues;
 	}
 
 	public Botiga getBotigaById(Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
 		if(optionalBotiga.isPresent())return optionalBotiga.get();
-		else return null;
+		else throw new ApiRequestException("No hi ha cap botiga insertada a la BD");
 	}
 
 	public void creteBotiga(Botiga botiga) {
