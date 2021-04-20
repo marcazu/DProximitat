@@ -18,6 +18,8 @@ public class BotigaService {
 	
 	@Autowired
 	private ProductesRespository productesRepository;
+	
+	private String ExceptionString;
 
 	public List<Botiga> getbotigues() {
 		List<Botiga> botigues = botiguesRepository.findAll();
@@ -28,7 +30,10 @@ public class BotigaService {
 	public Botiga getBotigaById(Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
 		if(optionalBotiga.isPresent())return optionalBotiga.get();
-		else throw new ApiRequestException("No hi ha cap botiga insertada a la BD");
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
 	public void creteBotiga(Botiga botiga) {
@@ -36,10 +41,15 @@ public class BotigaService {
 	}
 
 	public void deleteById(Long botigaId) {
-		botiguesRepository.deleteById(botigaId);
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
+		if(optionalBotiga.isPresent())botiguesRepository.deleteById(botigaId);
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
-	public int updateBotiga(Botiga botiga) {
+	public void updateBotiga(Botiga botiga) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botiga.getId());		
 		if(optionalBotiga.isPresent()) {
 			Botiga updateBotiga = optionalBotiga.get();
@@ -50,12 +60,14 @@ public class BotigaService {
 			updateBotiga.setLongitud(botiga.getLongitud());
 			updateBotiga.setTelefon(botiga.getTelefon());
 			botiguesRepository.save(updateBotiga);
-			return 1;
 		}
-		return 0;
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botiga.getId();
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 
-	public int afegirProducte(Long botigaId, Long productId) {
+	public void afegirProducte(Long botigaId, Long productId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
 		Optional<Producte> optionalProducte = productesRepository.findById(productId); //obtenir botiga
 		if (optionalBotiga.isPresent()) {
@@ -64,11 +76,16 @@ public class BotigaService {
 				Producte producte = optionalProducte.get();
 				botiga.addProducteBotiga(producte);
 				botiguesRepository.save(botiga);
-				return 1;
 			}
-			return 0;
+			else {
+				ExceptionString = "No hi ha cap producte amb ID:" + productId;
+				throw new ApiRequestException(ExceptionString);
+			}
 		}
-		return 0;
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 	public List<Producte> getProductesBotiga(Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
@@ -76,7 +93,10 @@ public class BotigaService {
 			Botiga botiga = optionalBotiga.get(); //optenim la botiga
 			return botiga.getProductesBotiga();
 		}
-		return null;
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
 	}
 	
 	

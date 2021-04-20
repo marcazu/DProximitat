@@ -32,35 +32,38 @@ public class BotigaController {
 	
 	@RequestMapping(value ="{botigaId}") // get botiga concreta
 	public ResponseEntity<Botiga>getBotigaById(@PathVariable("botigaId")Long botigaId){
-		if(botigaService.getBotigaById(botigaId) != null) return ResponseEntity.ok(botigaService.getBotigaById(botigaId));
-		else return ResponseEntity.noContent().build();// no troba el objecte
+		return ResponseEntity.ok(botigaService.getBotigaById(botigaId));
+		
 	}
 	
 	@PostMapping // post botiga
-	public ResponseEntity<Botiga> createBotiga(@RequestBody Botiga botiga){
+	public ResponseEntity<String> createBotiga(@RequestBody Botiga botiga){
 		botigaService.creteBotiga(botiga);
-		return ResponseEntity.ok(botiga);
+		String result = "S'ha creat una botiga amb id: " + botiga.getId();
+		return ResponseEntity.ok(result);
 	}
 	
 	@DeleteMapping(value ="{botigaId}") // delete botiga
-	public ResponseEntity<Void> deleteBotiga(@PathVariable("botigaId")Long botigaId){
+	public ResponseEntity<String> deleteBotiga(@PathVariable("botigaId")Long botigaId){
 		botigaService.deleteById(botigaId);
-		return ResponseEntity.ok(null);
+		String result = "S'ha eliminat el producte amb Id: "+ botigaId;
+		return ResponseEntity.ok(result);
 	}
 	
 	@PutMapping // modificar botiga
-	public ResponseEntity<Botiga> updateBotiga(@RequestBody Botiga botiga){
-		int response = botigaService.updateBotiga(botiga);
-		if (response == 1)return ResponseEntity.ok().build();  
-		else return ResponseEntity.notFound().build();// no troba el objecte
+	public ResponseEntity<String> updateBotiga(@RequestBody Botiga botiga){
+		botigaService.updateBotiga(botiga);
+		String result = "S'ha modificat el producte amb Id: "+ botiga.getId();
+		return ResponseEntity.ok(result);  
+
 	}
 	//
 	//afegir un producte a la botiga
 	@RequestMapping(value ="/{botigaId}/addProducte/{productId}", method =RequestMethod.PUT)
-	public ResponseEntity<Void>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
-		int response = botigaService.afegirProducte(botigaId, productId);
-		if (response == 1)return ResponseEntity.ok().build();
-		else return ResponseEntity.noContent().build();
+	public ResponseEntity<String>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
+		botigaService.afegirProducte(botigaId, productId);
+		String result = "S'ha afegit el producte amb Id: "+ productId + " a la botiga amb ID: " + botigaId;
+		return ResponseEntity.ok(result);
 
 	}
 	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
