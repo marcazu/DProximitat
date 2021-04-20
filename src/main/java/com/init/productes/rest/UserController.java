@@ -52,7 +52,7 @@ public class UserController {
 	}
 	
 	/*
-	
+
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
 	public ResponseEntity<User>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
 		Optional<User> optionalUser = userRepository.findById(userId);//optenir user

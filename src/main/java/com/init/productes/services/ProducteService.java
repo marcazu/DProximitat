@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.init.productes.entity.Producte;
+import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.ProductesRespository;
 
 @Service
@@ -22,7 +23,7 @@ public class ProducteService {
 
 		Optional<Producte> optionalProduct = productRepository.findById(productId);	
 		if(optionalProduct.isPresent()) return optionalProduct.get(); 
-		else return null;
+		throw new ApiRequestException("No hi ha cap producte amb aquesta id");
 		
 	}
 
