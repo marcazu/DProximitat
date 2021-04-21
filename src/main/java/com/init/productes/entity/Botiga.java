@@ -35,7 +35,7 @@ public class Botiga {
 	private double latitud;
 	
 	@ManyToOne()
-	@JoinColumn(name="botiguerId")
+	@JoinColumn(name="userId")
 	private User BotiguerId;
 	
 	//La idea es que contingui els productes de la botiga

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,7 +30,8 @@ public class User {
 	@Column(name="Botiguer",columnDefinition = "boolean default false") // no posa en false
 	private Boolean esBotiguer;
 	
-	@OneToMany(mappedBy = "BotiguerId")
+	@OneToMany(mappedBy = "BotigaId",cascade = CascadeType.ALL)
+	@JoinColumn(name = "userBotigaID" , referencedColumnName = "id")
 	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
 	
 	/*
