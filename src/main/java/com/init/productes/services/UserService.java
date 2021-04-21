@@ -74,7 +74,9 @@ public class UserService {
 			if(optionalBotiga.isPresent()) {
 				User user = optionalUser.get();
 				Botiga botiga = optionalBotiga.get();
-				user.addBotigaUser(botiga);
+				List<Botiga> botigues = user.getBotiguesUsuari();
+				botigues.add(botiga);
+				user.setBotiguesUsuari(botigues);
 				userRepository.save(user);
 			}
 			else {
