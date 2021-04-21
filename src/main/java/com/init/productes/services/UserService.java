@@ -75,7 +75,8 @@ public class UserService {
 				User user = optionalUser.get();
 				Botiga botiga = optionalBotiga.get();
 				user.addBotigaUser(botiga);
-				userRepository.save(user);		
+				userRepository.save(user);
+				botigaRepository.save(botiga);
 			}
 			else {
 				exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
