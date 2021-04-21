@@ -34,7 +34,7 @@ public class Botiga {
 	@Column(name="latitud")
 	private double latitud;
 	
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="botigaId")
 	private User botiguer;
 	
