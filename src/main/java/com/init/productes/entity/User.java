@@ -31,7 +31,7 @@ public class User {
 	private Boolean esBotiguer;
 	
 	@OneToMany(
-			mappedBy = "botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
+			//mappedBy = "botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
 			cascade = CascadeType.ALL, // propaga totes les accions que es facin al user a la botiga
 			orphanRemoval = true // si borrem la llista d'usuaris la botiga desapareix
 			)
