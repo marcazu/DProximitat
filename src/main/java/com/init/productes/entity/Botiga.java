@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Botiga {
 	@Column(name="latitud")
 	private double latitud;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="botigaId")
 	private User botiguer;
 	
@@ -55,7 +56,7 @@ public class Botiga {
 		this.telefon = telefon;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		botiguer = botiguer;
+		this.botiguer = botiguer;
 		this.productesBotiga = productesBotiga;
 	}
 
