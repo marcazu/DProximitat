@@ -37,27 +37,35 @@ public class User {
 			)
 	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
 	
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = false) // no volem borrar productes de la BD si els eliminem del carro de la compra
+	private List<Producte> carro = new ArrayList<Producte>();
 	/*
 	@OneToMany(mappedBy ="UserId", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	*/
 	
-	protected User() {
-		
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari) {
+	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari,
+			List<Producte> carro) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
 		this.email = email;
 		this.esBotiguer = esBotiguer;
 		this.botiguesUsuari = botiguesUsuari;
+		this.carro = carro;
 	}
 	
+
 	public long getId() {
 		return id;
 	}
+
 
 	public String getNom() {
 		return nom;
@@ -107,5 +115,18 @@ public class User {
 		botiguesUsuari.add(botiga);
 	}
 
+	public List<Producte> getCarro() {
+		return carro;
+	}
+
+	public void setCarro(List<Producte> carro) {
+		this.carro = carro;
+	}
+	
+	public void addProducteCarro(Producte producte) {
+		carro.add(producte);
+	}
+
+	
 	
 }

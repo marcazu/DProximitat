@@ -56,10 +56,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
-	public ResponseEntity<String>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
+	public ResponseEntity<String>addBotiga(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
 		userService.linkarBotiga(userId,botigaId);
 		String response = "S'ha afegit la botiga amb Id: " + botigaId + "al usuari amb Id: " +userId;
 		return ResponseEntity.ok(response);
 		
 	}	
+	
+	@RequestMapping(value="/{userId}/addCarro/{producteId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>addProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
+		userService.afegirProducteCarro(userId,producteId);
+		String response = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(response);
+	}
 }
