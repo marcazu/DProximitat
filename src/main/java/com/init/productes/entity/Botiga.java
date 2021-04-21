@@ -40,7 +40,8 @@ public class Botiga {
 	//private User botiguer;
 	
 	//La idea es que contingui els productes de la botiga
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,
+			orphanRemoval = false)
 	private List<Producte> productesBotiga = new ArrayList<Producte>();
 	
 	protected Botiga() {
