@@ -32,13 +32,14 @@ public class User {
 	
 	@OneToMany(
 			//mappedBy = "botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
-			cascade = CascadeType.ALL, // propaga totes les accions que es facin al user a la botiga
+			cascade = CascadeType.PERSIST, // propaga totes les accions que es facin al user a la botiga
 			orphanRemoval = true // si borrem la llista d'usuaris la botiga desapareix
 			)
 	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
 	
 	@OneToMany(cascade = CascadeType.ALL,
-			orphanRemoval = false) // no volem borrar productes de la BD si els eliminem del carro de la compra
+			orphanRemoval = false
+			) // no volem borrar productes de la BD si els eliminem del carro de la compra
 	private List<Producte> carro = new ArrayList<Producte>();
 	/*
 	@OneToMany(mappedBy ="UserId", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
