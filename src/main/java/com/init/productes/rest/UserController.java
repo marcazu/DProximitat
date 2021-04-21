@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.User;
@@ -54,32 +55,11 @@ public class UserController {
 		return ResponseEntity.ok(response);
 	}
 	
-	/*
-
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
-	public ResponseEntity<User>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
-		Optional<User> optionalUser = userRepository.findById(userId);//optenir user
-		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId); //obtenir botiga
-		
-		if (optionalUser.isPresent()) {
-			User user = optionalUser.get(); //optenim l'user
-			if(optionalBotiga.isPresent()) {
-				Botiga botiga = optionalBotiga.get();
-				user.addBotigaUser(botiga);
-				userRepository.save(user);
-				
-				return ResponseEntity.ok(user);			
-			}
-			else {
-				//falta tractar error millor 
-				return ResponseEntity.noContent().build();
-			}
-		}
-		else {
-			return ResponseEntity.noContent().build();
-			//Botiga no existeix, falta tractar millor els errors
-		}
+	public ResponseEntity<String>AddComanda(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
+		userService.linkarBotiga(userId,botigaId);
+		String response = "S'ha afegit la botiga amb Id: " + botigaId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(response);
 		
 	}	
-	*/
 }

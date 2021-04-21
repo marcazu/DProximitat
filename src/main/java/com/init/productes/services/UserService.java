@@ -3,7 +3,10 @@ package com.init.productes.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.init.productes.entity.Botiga;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
@@ -17,7 +20,7 @@ public class UserService {
 	@Autowired
 	private BotiguesRepository botigaRepository;
 	
-	private String ExceptionString;
+	private String exceptionString;
 	
 	public List<User> getUsers() {
 		return userRepository.findAll();
@@ -27,8 +30,8 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(userId);		
 		if(optionalUser.isPresent()) return optionalUser.get();
 		else {
-			ExceptionString = "No hi ha cap user amb ID:" + userId;
-			throw new ApiRequestException(ExceptionString);
+			exceptionString = "No hi ha cap user amb ID:" + userId;
+			throw new ApiRequestException(exceptionString);
 		}
 	}
 
@@ -36,8 +39,8 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(userId);		
 		if(optionalUser.isPresent())userRepository.deleteById(userId);	 
 		else {
-			ExceptionString = "No hi ha cap user amb ID:" + userId;
-			throw new ApiRequestException(ExceptionString);
+			exceptionString = "No hi ha cap user amb ID:" + userId;
+			throw new ApiRequestException(exceptionString);
 		}
 	}
 
@@ -53,8 +56,8 @@ public class UserService {
 			userRepository.save(updateUser);
 		}
 		else {
-			ExceptionString = "No hi ha cap user amb ID:" + user.getId();
-			throw new ApiRequestException(ExceptionString);
+			exceptionString = "No hi ha cap user amb ID:" + user.getId();
+			throw new ApiRequestException(exceptionString);
 		}
 	}
 
@@ -62,9 +65,26 @@ public class UserService {
 		userRepository.save(user);
 		
 	}
-	
-	
-	
-	
 
+	public void linkarBotiga(Long userId, Long botigaId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId);
+		
+		if(optionalUser.isPresent()) {
+			if(optionalBotiga.isPresent()) {
+				User user = optionalUser.get();
+				Botiga botiga = optionalBotiga.get();
+				user.addBotigaUser(botiga);
+				userRepository.save(user);		
+			}
+			else {
+				exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+				throw new ApiRequestException(exceptionString);
+			}
+		}
+		else {
+			exceptionString = "No hi ha cap user amb ID: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}	
+	}
 }
