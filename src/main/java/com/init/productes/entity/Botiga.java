@@ -35,8 +35,8 @@ public class Botiga {
 	private double latitud;
 	
 	@ManyToOne()
-	@JoinColumn(name="userId")
-	private User BotiguerId;
+	@JoinColumn(name="botigaId")
+	private User botiguer;
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.ALL)
@@ -47,7 +47,7 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			User botiguerId, List<Producte> productesBotiga) {
+			User botiguer, List<Producte> productesBotiga) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -55,7 +55,7 @@ public class Botiga {
 		this.telefon = telefon;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		BotiguerId = botiguerId;
+		botiguer = botiguer;
 		this.productesBotiga = productesBotiga;
 	}
 
@@ -111,12 +111,15 @@ public class Botiga {
 	public void addProducteBotiga(Producte producte) {
 		productesBotiga.add(producte);
 	}
-	public User getBotiguerId() {
-		return BotiguerId;
+	public User getBotiguer() {
+		return botiguer;
 	}
-	public void setBotiguerId(User botiguerId) {
-		BotiguerId = botiguerId;
+	public void setBotiguer(User botiguer) {
+		this.botiguer = botiguer;
 	}
+	
+	
+
 	
 	
 

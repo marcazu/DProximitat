@@ -30,8 +30,11 @@ public class User {
 	@Column(name="Botiguer",columnDefinition = "boolean default false") // no posa en false
 	private Boolean esBotiguer;
 	
-	@OneToMany(mappedBy = "BotigaId",cascade = CascadeType.ALL)
-	@JoinColumn(name = "userBotigaID" , referencedColumnName = "id")
+	@OneToMany(
+			mappedBy = "botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
+			cascade = CascadeType.ALL, // propaga totes les accions que es facin al user a la botiga
+			orphanRemoval = false // si borrem la llista d'usuaris la botiga no desapareix
+			)
 	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
 	
 	/*
