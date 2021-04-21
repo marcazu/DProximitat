@@ -69,4 +69,11 @@ public class UserController {
 		String response = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
 		return ResponseEntity.ok(response);
 	}
+	
+	@RequestMapping(value="/{userId}/deleteCarro/{producteId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>deleteProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
+		userService.deleteProducteCarro(userId,producteId);
+		String response = "S'ha esborrrat el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(response);
+	}
 }

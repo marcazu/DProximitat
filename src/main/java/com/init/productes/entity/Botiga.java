@@ -40,8 +40,8 @@ public class Botiga {
 	//private User botiguer;
 	
 	//La idea es que contingui els productes de la botiga
-	@OneToMany(cascade = CascadeType.PERSIST,
-			orphanRemoval = false)
+	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
+			orphanRemoval = false) // no borrem orfes
 	private List<Producte> productesBotiga = new ArrayList<Producte>();
 	
 	protected Botiga() {

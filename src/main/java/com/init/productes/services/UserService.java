@@ -112,4 +112,36 @@ public class UserService {
 			throw new ApiRequestException(exceptionString);
 		}	
 	}
+
+	public void deleteProducteCarro(Long userId, Long producteId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
+		if(optionalUser.isPresent()) {
+			if(optionalProducte.isPresent()) {
+				User user = optionalUser.get();
+				Producte producte = optionalProducte.get();
+				List<Producte> carro = user.getCarro();
+				for(Producte p : carro)	{
+					if(p.getId() == producte.getId()) {
+						carro.remove(p);
+						userRepository.save(user);		
+						return;
+					}
+				}
+				// no ha trobaat l'objecte posar excepcio
+				exceptionString = " no s'ha trobat el producte al carro del user";
+				throw new ApiRequestException(exceptionString);
+			}
+			else {
+				exceptionString = "No hi ha cap producte amb ID: " + producteId;
+				throw new ApiRequestException(exceptionString);
+			}		
+		}
+		else {
+			exceptionString = "No hi ha cap user amb ID: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}	
+		
+		
+	}
 }
