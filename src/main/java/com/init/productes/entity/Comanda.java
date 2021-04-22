@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javassist.compiler.ast.Pair;
 
 @Entity
@@ -34,6 +36,7 @@ public class Comanda {
 	
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 	private User UserOwner;
 	
 
