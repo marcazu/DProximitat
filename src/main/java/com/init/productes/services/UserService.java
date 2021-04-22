@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.init.productes.entity.Botiga;
+import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
+import com.init.productes.repository.ComandaRepository;
 import com.init.productes.repository.ProductesRespository;
 import com.init.productes.repository.UserRepository;
 
@@ -23,6 +25,8 @@ public class UserService {
 	private BotiguesRepository botigaRepository;
 	@Autowired
 	private ProductesRespository producteRepository;
+	@Autowired
+	private ComandaRepository comandaRepository;
 	
 	private String exceptionString;
 	
@@ -143,5 +147,29 @@ public class UserService {
 		}	
 		
 		
+	}
+
+	public void linkcomanda(Long userId, Long comandaId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalUser.isPresent()) {
+			if(optionalComanda.isPresent()) {
+				User user = optionalUser.get();
+				Comanda comanda = optionalComanda.get();
+				comanda.setUserOwner(user);
+				user.addComanda(comanda);
+				userRepository.save(user);
+				return;
+				
+			}
+			else {
+				exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+				throw new ApiRequestException(exceptionString);
+			}
+		}
+		else {
+			exceptionString = "No hi ha cap user amb ID: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
 	}
 }

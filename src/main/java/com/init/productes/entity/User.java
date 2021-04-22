@@ -41,18 +41,20 @@ public class User {
 			orphanRemoval = false
 			) // no volem borrar productes de la BD si els eliminem del carro de la compra
 	private List<Producte> carro = new ArrayList<Producte>();
-	/*
-	@OneToMany(mappedBy ="UserId", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
+
+	@OneToMany(mappedBy ="UserOwner", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
-	*/
+	
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+
 	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari,
-			List<Producte> carro) {
+			List<Producte> carro, List<Comanda> comandesUsuari) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
@@ -60,8 +62,11 @@ public class User {
 		this.esBotiguer = esBotiguer;
 		this.botiguesUsuari = botiguesUsuari;
 		this.carro = carro;
+		this.comandesUsuari = comandesUsuari;
 	}
-	
+
+
+
 
 	public long getId() {
 		return id;
@@ -126,6 +131,10 @@ public class User {
 	
 	public void addProducteCarro(Producte producte) {
 		carro.add(producte);
+	}
+	
+	public void addComanda(Comanda comanda) {
+		comandesUsuari.add(comanda);
 	}
 
 	

@@ -24,6 +24,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	private String exceptionResponse;
+	
 	@GetMapping // get all users
 	public ResponseEntity<List<User>> getUsers(){
 		return ResponseEntity.ok(userService.getUsers());
@@ -36,44 +38,53 @@ public class UserController {
 	@DeleteMapping(value ="{userId}") // delete user
 	public ResponseEntity<String> deleteUser(@PathVariable("userId")Long userId){
 		userService.deleteUser(userId);
-		String response = "s'ha eliminat el user amb ID: " + userId;
-		return ResponseEntity.ok(response);
+		exceptionResponse = "s'ha eliminat el user amb ID: " + userId;
+		return ResponseEntity.ok(exceptionResponse);
 	}
 	
 	@PutMapping // modificar user
 	public ResponseEntity<String> updateUser(@RequestBody User user){
 		userService.updateUser(user);
-		String response = "s'ha modificat el user amb ID: " + user.getId();
-		return ResponseEntity.ok(response);  
+		exceptionResponse = "s'ha modificat el user amb ID: " + user.getId();
+		return ResponseEntity.ok(exceptionResponse);  
 
 	}
 	
 	@PostMapping
 	public ResponseEntity<String> createProducte(@RequestBody User user){
 		userService.crearUser(user);
-		String response = "s'ha creat el user amb ID: " + user.getId();
-		return ResponseEntity.ok(response);
+		exceptionResponse = "s'ha creat el user amb ID: " + user.getId();
+		return ResponseEntity.ok(exceptionResponse);
 	}
 	
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
 	public ResponseEntity<String>addBotiga(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
 		userService.linkarBotiga(userId,botigaId);
-		String response = "S'ha afegit la botiga amb Id: " + botigaId + "al usuari amb Id: " +userId;
-		return ResponseEntity.ok(response);
+		exceptionResponse = "S'ha afegit la botiga amb Id: " + botigaId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(exceptionResponse);
 		
 	}	
 	
 	@RequestMapping(value="/{userId}/addCarro/{producteId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>addProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
 		userService.afegirProducteCarro(userId,producteId);
-		String response = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
-		return ResponseEntity.ok(response);
+		exceptionResponse = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(exceptionResponse);
 	}
 	
 	@RequestMapping(value="/{userId}/deleteCarro/{producteId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>deleteProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
 		userService.deleteProducteCarro(userId,producteId);
-		String response = "S'ha esborrrat el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
-		return ResponseEntity.ok(response);
+		exceptionResponse = "S'ha esborrrat el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
+		return ResponseEntity.ok(exceptionResponse);
 	}
+	
+	@RequestMapping(value="/{userId}/linkComanda/{comandaId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>linkarComanda(@PathVariable("userId") Long userId, @PathVariable("comandaId") Long comandaId){
+		userService.linkcomanda(userId,comandaId);
+		exceptionResponse = "S'ha linkat l'usuari amb Id: amb la comadna amb Id";
+		return ResponseEntity.ok(exceptionResponse);
+		
+	}
+
 }
