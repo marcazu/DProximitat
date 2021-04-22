@@ -157,6 +157,7 @@ public class UserService {
 				User user = optionalUser.get();
 				Comanda comanda = optionalComanda.get();
 				user.addComanda(comanda);
+				comanda.setUserOwner(user);
 				userRepository.save(user);
 				return;
 				
