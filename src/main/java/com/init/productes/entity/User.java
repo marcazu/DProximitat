@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class User {
 			) // no volem borrar productes de la BD si els eliminem del carro de la compra
 	private List<Producte> carro = new ArrayList<Producte>();
 
-	@OneToMany(mappedBy ="UserOwner", cascade = CascadeType.ALL) // cascade si borrem el user es borraran les seves comandes
+	@OneToMany(mappedBy ="UserOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
 	
