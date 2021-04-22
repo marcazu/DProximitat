@@ -137,6 +137,14 @@ public class User {
 		comandesUsuari.add(comanda);
 	}
 
+	public List<Comanda> getComandesUsuari() {
+		return comandesUsuari;
+	}
+
+	public void setComandesUsuari(List<Comanda> comandesUsuari) {
+		this.comandesUsuari = comandesUsuari;
+	}
+
 	
 	
 }
