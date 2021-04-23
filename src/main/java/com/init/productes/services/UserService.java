@@ -2,10 +2,13 @@ package com.init.productes.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
@@ -30,8 +33,8 @@ public class UserService {
 	
 	private String exceptionString;
 	
-	public List<User> getUsers() {
-		return userRepository.findAll();
+	public List<UserDto> getUsers() {
+		return userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
 	}
 
 	public User getUser(Long userId) {
