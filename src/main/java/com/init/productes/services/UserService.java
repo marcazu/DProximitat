@@ -35,8 +35,18 @@ public class UserService {
 	private String exceptionString;
 	
 	public List<UserDto> getUsers() {
-		return userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
+		List<Botiga> botigues = new ArrayList<Botiga>();
+		List<Producte> productes = new ArrayList<Producte>();
+		List<Comanda> comandes = new ArrayList<Comanda>();
+		User user = new User("nom","telefon", "email", false, botigues,
+			productes, comandes);
+		UserDto userDto = new UserDto(user);
+		List<UserDto> userDtoList = new ArrayList<UserDto>();
+		userDtoList.add(userDto);
+		return userDtoList;
+		//return userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
 		/*
+		 * new
 		List<UserDto> usersDto = new ArrayList<UserDto>();List<User> users = userRepository.findAll();
 		for (User usuari : users) {
 			UserDto userdto = new UserDto(usuari);
