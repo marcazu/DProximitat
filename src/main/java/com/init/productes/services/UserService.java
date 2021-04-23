@@ -48,9 +48,12 @@ public class UserService {
 		*/
 	}
 
-	public User getUser(Long userId) {
+	public UserDto getUser(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);		
-		if(optionalUser.isPresent()) return optionalUser.get();
+		if(optionalUser.isPresent()) {
+			UserDto userDto = new UserDto(optionalUser.get());
+			return userDto;
+		}
 		else {
 			exceptionString = "No hi ha cap user amb ID:" + userId;
 			throw new ApiRequestException(exceptionString);

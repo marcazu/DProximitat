@@ -32,7 +32,7 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUsers());
 	}
 	@RequestMapping(value ="{userId}") // get user concret
-	public ResponseEntity<User>getUserById(@PathVariable("userId")Long userId){
+	public ResponseEntity<UserDto>getUserById(@PathVariable("userId")Long userId){
 		 return ResponseEntity.ok(userService.getUser(userId));
 	}
 	
