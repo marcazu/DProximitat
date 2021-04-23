@@ -28,7 +28,7 @@ public class UserController {
 	private String exceptionResponse;
 	
 	@GetMapping // get all users
-	public ResponseEntity<List<User>> getUsers(){
+	public ResponseEntity<List<UserDto>> getUsers(){
 		return ResponseEntity.ok(userService.getUsers());
 	}
 	@RequestMapping(value ="{userId}") // get user concret

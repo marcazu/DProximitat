@@ -17,6 +17,46 @@ public class UserDto {
 		this.email = user.getEmail();
 		this.esbotiguer = user.getEsBotiguer();
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getTelefon() {
+		return telefon;
+	}
+
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getEsbotiguer() {
+		return esbotiguer;
+	}
+
+	public void setEsbotiguer(Boolean esbotiguer) {
+		this.esbotiguer = esbotiguer;
+	}
 	
 	
 
