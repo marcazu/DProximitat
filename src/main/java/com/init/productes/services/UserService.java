@@ -34,7 +34,8 @@ public class UserService {
 	private String exceptionString;
 	
 	public List<UserDto> getUsers() {
-		return userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
+		List<UserDto> users = userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
+		return users;
 	}
 
 	public User getUser(Long userId) {
