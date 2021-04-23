@@ -1,5 +1,6 @@
 package com.init.productes.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,8 +35,13 @@ public class UserService {
 	private String exceptionString;
 	
 	public List<UserDto> getUsers() {
-		List<UserDto> users = userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
-		return users;
+		List<UserDto> usersDto = new ArrayList<UserDto>();//userRepository.findAll().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
+		List<User> users = userRepository.findAll();
+		for (User usuari : users) {
+			UserDto userdto = new UserDto(usuari);
+			usersDto.add(userdto);
+		}
+		return usersDto;
 	}
 
 	public User getUser(Long userId) {
