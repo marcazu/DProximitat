@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.User;
 import com.init.productes.services.UserService;
@@ -86,6 +87,10 @@ public class UserController {
 		exceptionResponse = "S'ha linkat l'usuari amb Id: amb la comadna amb Id";
 		return ResponseEntity.ok(exceptionResponse);
 		
+	}
+	@RequestMapping(value="/{userId}/carro")
+	public ResponseEntity<List<ProducteDto>> getcarro(@PathVariable("userId") Long userId){
+		return ResponseEntity.ok(userService.getCarro(userId));
 	}
 
 }

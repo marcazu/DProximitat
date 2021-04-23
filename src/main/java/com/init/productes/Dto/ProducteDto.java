@@ -4,14 +4,14 @@ import javax.persistence.Column;
 
 import com.init.productes.entity.Producte;
 
-public class PruducteDto {
+public class ProducteDto {
 	
 	private long id;
 	private String nom;
 	private String descripcio;
 	private String tipus;
 	
-	public PruducteDto(Producte producte) {
+	public ProducteDto(Producte producte) {
 		this.id = producte.getId();
 		this.nom = producte.getNom();
 		this.descripcio = producte.getDescripcio();

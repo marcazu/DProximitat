@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
@@ -186,6 +187,24 @@ public class UserService {
 		}
 		else {
 			exceptionString = "No hi ha cap user amb ID: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+	}
+
+	public List<ProducteDto> getCarro(Long userId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			List<Producte> carro = user.getCarro();
+			List<ProducteDto> carroDto = new ArrayList<ProducteDto>();
+			for(Producte p :carro) {
+				carroDto.add(new ProducteDto(p));
+			}
+			return carroDto;
+			
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
 		}
 	}
