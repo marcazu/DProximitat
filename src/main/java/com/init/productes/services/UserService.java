@@ -217,7 +217,7 @@ public class UserService {
 			List<Comanda> comandes = user.getComandesUsuari();
 			List<ComandaDto> comandesDtos = new ArrayList<ComandaDto>();
 			for(Comanda c :comandes) {
-				comandesDtos.add(new ComandaDto(c));
+				//comandesDtos.add(new ComandaDto(c));
 			}
 			return comandesDtos;
 		}
