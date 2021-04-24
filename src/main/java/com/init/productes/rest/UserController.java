@@ -82,7 +82,7 @@ public class UserController {
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
-	@RequestMapping(value="/{userId}/carro")
+	@RequestMapping(value="/{userId}/carro", method = RequestMethod.GET)
 	public ResponseEntity<List<ProducteDto>> getcarro(@PathVariable("userId") Long userId){
 		return ResponseEntity.ok(userService.getCarro(userId));
 	}

@@ -10,6 +10,11 @@ public class UserDto {
 	private String email;
 	private Boolean esbotiguer;
 	
+	
+	public UserDto() {
+		super();
+	}
+
 	public UserDto(User user) {
 		this.id = user.getId();
 		this.nom = user.getNom();

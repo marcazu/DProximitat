@@ -9,6 +9,11 @@ public class ComandaDto {
 	private long id;
 	private Boolean entregada;
 	
+	
+	public ComandaDto() {
+		super();
+	}
+
 	public ComandaDto(Comanda comanda) {
 		this.id = comanda.getId();
 		this.entregada = comanda.getEntregada();
