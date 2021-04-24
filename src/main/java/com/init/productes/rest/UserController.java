@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.User;
@@ -81,16 +82,24 @@ public class UserController {
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
-	@RequestMapping(value="/{userId}/linkComanda/{comandaId}", method = RequestMethod.PUT)
-	public ResponseEntity<String>linkarComanda(@PathVariable("userId") Long userId, @PathVariable("comandaId") Long comandaId){
-		userService.linkcomanda(userId,comandaId);
-		exceptionResponse = "S'ha linkat l'usuari amb Id: amb la comadna amb Id";
-		return ResponseEntity.ok(exceptionResponse);
-		
-	}
 	@RequestMapping(value="/{userId}/carro")
 	public ResponseEntity<List<ProducteDto>> getcarro(@PathVariable("userId") Long userId){
 		return ResponseEntity.ok(userService.getCarro(userId));
 	}
+	
+	@RequestMapping(value="/{userId}/linkComanda/{comandaId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>linkarComanda(@PathVariable("userId") Long userId, @PathVariable("comandaId") Long comandaId){
+		userService.linkcomanda(userId,comandaId);
+		exceptionResponse = "S'ha linkat l'usuari amb Id: amb la comadna amb Id";
+		return ResponseEntity.ok(exceptionResponse);		
+	}
+	
+	@RequestMapping(value="/{userId}/comandes", method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>>getComandesUser(@PathVariable("userID") Long userId){
+		return ResponseEntity.ok(userService.getComandesUser(userId));
+		
+	}
+	
+	
 
 }

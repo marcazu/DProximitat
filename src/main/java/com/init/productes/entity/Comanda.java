@@ -36,7 +36,6 @@ public class Comanda {
 	
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 	private User UserOwner;
 	
 
