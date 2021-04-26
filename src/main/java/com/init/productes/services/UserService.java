@@ -238,7 +238,12 @@ public class UserService {
 			for(Comanda c: comandes) {
 				comandesDto.add(new ComandaDto(c));
 			}
-			return comandesDto;
+			if (comandesDto.isEmpty()){
+				exceptionString = "no Hi ha coses ";
+				throw new ApiRequestException(exceptionString);
+			}
+			else {
+			return comandesDto;}
 		}
 		else {
 			exceptionString = "No hi ha cap user amb Id: " + userId;
