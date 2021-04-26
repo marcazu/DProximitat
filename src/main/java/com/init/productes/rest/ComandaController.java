@@ -15,6 +15,7 @@ import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
+import com.init.productes.entity.Producte;
 import com.init.productes.services.ComandaService;
 
 @RestController
@@ -52,8 +53,12 @@ public class ComandaController {
 	
 	@RequestMapping(value="{comandaId}/propietari", method = RequestMethod.GET)
 	public ResponseEntity<UserDto> getPropietariComanda(@PathVariable("comandaId")Long comandaId){
-		return ResponseEntity.ok(comandaService.getPropietari(comandaId));
-		
+		return ResponseEntity.ok(comandaService.getPropietari(comandaId));	
+	}
+	
+	@RequestMapping(value="{comandaId}/productes", method = RequestMethod.GET)
+	public ResponseEntity<List<Producte>> getProductesComandes(@PathVariable("comandaId")Long comandaId){
+		return ResponseEntity.ok(comandaService.getProductescomanda(comandaId));	
 	}
 
 }

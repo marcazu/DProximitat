@@ -90,4 +90,16 @@ public class ComandaService {
 		}	
 	}
 
+	public List<Producte> getProductescomanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			return c.getProductesComanda();	
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+	}
+
 }
