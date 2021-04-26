@@ -10,9 +10,6 @@ public class ComandaDto {
 	private Boolean entregada;
 	
 	
-	public ComandaDto() {
-		super();
-	}
 
 	public ComandaDto(Comanda comanda) {
 		this.id = comanda.getId();

@@ -227,7 +227,6 @@ public class UserService {
 			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
 		}
-
 	}
 
 	public List<ComandaDto> getComandes(Long userId) {
