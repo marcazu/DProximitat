@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
@@ -69,7 +70,7 @@ public class UserController {
 		
 	}	
 	@RequestMapping(value="/{userId}/botigues", method =RequestMethod.GET)
-	public ResponseEntity<List<Botiga>> getBotiguesUsuari(@PathVariable("userId")Long userId){
+	public ResponseEntity<List<BotigaDto>> getBotiguesUsuari(@PathVariable("userId")Long userId){
 		
 		return ResponseEntity.ok(userService.getBotigues(userId));
 		
