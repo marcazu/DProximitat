@@ -48,10 +48,7 @@ public class User {
 	
 	
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	
 	
 
 	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari,

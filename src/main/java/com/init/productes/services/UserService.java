@@ -177,8 +177,8 @@ public class UserService {
 			if(optionalComanda.isPresent()) {
 				User user = optionalUser.get();
 				Comanda comanda = optionalComanda.get();
-				user.addComanda(comanda);
 				comanda.setUserOwner(user);
+				user.addComanda(comanda);//potserfalla aqui
 				userRepository.save(user);
 				return;
 				
