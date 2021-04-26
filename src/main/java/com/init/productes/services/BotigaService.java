@@ -1,9 +1,13 @@
 package com.init.productes.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.init.productes.Dto.BotigaDto;
+import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.exception.ApiRequestException;
@@ -21,10 +25,14 @@ public class BotigaService {
 	
 	private String ExceptionString;
 
-	public List<Botiga> getbotigues() {
+	public List<BotigaDto> getbotigues() {
 		List<Botiga> botigues = botiguesRepository.findAll();
+		List<BotigaDto> botigaDto = new ArrayList<BotigaDto>();
 		if(botigues.isEmpty()) throw new ApiRequestException("No hi ha cap botiga insertada a la BD");
-		return botigues;
+		for(Botiga b : botigues) {
+			botigaDto.add(new BotigaDto(b));
+		}
+		return botigaDto;
 	}
 
 	public Botiga getBotigaById(Long botigaId) {
@@ -92,6 +100,19 @@ public class BotigaService {
 		if (optionalBotiga.isPresent()) {
 			Botiga botiga = optionalBotiga.get(); //optenim la botiga
 			return botiga.getProductesBotiga();
+		}
+		else {
+			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
+	}
+
+	public UserDto getPropietari(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
+		if(optionalBotiga.isPresent()) {
+			Botiga botiga = optionalBotiga.get();
+			UserDto userDto = new UserDto(botiga.getBotiguer());
+			return userDto;
 		}
 		else {
 			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;

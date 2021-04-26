@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.Dto.BotigaDto;
+import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.services.BotigaService;
@@ -25,7 +27,7 @@ public class BotigaController {
 	private BotigaService botigaService;
 
 	@GetMapping // get all botigues
-	public ResponseEntity<List<Botiga>> getBotiga(){
+	public ResponseEntity<List<BotigaDto>> getBotiga(){
 		System.out.println("Hello, logs!");
 		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
@@ -69,5 +71,10 @@ public class BotigaController {
 	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<Producte>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
 		return ResponseEntity.ok(botigaService.getProductesBotiga(botigaId));
+	}
+	@RequestMapping(value="/{botigaId}/propietari", method = RequestMethod.GET)
+	public ResponseEntity<UserDto> getPropietari(@PathVariable("botigaId")Long botigaId){
+		return ResponseEntity.ok(botigaService.getPropietari(botigaId));
+		
 	}
 }
