@@ -101,11 +101,9 @@ public class UserController {
 		exceptionResponse = "S'ha linkat l'usuari amb Id: amb la comadna amb Id";
 		return ResponseEntity.ok(exceptionResponse);		
 	}
-	
 	@RequestMapping(value="/{userId}/comandes", method = RequestMethod.GET)
-	public ResponseEntity<List<ComandaDto>>getComandesUser(@PathVariable("userID") Long userId){
-		return ResponseEntity.ok(userService.getComandesUser(userId));
-		
+	public ResponseEntity<List<ComandaDto>> getComandes(@PathVariable("userID")Long userId){
+		return ResponseEntity.ok(userService.getComandes(userId));
 	}
 	
 	

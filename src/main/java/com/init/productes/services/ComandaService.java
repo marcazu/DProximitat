@@ -1,9 +1,13 @@
 package com.init.productes.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
@@ -21,8 +25,18 @@ public class ComandaService {
 	
 	private String exceptionString;
 
-	public List<Comanda> getComandes() {
-		return comandaRepository.findAll();
+	public List<ComandaDto> getComandes() {
+		List<Comanda> comandes = comandaRepository.findAll();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		if(comandes.isEmpty()) {
+			exceptionString = "No hi ha cap comanda a la BD:";
+			throw new ApiRequestException(exceptionString);
+		}
+		for(Comanda c : comandes) {
+			comandesDto.add(new ComandaDto(c));
+			
+		}
+		return comandesDto;
 	}
 
 	public Comanda getProducteById(Long comandaId) {
@@ -61,6 +75,19 @@ public class ComandaService {
 		}	
 	
 		
+	}
+
+	public UserDto getPropietari(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			UserDto userDto = new UserDto(c.getUserOwner());
+			return userDto;			
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}	
 	}
 
 }

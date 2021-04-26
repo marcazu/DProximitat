@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RootController {
 	@GetMapping
 	public String hello() {
-		return("hola, encara no funciona tot, estic fent proves");
+		return("Hola, aquí pots veure el swagger: https://backenddproximitat.herokuapp.com/swagger-ui.html");
 		
 	}
 

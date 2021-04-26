@@ -212,23 +212,6 @@ public class UserService {
 		}
 	}
 
-	public List<ComandaDto> getComandesUser(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User user = optionalUser.get();
-			List<Comanda> comandes = user.getComandesUsuari();
-			List<ComandaDto> comandesDtos = new ArrayList<ComandaDto>();
-			for(Comanda c :comandes) {
-				comandesDtos.add(new ComandaDto(c));
-			}
-			return comandesDtos;
-		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
-	}
-
 	public List<BotigaDto> getBotigues(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) {
@@ -245,5 +228,22 @@ public class UserService {
 			throw new ApiRequestException(exceptionString);
 		}
 
+	}
+
+	public List<ComandaDto> getComandes(Long userId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			List<Comanda> comandes = user.getComandesUsuari();
+			List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+			for(Comanda c: comandes) {
+				comandesDto.add(new ComandaDto(c));
+			}
+			return comandesDto;
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
 	}
 }

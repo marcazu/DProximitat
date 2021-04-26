@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.services.ComandaService;
@@ -24,7 +26,7 @@ public class ComandaController {
 	
 	
 	@GetMapping // get all botigues
-	public ResponseEntity<List<Comanda>> getComandes(){
+	public ResponseEntity<List<ComandaDto>> getComandes(){
 		return ResponseEntity.ok(comandaService.getComandes());	
 	}
 	
@@ -46,6 +48,12 @@ public class ComandaController {
 		comandaService.afegirProducte(comandaId,producteId);
 		String response = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +comandaId;
 		return ResponseEntity.ok(response);
+	}
+	
+	@RequestMapping(value="{comandaId}/propietari", method = RequestMethod.GET)
+	public ResponseEntity<UserDto> getPropietariComanda(@PathVariable("comandaId")Long comandaId){
+		return ResponseEntity.ok(comandaService.getPropietari(comandaId));
+		
 	}
 
 }
