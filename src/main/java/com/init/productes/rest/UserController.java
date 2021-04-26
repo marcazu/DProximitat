@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
+import com.init.productes.entity.Botiga;
 import com.init.productes.entity.User;
 import com.init.productes.services.UserService;
 
@@ -67,6 +68,12 @@ public class UserController {
 		return ResponseEntity.ok(exceptionResponse);
 		
 	}	
+	@RequestMapping(value="/{userId}/botigues", method =RequestMethod.GET)
+	public ResponseEntity<List<Botiga>> getBotiguesUsuari(@PathVariable("userId")Long userId){
+		
+		return ResponseEntity.ok(userService.getBotigues(userId));
+		
+	}
 	
 	@RequestMapping(value="/{userId}/addCarro/{producteId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>addProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){

@@ -35,9 +35,9 @@ public class Botiga {
 	@Column(name="latitud")
 	private double latitud;
 	
-	//@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name="botigaId")
-	//private User botiguer;
+	@ManyToOne(cascade = CascadeType.PERSIST) // no borrem el producte al treurel de la botiga)
+	@JoinColumn(name = "user_id")
+	private User Botiguer;
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga

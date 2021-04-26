@@ -32,7 +32,7 @@ public class User {
 	private Boolean esBotiguer;
 	
 	@OneToMany(
-			//mappedBy = "botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
+			mappedBy = "Botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
 			cascade = CascadeType.PERSIST, // propaga casi tottes les funciones menys la de borrar el producte
 			orphanRemoval = false // no volem eliminar orfes
 			)

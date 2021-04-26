@@ -226,4 +226,17 @@ public class UserService {
 			throw new ApiRequestException(exceptionString);
 		}
 	}
+
+	public List<Botiga> getBotigues(Long userId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			return user.getBotiguesUsuari();
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+
+	}
 }
