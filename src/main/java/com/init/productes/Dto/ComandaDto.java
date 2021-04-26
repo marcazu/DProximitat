@@ -1,7 +1,5 @@
 package com.init.productes.Dto;
 
-import javax.persistence.Column;
-
 import com.init.productes.entity.Comanda;
 
 public class ComandaDto {
@@ -9,8 +7,6 @@ public class ComandaDto {
 	private long id;
 	private Boolean entregada;
 	
-	
-
 	public ComandaDto(Comanda comanda) {
 		this.id = comanda.getId();
 		this.entregada = comanda.getEntregada();
@@ -28,7 +24,5 @@ public class ComandaDto {
 	public void setEntregada(Boolean entregada) {
 		this.entregada = entregada;
 	}
-	
-	
 
 }

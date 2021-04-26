@@ -103,6 +103,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/{userId}/comandes", method = RequestMethod.GET)
 	public ResponseEntity<List<ComandaDto>> getComandes(@PathVariable("userID")Long userId){
+		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandes(userId));
 	}
 	

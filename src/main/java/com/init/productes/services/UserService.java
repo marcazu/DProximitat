@@ -243,6 +243,7 @@ public class UserService {
 				throw new ApiRequestException(exceptionString);
 			}
 			else {
+				System.out.println("retorno les comandesDto");	
 			return comandesDto;}
 		}
 		else {

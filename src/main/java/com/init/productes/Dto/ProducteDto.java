@@ -1,7 +1,5 @@
 package com.init.productes.Dto;
 
-import javax.persistence.Column;
-
 import com.init.productes.entity.Producte;
 
 public class ProducteDto {

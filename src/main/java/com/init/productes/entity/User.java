@@ -66,9 +66,6 @@ public class User {
 		this.comandesUsuari = comandesUsuari;
 	}
 
-
-
-
 	public long getId() {
 		return id;
 	}
