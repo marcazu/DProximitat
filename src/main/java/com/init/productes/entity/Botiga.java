@@ -113,14 +113,13 @@ public class Botiga {
 	public void addProducteBotiga(Producte producte) {
 		productesBotiga.add(producte);
 	}
-	/*
 	public User getBotiguer() {
-		return botiguer;
+		return Botiguer;
 	}
 	public void setBotiguer(User botiguer) {
-		this.botiguer = botiguer;
+		Botiguer = botiguer;
 	}
-	*/
+	
 	
 	
 

@@ -102,6 +102,7 @@ public class UserService {
 				User user = optionalUser.get();
 				Botiga botiga = optionalBotiga.get();
 				user.addBotigaUser(botiga);
+				botiga.setBotiguer(user);
 				userRepository.save(user);
 			}
 			else {
