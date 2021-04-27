@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.Dto.BotigaDto;
+import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
@@ -64,7 +65,7 @@ public class BotigaController {
 	@RequestMapping(value ="/{botigaId}/addProducte/{productId}", method =RequestMethod.PUT)
 	public ResponseEntity<String>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
 		botigaService.afegirProducte(botigaId, productId);
-		String result = "S'ha afegit el producte amb Id: "+ productId + " a la botiga amb ID: " + botigaId;
+		String result = "S'ha afegit el producte amb Id: "+ productId + " a la botiga amb Id: " + botigaId;
 		return ResponseEntity.ok(result);
 
 	}
@@ -76,6 +77,18 @@ public class BotigaController {
 	@RequestMapping(value="/{botigaId}/propietari", method = RequestMethod.GET)
 	public ResponseEntity<UserDto> getPropietari(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getPropietari(botigaId));
+		
+	}
+	@RequestMapping(value="/{botigaId}/addComanda/{comnadaId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>AddComanda(@PathVariable("botigaId")Long botigaId, @PathVariable("comandaId") Long comandaId){
+		botigaService.afegirComanda(botigaId,comandaId);
+		String result = "S'ha afegit la comanda amb Id: "+comandaId+" a la botiga amb Id: "+botigaId;
+		return ResponseEntity.ok(result);
+	}
+	
+	@RequestMapping(value="/{botigaId}/Comandes",method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>>getComandes(@PathVariable("botigaId")Long botigaId){
+		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
 	}
 }

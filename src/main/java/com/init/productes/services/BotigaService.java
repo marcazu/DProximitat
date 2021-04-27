@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.init.productes.Dto.BotigaDto;
+import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
+import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
+import com.init.productes.repository.ComandaRepository;
 import com.init.productes.repository.ProductesRespository;
 
 @Service
@@ -22,6 +25,9 @@ public class BotigaService {
 	
 	@Autowired
 	private ProductesRespository productesRepository;
+	
+	@Autowired
+	private ComandaRepository comandaRepository;
 	
 	private String ExceptionString;
 
@@ -55,7 +61,7 @@ public class BotigaService {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
 		if(optionalBotiga.isPresent())botiguesRepository.deleteById(botigaId);
 		else {
-			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
 			throw new ApiRequestException(ExceptionString);
 		}
 	}
@@ -73,7 +79,7 @@ public class BotigaService {
 			botiguesRepository.save(updateBotiga);
 		}
 		else {
-			ExceptionString = "No hi ha cap botiga amb ID:" + botiga.getId();
+			ExceptionString = "No hi ha cap botiga amb Id:" + botiga.getId();
 			throw new ApiRequestException(ExceptionString);
 		}
 	}
@@ -89,12 +95,12 @@ public class BotigaService {
 				botiguesRepository.save(botiga);
 			}
 			else {
-				ExceptionString = "No hi ha cap producte amb ID:" + productId;
+				ExceptionString = "No hi ha cap producte amb Id:" + productId;
 				throw new ApiRequestException(ExceptionString);
 			}
 		}
 		else {
-			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
 			throw new ApiRequestException(ExceptionString);
 		}
 	}
@@ -105,7 +111,7 @@ public class BotigaService {
 			return botiga.getProductesBotiga();
 		}
 		else {
-			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
 			throw new ApiRequestException(ExceptionString);
 		}
 	}
@@ -118,7 +124,48 @@ public class BotigaService {
 			return userDto;
 		}
 		else {
-			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
+	}
+
+	public void afegirComanda(Long botigaId, Long comandaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);//optenir botiga
+		if (optionalBotiga.isPresent()) {
+			if(optionalComanda.isPresent()) {
+				Botiga botiga = optionalBotiga.get();
+				Comanda comanda = optionalComanda.get();
+				botiga.addComanda(comanda);
+				comanda.setBotigaCompra(botiga);
+				botiguesRepository.save(botiga);
+			}
+			else {
+				ExceptionString = "No hi ha cap comanda amb Id:" + comandaId;
+				throw new ApiRequestException(ExceptionString);
+			}
+		}
+		else {
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
+			throw new ApiRequestException(ExceptionString);
+		}
+		
+	}
+
+	public List<ComandaDto> getComandes(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
+		if (optionalBotiga.isPresent()) {
+			Botiga botiga = optionalBotiga.get();
+			List<Comanda> comandes = botiga.getComandesBotiga();
+			List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+			for(Comanda c : comandes) {
+				comandesDto.add(new ComandaDto(c));
+			}
+			return comandesDto;
+			
+		}
+		else {
+			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;
 			throw new ApiRequestException(ExceptionString);
 		}
 	}

@@ -44,6 +44,11 @@ public class Botiga {
 			orphanRemoval = false) // no borrem orfes
 	private List<Producte> productesBotiga = new ArrayList<Producte>();
 	
+	@OneToMany(mappedBy ="botigaCompra",
+			cascade = CascadeType.PERSIST, // no borrem la comanda al treure la comanda
+			orphanRemoval = false)// no borrem orfes de moment
+	private List<Comanda> comandesBotiga = new ArrayList<Comanda>();
+	
 	protected Botiga() {
 		
 	}
@@ -119,7 +124,15 @@ public class Botiga {
 	public void setBotiguer(User botiguer) {
 		Botiguer = botiguer;
 	}
-	
+	public void addComanda(Comanda comanda) {
+		comandesBotiga.add(comanda);
+	}
+	public List<Comanda> getComandesBotiga() {
+		return comandesBotiga;
+	}
+	public void setComandesBotiga(List<Comanda> comandesBotiga) {
+		this.comandesBotiga = comandesBotiga;
+	}
 	
 	
 

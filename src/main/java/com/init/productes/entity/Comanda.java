@@ -38,6 +38,10 @@ public class Comanda {
 	@JoinColumn(name = "user_id")
 	private User UserOwner;
 	
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name= "botiga_id")
+	private Botiga botigaCompra;
+	
 
 	protected Comanda() {
 	}	
@@ -82,6 +86,14 @@ public class Comanda {
 
 	public void setUserOwner(User userOwner) {
 		UserOwner = userOwner;
+	}
+
+	public Botiga getBotigaCompra() {
+		return botigaCompra;
+	}
+
+	public void setBotigaCompra(Botiga botigaCompra) {
+		this.botigaCompra = botigaCompra;
 	}
 	
 	

@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.UserDto;
+import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
@@ -98,6 +100,20 @@ public class ComandaService {
 		if(optionalComanda.isPresent()) {
 			Comanda c = optionalComanda.get();
 			return c.getProductesComanda();	
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+	}
+
+	public BotigaDto getBotiga(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			Botiga b = c.getBotigaCompra();
+			return new BotigaDto(b);
+			
 		}
 		else {
 			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
