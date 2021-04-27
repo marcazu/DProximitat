@@ -35,9 +35,12 @@ public class BotigaService {
 		return botigaDto;
 	}
 
-	public Botiga getBotigaById(Long botigaId) {
+	public BotigaDto getBotigaById(Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
-		if(optionalBotiga.isPresent())return optionalBotiga.get();
+		if(optionalBotiga.isPresent()) {
+			BotigaDto botigaDto = new BotigaDto(optionalBotiga.get());
+			return botigaDto;
+		}
 		else {
 			ExceptionString = "No hi ha cap botiga amb ID:" + botigaId;
 			throw new ApiRequestException(ExceptionString);

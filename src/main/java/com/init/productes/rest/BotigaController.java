@@ -26,33 +26,33 @@ public class BotigaController {
 	@Autowired
 	private BotigaService botigaService;
 
-	@GetMapping // get all botigues
+	@RequestMapping(method =RequestMethod.GET)// get all botigues
 	public ResponseEntity<List<BotigaDto>> getBotiga(){
 		System.out.println("Hello, logs!");
 		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
 	
-	@RequestMapping(value ="{botigaId}") // get botiga concreta
-	public ResponseEntity<Botiga>getBotigaById(@PathVariable("botigaId")Long botigaId){
+	@RequestMapping(value ="{botigaId}", method =RequestMethod.GET ) // get botiga concreta
+	public ResponseEntity<BotigaDto>getBotigaById(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getBotigaById(botigaId));
 		
 	}
 	
-	@PostMapping // post botiga
+	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createBotiga(@RequestBody Botiga botiga){
 		botigaService.creteBotiga(botiga);
 		String result = "S'ha creat una botiga amb id: " + botiga.getId();
 		return ResponseEntity.ok(result);
 	}
 	
-	@DeleteMapping(value ="{botigaId}") // delete botiga
+	@RequestMapping(value ="{botigaId}",method =RequestMethod.DELETE)
 	public ResponseEntity<String> deleteBotiga(@PathVariable("botigaId")Long botigaId){
 		botigaService.deleteById(botigaId);
 		String result = "S'ha eliminat el producte amb Id: "+ botigaId;
 		return ResponseEntity.ok(result);
 	}
 	
-	@PutMapping // modificar botiga
+	@RequestMapping(method =RequestMethod.PUT)
 	public ResponseEntity<String> updateBotiga(@RequestBody Botiga botiga){
 		botigaService.updateBotiga(botiga);
 		String result = "S'ha modificat el producte amb Id: "+ botiga.getId();

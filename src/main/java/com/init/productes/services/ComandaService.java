@@ -39,10 +39,13 @@ public class ComandaService {
 		return comandesDto;
 	}
 
-	public Comanda getProducteById(Long comandaId) {
+	public ComandaDto getProducteById(Long comandaId) {
 		
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);	
-		if(optionalComanda.isPresent()) return optionalComanda.get();
+		if(optionalComanda.isPresent()) {
+			ComandaDto comandaDto = new ComandaDto(optionalComanda.get());
+			return comandaDto;
+		}
 		else {
 			exceptionString = "No hi ha cap comanda amb ID:" + comandaId;
 			throw new ApiRequestException(exceptionString);

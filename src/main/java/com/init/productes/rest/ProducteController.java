@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.entity.Producte;
@@ -23,31 +24,31 @@ public class ProducteController {
 	@Autowired
 	private ProducteService producteService;
 	
-	@GetMapping
+	@RequestMapping(method =RequestMethod.GET)
 	public ResponseEntity<List<Producte>> getProduct(){
 		return ResponseEntity.ok(producteService.getProductes());	
 	}
 	
-	@RequestMapping(value ="{productId}")
+	@RequestMapping(value ="{productId}",method =RequestMethod.GET)
 	public ResponseEntity<Producte>getProductById(@PathVariable("productId")Long productId){
 		return ResponseEntity.ok(producteService.getProducteById(productId));
 	}
 	
-	@PostMapping
+	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createProducte(@RequestBody Producte producte){
 		producteService.createProducte(producte);
 		String result = "S'ha creat un producte amb id: " + producte.getId();
 		return ResponseEntity.ok(result);
 	}
 	
-	@DeleteMapping(value ="{productId}")
+	@RequestMapping(value ="{productId}", method =RequestMethod.DELETE)
 	public ResponseEntity<String> deleteProducte(@PathVariable("productId")Long productId){
 		producteService.deleteById(productId);
 		String result = "S'ha eliminat el producte amb Id: "+ productId;
 		return ResponseEntity.ok(result);
 	}
 		
-	@PutMapping
+	@RequestMapping(method =RequestMethod.PUT)
 	public ResponseEntity<String> updateProducte(@RequestBody Producte producte){
 		producteService.updateProducte(producte);
 		String result = "S'ha modificat el producte amb Id: " + producte.getId();

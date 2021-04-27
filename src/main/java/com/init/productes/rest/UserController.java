@@ -31,23 +31,23 @@ public class UserController {
 	
 	private String exceptionResponse;
 	
-	@GetMapping // get all users
+	@RequestMapping(method =RequestMethod.GET)
 	public ResponseEntity<List<UserDto>> getUsers(){
 		return ResponseEntity.ok(userService.getUsers());
 	}
-	@RequestMapping(value ="{userId}") // get user concret
+	@RequestMapping(value ="{userId}",method =RequestMethod.GET) // get user concret
 	public ResponseEntity<UserDto>getUserById(@PathVariable("userId")Long userId){
 		 return ResponseEntity.ok(userService.getUser(userId));
 	}
 	
-	@DeleteMapping(value ="{userId}") // delete user
+	@RequestMapping(value ="{userId}",method =RequestMethod.DELETE) // delete user
 	public ResponseEntity<String> deleteUser(@PathVariable("userId")Long userId){
 		userService.deleteUser(userId);
 		exceptionResponse = "s'ha eliminat el user amb ID: " + userId;
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
-	@PutMapping // modificar user
+	@RequestMapping(method =RequestMethod.PUT)
 	public ResponseEntity<String> updateUser(@RequestBody User user){
 		userService.updateUser(user);
 		exceptionResponse = "s'ha modificat el user amb ID: " + user.getId();
@@ -55,7 +55,7 @@ public class UserController {
 
 	}
 	
-	@PostMapping
+	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createProducte(@RequestBody User user){
 		userService.crearUser(user);
 		exceptionResponse = "s'ha creat el user amb ID: " + user.getId();

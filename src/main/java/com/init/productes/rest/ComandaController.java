@@ -26,18 +26,18 @@ public class ComandaController {
 	private ComandaService comandaService;
 	
 	
-	@GetMapping // get all botigues
+	@RequestMapping(method =RequestMethod.GET)
 	public ResponseEntity<List<ComandaDto>> getComandes(){
 		return ResponseEntity.ok(comandaService.getComandes());	
 	}
 	
-	@RequestMapping(value ="{comandaId}") // get comanda concreta by id
-	public ResponseEntity<Comanda>getcomandaById(@PathVariable("comandaId")Long comandaId){
+	@RequestMapping(value ="{comandaId}",method =RequestMethod.GET) // get comanda concreta by id
+	public ResponseEntity<ComandaDto>getcomandaById(@PathVariable("comandaId")Long comandaId){
 		
 		return ResponseEntity.ok(comandaService.getProducteById(comandaId));
 	}
 	
-	@PostMapping // post botiga
+	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createBotiga(@RequestBody Comanda comanda){
 		comandaService.createComanda(comanda);
 		String result ="S'ha creat la comanda amb Id: " + comanda.getId();
