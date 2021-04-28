@@ -21,16 +21,19 @@ public class Producte {
 	private String descripcio;
 	@Column(name="tipus", nullable=false, length=30)
 	private String tipus;
+	@Column(name="preu", nullable=false)
+	private Double preu;
 	
 	protected Producte() {
 		
 	}
 	
-	public Producte(String nom, String descripcio, String tipus) {
+	public Producte(String nom, String descripcio, String tipus, Double preu) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
 		this.tipus = tipus;
+		this.preu = preu;
 	}
 	public long getId() {
 		return id;
@@ -56,6 +59,13 @@ public class Producte {
 	public void setTipus(String tipus) {
 		this.tipus = tipus;
 	}
+	public Double getPreu() {
+		return preu;
+	}
+	public void setPreu(Double preu) {
+		this.preu = preu;
+	}
+	
 
 	
 }
