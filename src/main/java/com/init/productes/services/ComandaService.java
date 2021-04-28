@@ -125,4 +125,32 @@ public class ComandaService {
 		}
 	}
 
+	public void prepararComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			c.setPreparada(true);
+			comandaRepository.save(c);			
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
+	public void entregarComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			c.setEntregada(true);
+			comandaRepository.save(c);			
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
 }

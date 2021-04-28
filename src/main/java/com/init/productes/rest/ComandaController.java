@@ -26,6 +26,8 @@ public class ComandaController {
 	@Autowired
 	private ComandaService comandaService;
 	
+	private String exceptionString;
+	
 	
 	@RequestMapping(method =RequestMethod.GET)
 	public ResponseEntity<List<ComandaDto>> getComandes(){
@@ -41,15 +43,15 @@ public class ComandaController {
 	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createBotiga(@RequestBody Comanda comanda){
 		comandaService.createComanda(comanda);
-		String result ="S'ha creat la comanda amb Id: " + comanda.getId();
-		return ResponseEntity.ok(result);
+		exceptionString ="S'ha creat la comanda amb Id: " + comanda.getId();
+		return ResponseEntity.ok(exceptionString);
 	}
 	
 	@RequestMapping(value="/{comandaId}/addProducte/{producteId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>addProducteCarro(@PathVariable("comandaId") Long comandaId, @PathVariable("producteId") Long producteId){
 		comandaService.afegirProducte(comandaId,producteId);
-		String response = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +comandaId;
-		return ResponseEntity.ok(response);
+		exceptionString = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +comandaId;
+		return ResponseEntity.ok(exceptionString);
 	}
 	
 	@RequestMapping(value="{comandaId}/propietari", method = RequestMethod.GET)
@@ -65,6 +67,19 @@ public class ComandaController {
 	public ResponseEntity<BotigaDto> getBotigaComanda(@PathVariable("comandaId") Long comandaId){
 		return ResponseEntity.ok(comandaService.getBotiga(comandaId));
 		
+	}
+	@RequestMapping(value="{comandaId}/preparar", method = RequestMethod.PUT)
+	public ResponseEntity<String> prepararComanda(@PathVariable("comandaId") Long comandaId){
+		comandaService.prepararComanda(comandaId);
+		exceptionString = "S'ha modificat la comanda a preparada";
+		return ResponseEntity.ok(exceptionString);
+		
+	}
+	@RequestMapping(value="{comandaId}/entregar", method = RequestMethod.PUT)
+	public ResponseEntity<String>entregarComanda(@PathVariable("comandaId") Long comandaId){
+		comandaService.entregarComanda(comandaId);
+		exceptionString = "S'ha preparat la comanda: " + comandaId;
+		return ResponseEntity.ok(exceptionString);
 	}
 
 }
