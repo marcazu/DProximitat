@@ -30,4 +30,21 @@ public class ComandaDto {
 		this.entregada = entregada;
 	}
 
+	public Boolean getPreparada() {
+		return preparada;
+	}
+
+	public void setPreparada(Boolean preparada) {
+		this.preparada = preparada;
+	}
+
+	public double getCostTotal() {
+		return costTotal;
+	}
+
+	public void setCostTotal(double costTotal) {
+		this.costTotal = costTotal;
+	}
+	
+
 }
