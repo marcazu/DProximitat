@@ -56,6 +56,9 @@ public class ComandaService {
 	}
 
 	public void createComanda(Comanda comanda) {
+		comanda.setEntregada(false);
+		comanda.setPreparada(false);
+		comanda.setCostTotal(0.0);
 		comandaRepository.save(comanda);	
 	}
 
@@ -67,6 +70,7 @@ public class ComandaService {
 				Comanda comanda = optionalComanda.get();
 				Producte producte = optionalProducte.get();
 				comanda.addProducte(producte);
+				comanda.addPreuTotal(producte.getPreu());
 				comandaRepository.save(comanda);
 			}
 			else {

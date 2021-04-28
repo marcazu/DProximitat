@@ -27,8 +27,14 @@ public class Comanda {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	@Column(name="preparada")
+	private Boolean preparada;
+	
 	@Column(name="entregada")
 	private Boolean entregada;
+	
+	@Column(name="costTotal")
+	private Double costTotal; 
 	
 	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
 			orphanRemoval = false) // no borrem orfes
@@ -94,6 +100,27 @@ public class Comanda {
 
 	public void setBotigaCompra(Botiga botigaCompra) {
 		this.botigaCompra = botigaCompra;
+	}
+
+	public Boolean getPreparada() {
+		return preparada;
+	}
+
+	public void setPreparada(Boolean preparada) {
+		this.preparada = preparada;
+	}
+
+	public Double getCostTotal() {
+		return costTotal;
+	}
+
+	public void setCostTotal(Double costTotal) {
+		this.costTotal = costTotal;
+	}
+
+	public void addPreuTotal(Double preu) {
+		this.costTotal = this.costTotal + preu;
+		
 	}
 	
 	

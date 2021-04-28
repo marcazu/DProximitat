@@ -5,11 +5,16 @@ import com.init.productes.entity.Comanda;
 public class ComandaDto {
 	
 	private long id;
+	private Boolean preparada;
 	private Boolean entregada;
+	private double costTotal;
+	
 	
 	public ComandaDto(Comanda comanda) {
 		this.id = comanda.getId();
 		this.entregada = comanda.getEntregada();
+		this.preparada = comanda.getPreparada();
+		this.costTotal = comanda.getCostTotal();
 	}
 	
 	public long getId() {
