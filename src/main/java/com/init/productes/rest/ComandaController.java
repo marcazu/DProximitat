@@ -71,14 +71,14 @@ public class ComandaController {
 	@RequestMapping(value="{comandaId}/preparar", method = RequestMethod.PUT)
 	public ResponseEntity<String> prepararComanda(@PathVariable("comandaId") Long comandaId){
 		comandaService.prepararComanda(comandaId);
-		exceptionString = "S'ha modificat la comanda a preparada";
+		exceptionString = "S'ha preparat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
 		
 	}
 	@RequestMapping(value="{comandaId}/entregar", method = RequestMethod.PUT)
 	public ResponseEntity<String>entregarComanda(@PathVariable("comandaId") Long comandaId){
 		comandaService.entregarComanda(comandaId);
-		exceptionString = "S'ha preparat la comanda: " + comandaId;
+		exceptionString = "S'ha entregat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
 

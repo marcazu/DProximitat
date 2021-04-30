@@ -60,7 +60,6 @@ public class BotigaController {
 		return ResponseEntity.ok(result);  
 
 	}
-	//
 	//afegir un producte a la botiga
 	@RequestMapping(value ="/{botigaId}/addProducte/{productId}", method =RequestMethod.PUT)
 	public ResponseEntity<String>AddProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
