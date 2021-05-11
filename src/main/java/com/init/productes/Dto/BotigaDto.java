@@ -10,28 +10,28 @@ import com.init.productes.entity.User;
 public class BotigaDto {
 
 
-	private long id;
+	private String id;
 	private String nom;
 	private String descripcio;
 	private String email;
 	private String telefon;
-	private double longitud;
-	private double latitud;
+	private String longitud;
+	private String latitud;
 	
 	public BotigaDto(Botiga botiga) {//Constructor de botiga Dto
-		this.id = botiga.getId();
+		this.id = String.valueOf(botiga.getId());
 		this.nom = botiga.getNom();
 		this.descripcio = botiga.getDescripcio();
 		this.email = botiga.getEmail();
 		this.telefon = botiga.getTelefon();
-		this.longitud = botiga.getLongitud();
-		this.latitud = botiga.getLatitud();
+		this.longitud = String.valueOf(botiga.getLongitud());
+		this.latitud = String.valueOf(botiga.getLatitud());
 
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNom() {
@@ -58,16 +58,16 @@ public class BotigaDto {
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
-	public double getLongitud() {
+	public String getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(double longitud) {
+	public void setLongitud(String longitud) {
 		this.longitud = longitud;
 	}
-	public double getLatitud() {
+	public String getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(double latitud) {
+	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
 	
