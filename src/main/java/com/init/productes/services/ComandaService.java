@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
@@ -99,11 +100,16 @@ public class ComandaService {
 		}	
 	}
 
-	public List<Producte> getProductescomanda(Long comandaId) {
+	public List<ProducteDto> getProductescomanda(Long comandaId) {
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
 		if(optionalComanda.isPresent()) {
 			Comanda c = optionalComanda.get();
-			return c.getProductesComanda();	
+			List<Producte> productes = c.getProductesComanda();
+			List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
+			for(Producte p : productes) {
+				productesDto.add(new ProducteDto(p));
+			}
+			return productesDto;	
 		}
 		else {
 			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;

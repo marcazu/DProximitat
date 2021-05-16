@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
@@ -104,11 +105,16 @@ public class BotigaService {
 			throw new ApiRequestException(ExceptionString);
 		}
 	}
-	public List<Producte> getProductesBotiga(Long botigaId) {
+	public List<ProducteDto> getProductesBotiga(Long botigaId) {
 		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);//optenir botiga
 		if (optionalBotiga.isPresent()) {
 			Botiga botiga = optionalBotiga.get(); //optenim la botiga
-			return botiga.getProductesBotiga();
+			List<Producte> productes = botiga.getProductesBotiga();
+			List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
+			for(Producte p : productes) {
+				productesDto.add(new ProducteDto(p));
+			}
+			return productesDto;
 		}
 		else {
 			ExceptionString = "No hi ha cap botiga amb Id:" + botigaId;

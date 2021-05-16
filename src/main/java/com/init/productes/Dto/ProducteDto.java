@@ -8,12 +8,14 @@ public class ProducteDto {
 	private String nom;
 	private String descripcio;
 	private String tipus;
+	private String preu;
 	
 	public ProducteDto(Producte producte) {
 		this.id = producte.getId();
 		this.nom = producte.getNom();
 		this.descripcio = producte.getDescripcio();
 		this.tipus = producte.getTipus();
+		this.setPreu(String.valueOf(producte.getPreu()));
 		
 	}
 	public long getId() {
@@ -39,6 +41,12 @@ public class ProducteDto {
 	}
 	public void setTipus(String tipus) {
 		this.tipus = tipus;
+	}
+	public String getPreu() {
+		return preu;
+	}
+	public void setPreu(String preu) {
+		this.preu = preu;
 	}
 	
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
@@ -69,7 +70,7 @@ public class BotigaController {
 
 	}
 	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
-	public ResponseEntity<List<Producte>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
+	public ResponseEntity<List<ProducteDto>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
 		return ResponseEntity.ok(botigaService.getProductesBotiga(botigaId));
 	}
 	
