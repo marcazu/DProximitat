@@ -4,24 +4,24 @@ import com.init.productes.entity.Producte;
 
 public class ProducteDto {
 	
-	private long id;
+	private String id;
 	private String nom;
 	private String descripcio;
 	private String tipus;
 	private String preu;
 	
 	public ProducteDto(Producte producte) {
-		this.id = producte.getId();
+		this.id = String.valueOf(producte.getId());
 		this.nom = producte.getNom();
 		this.descripcio = producte.getDescripcio();
 		this.tipus = producte.getTipus();
-		this.setPreu(String.valueOf(producte.getPreu()));
+		this.preu = (String.valueOf(producte.getPreu()));
 		
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNom() {
