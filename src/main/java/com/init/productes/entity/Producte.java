@@ -23,17 +23,20 @@ public class Producte {
 	private String tipus;
 	@Column(name="preu", nullable=false)
 	private Double preu;
+	@Column(name="icona")
+	private String iconaProducte;
 	
 	protected Producte() {
 		
 	}
 	
-	public Producte(String nom, String descripcio, String tipus, Double preu) {
+	public Producte(String nom, String descripcio, String tipus, Double preu,String iconaProducte) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
 		this.tipus = tipus;
 		this.preu = preu;
+		this.iconaProducte = iconaProducte;
 	}
 	public long getId() {
 		return id;
@@ -64,6 +67,12 @@ public class Producte {
 	}
 	public void setPreu(Double preu) {
 		this.preu = preu;
+	}
+	public String getIconaProducte() {
+		return iconaProducte;
+	}
+	public void setIconaProducte(String iconaProducte) {
+		this.iconaProducte = iconaProducte;
 	}
 	
 

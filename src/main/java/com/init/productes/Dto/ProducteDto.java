@@ -9,6 +9,7 @@ public class ProducteDto {
 	private String descripcio;
 	private String tipus;
 	private String preu;
+	private String iconaProducte;
 	
 	public ProducteDto(Producte producte) {
 		this.id = String.valueOf(producte.getId());
@@ -16,6 +17,7 @@ public class ProducteDto {
 		this.descripcio = producte.getDescripcio();
 		this.tipus = producte.getTipus();
 		this.preu = (String.valueOf(producte.getPreu()));
+		this.iconaProducte = producte.getIconaProducte();
 		
 	}
 	public String getId() {
@@ -47,6 +49,12 @@ public class ProducteDto {
 	}
 	public void setPreu(String preu) {
 		this.preu = preu;
+	}
+	public String getIconaProducte() {
+		return iconaProducte;
+	}
+	public void setIconaProducte(String iconaProducte) {
+		this.iconaProducte = iconaProducte;
 	}
 	
 	
