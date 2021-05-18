@@ -74,7 +74,19 @@ public class BotigaDto {
 	public void setLatitud(String latitud) {
 		this.latitud = latitud;
 	}
+	public String getIconUrl() {
+		return iconUrl;
+	}
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+	public String getMainImageUrl() {
+		return mainImageUrl;
+	}
+	public void setMainImageUrl(String mainImageUrl) {
+		this.mainImageUrl = mainImageUrl;
+	}
 	
-	
+	//ja està crec
 }
 
