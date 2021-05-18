@@ -34,6 +34,10 @@ public class Botiga {
 	private double longitud;
 	@Column(name="latitud")
 	private double latitud;
+	@Column(name="icon")
+	private String iconUrl;
+	@Column(name="mainImageUrl")
+	private String mainImageUrl;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST) // no borrem el producte al treurel de la botiga)
 	@JoinColumn(name = "user_id")
@@ -54,7 +58,7 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			 List<Producte> productesBotiga) {
+			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -64,6 +68,8 @@ public class Botiga {
 		this.latitud = latitud;
 		///this.botiguer = botiguer;
 		this.productesBotiga = productesBotiga;
+		this.iconUrl = iconUrl;
+		this.mainImageUrl = mainImageUrl;
 	}
 
 
@@ -132,6 +138,22 @@ public class Botiga {
 	}
 	public void setComandesBotiga(List<Comanda> comandesBotiga) {
 		this.comandesBotiga = comandesBotiga;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
+	public String getMainImageUrl() {
+		return mainImageUrl;
+	}
+
+	public void setMainImageUrl(String mainImageUrl) {
+		this.mainImageUrl = mainImageUrl;
 	}
 	
 	

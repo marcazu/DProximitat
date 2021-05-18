@@ -17,6 +17,8 @@ public class BotigaDto {
 	private String telefon;
 	private String longitud;
 	private String latitud;
+	private String iconUrl;
+	private String mainImageUrl;
 	
 	public BotigaDto(Botiga botiga) {//Constructor de botiga Dto
 		this.id = String.valueOf(botiga.getId());
@@ -26,6 +28,8 @@ public class BotigaDto {
 		this.telefon = botiga.getTelefon();
 		this.longitud = String.valueOf(botiga.getLongitud());
 		this.latitud = String.valueOf(botiga.getLatitud());
+		this.iconUrl = botiga.getIconUrl();
+		this.mainImageUrl = botiga.getMainImageUrl();
 
 	}
 	public String getId() {
