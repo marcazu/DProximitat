@@ -30,6 +30,8 @@ public class User {
 	private String email;
 	@Column(name="Botiguer",columnDefinition = "boolean default false") // no posa en false
 	private Boolean esBotiguer;
+	@Column(name="fireBaseUId")
+	private String firebaseUId;
 	
 	@OneToMany(
 			mappedBy = "Botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
@@ -52,7 +54,7 @@ public class User {
 	
 
 	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari,
-			List<Producte> carro, List<Comanda> comandesUsuari) {
+			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
@@ -61,6 +63,7 @@ public class User {
 		this.botiguesUsuari = botiguesUsuari;
 		this.carro = carro;
 		this.comandesUsuari = comandesUsuari;
+		this.firebaseUId = firebaseUId;
 	}
 
 	public long getId() {
@@ -139,6 +142,16 @@ public class User {
 	public void setComandesUsuari(List<Comanda> comandesUsuari) {
 		this.comandesUsuari = comandesUsuari;
 	}
+
+	public String getFirebaseUId() {
+		return firebaseUId;
+	}
+
+	public void setFirebaseUId(String firebaseUId) {
+		this.firebaseUId = firebaseUId;
+	}
+	
+	
 
 	
 	

@@ -106,6 +106,11 @@ public class UserController {
 		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandes(userId));
 	}
+	@RequestMapping(value="/firebase/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<UserDto> getUserByFirebaseId(@PathVariable("userId")String userId){
+		return ResponseEntity.ok(userService.getUserFireBase(userId));
+		
+	}
 	
 	
 

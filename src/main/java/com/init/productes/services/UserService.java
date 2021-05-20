@@ -90,6 +90,7 @@ public class UserService {
 	}
 
 	public void crearUser(User user) {
+		user.setEsBotiguer(false);
 		userRepository.save(user);
 		
 	}
@@ -102,6 +103,7 @@ public class UserService {
 			if(optionalBotiga.isPresent()) {
 				User user = optionalUser.get();
 				Botiga botiga = optionalBotiga.get();
+				user.setEsBotiguer(true);
 				user.addBotigaUser(botiga);
 				botiga.setBotiguer(user);
 				userRepository.save(user);
@@ -246,6 +248,21 @@ public class UserService {
 				System.out.println("retorno les comandesDto");	
 			return comandesDto;}
 		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+	}
+
+	public UserDto getUserFireBase(String userId) {
+		// TODO Auto-generated method stub
+		Optional<User> optionalUser = userRepository.findByfirebaseUId(userId);
+		if(optionalUser.isPresent()) {
+			UserDto userDto = new UserDto(optionalUser.get());
+			return userDto;
+			
+		}
+		
 		else {
 			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
