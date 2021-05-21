@@ -4,7 +4,7 @@ import com.init.productes.entity.User;
 
 public class UserDto {
 	
-	private long id;
+	private String id;
 	private String nom;
 	private String telefon;
 	private String email;
@@ -12,18 +12,21 @@ public class UserDto {
 	
 
 	public UserDto(User user) {
-		this.id = user.getId();
+		this.id = String.valueOf(user.getId());
 		this.nom = user.getNom();
 		this.telefon = user.getTelefon();
 		this.email = user.getEmail();
 		this.esbotiguer = user.getEsBotiguer();
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
 	public void setId(long id) {
+		this.id = String.valueOf(id);
+	}
+	public void setId(String id) {
 		this.id = id;
 	}
 

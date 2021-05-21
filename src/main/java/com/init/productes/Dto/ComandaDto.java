@@ -4,23 +4,26 @@ import com.init.productes.entity.Comanda;
 
 public class ComandaDto {
 	
-	private long id;
+	private String id;
 	private Boolean preparada;
 	private Boolean entregada;
-	private double costTotal;
+	private String costTotal;
 	
 	
 	public ComandaDto(Comanda comanda) {
-		this.id = comanda.getId();
+		this.id = String.valueOf(comanda.getId());
 		this.entregada = comanda.getEntregada();
 		this.preparada = comanda.getPreparada();
-		this.costTotal = comanda.getCostTotal();
+		this.costTotal = String.valueOf(comanda.getCostTotal());
 	}
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 	public void setId(long id) {
+		this.id = String.valueOf(id);
+	}
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Boolean getEntregada() {
@@ -38,11 +41,15 @@ public class ComandaDto {
 		this.preparada = preparada;
 	}
 
-	public double getCostTotal() {
+	public String getCostTotal() {
 		return costTotal;
 	}
 
 	public void setCostTotal(double costTotal) {
+		this.costTotal = String.valueOf(costTotal);
+	}
+	
+	public void setCostTotal(String costTotal) {
 		this.costTotal = costTotal;
 	}
 	
