@@ -23,9 +23,6 @@ public class UserDto {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = String.valueOf(id);
-	}
 	public void setId(String id) {
 		this.id = id;
 	}
