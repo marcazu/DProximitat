@@ -270,20 +270,4 @@ public class UserService {
 		}
 	}
 
-	public void updateNomEmail(NomTelefon nomTelefon) {
-		Optional<User> optionalUser = userRepository.findById(Long.parseLong(nomTelefon.getUserId()));
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			if(!nomTelefon.getNom().isBlank()) updateUser.setNom(nomTelefon.getNom());
-			if(!nomTelefon.getEmail().isBlank())updateUser.setEmail(nomTelefon.getEmail());
-			userRepository.save(updateUser);
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID:" + nomTelefon.getUserId();
-			throw new ApiRequestException(exceptionString);
-		}
-		
-		// TODO Auto-generated method stub
-		
-	}
 }

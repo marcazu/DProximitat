@@ -112,12 +112,5 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUserFireBase(userId));
 		
 	}
-	@RequestMapping(value="/update",method = RequestMethod.PUT)
-	public ResponseEntity<String> updateNomEmail(@RequestBody NomTelefon nomTelefon){
-		userService.updateNomEmail(nomTelefon);
-		exceptionResponse = "s'ha modificat el user amb ID: " + nomTelefon.getUserId();
-		return ResponseEntity.ok(exceptionResponse);
-	}
 	
-
 }
