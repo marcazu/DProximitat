@@ -274,9 +274,9 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(Long.valueOf(userdto.getId()));
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
-			if(!userdto.getEmail().isEmpty())updateUser.setEmail(userdto.getEmail());
-			if(!userdto.getNom().isEmpty())updateUser.setNom(userdto.getNom());
-			if(!userdto.getTelefon().isEmpty())updateUser.setTelefon(userdto.getTelefon());
+			if(!(userdto.getEmail() == null))updateUser.setEmail(userdto.getEmail());
+			if(!(userdto.getNom() == null))updateUser.setNom(userdto.getNom());
+			if(!(userdto.getTelefon() == null))updateUser.setTelefon(userdto.getTelefon());
 			userRepository.save(updateUser);
 			
 		}
