@@ -113,7 +113,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/dto",method =RequestMethod.PUT)
+	@RequestMapping(value="/dto",method = RequestMethod.PUT)
 	public ResponseEntity<String> updateUserDto(@RequestBody UserDto userdto){
 		userService.updateUserDto(userdto);
 		exceptionResponse = "s'ha modificat el user amb ID: " + userdto.getId();

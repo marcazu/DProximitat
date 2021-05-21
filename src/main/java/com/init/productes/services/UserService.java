@@ -277,7 +277,6 @@ public class UserService {
 			if(!userdto.getEmail().isEmpty())updateUser.setEmail(userdto.getEmail());
 			if(!userdto.getNom().isEmpty())updateUser.setNom(userdto.getNom());
 			if(!userdto.getTelefon().isEmpty())updateUser.setTelefon(userdto.getTelefon());
-			if(!userdto.getNom().isEmpty())updateUser.setNom(userdto.getNom());	
 			userRepository.save(updateUser);
 			
 		}
