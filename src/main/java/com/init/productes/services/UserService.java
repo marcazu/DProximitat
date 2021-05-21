@@ -15,6 +15,7 @@ import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
+import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
@@ -267,5 +268,22 @@ public class UserService {
 			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
 		}
+	}
+
+	public void updateNomEmail(NomTelefon nomTelefon) {
+		Optional<User> optionalUser = userRepository.findById(Long.parseLong(nomTelefon.getUserId()));
+		if(optionalUser.isPresent()) {
+			User updateUser = optionalUser.get();
+			if(!nomTelefon.getNom().isBlank()) updateUser.setNom(nomTelefon.getNom());
+			if(!nomTelefon.getEmail().isBlank())updateUser.setEmail(nomTelefon.getEmail());
+			userRepository.save(updateUser);
+		}
+		else {
+			exceptionString = "No hi ha cap user amb ID:" + nomTelefon.getUserId();
+			throw new ApiRequestException(exceptionString);
+		}
+		
+		// TODO Auto-generated method stub
+		
 	}
 }

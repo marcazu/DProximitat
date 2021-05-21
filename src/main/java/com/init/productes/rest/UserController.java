@@ -18,6 +18,7 @@ import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
+import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.User;
 import com.init.productes.services.UserService;
 
@@ -111,7 +112,12 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUserFireBase(userId));
 		
 	}
-	
+	@RequestMapping(value="/update",method = RequestMethod.PUT)
+	public ResponseEntity<String> updateNomEmail(@RequestBody NomTelefon nomTelefon){
+		userService.updateNomEmail(nomTelefon);
+		exceptionResponse = "s'ha modificat el user amb ID: " + nomTelefon.getUserId();
+		return ResponseEntity.ok(exceptionResponse);
+	}
 	
 
 }
