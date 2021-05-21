@@ -77,11 +77,11 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(user.getId());		
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
-			if(!user.getNom().isBlank()) updateUser.setNom(user.getNom());
-			if(!user.getEmail().isBlank())updateUser.setEmail(user.getEmail());
-			if(!user.getTelefon().isBlank())updateUser.setTelefon(user.getTelefon());
+			if(!user.getNom().isEmpty())updateUser.setNom(user.getNom());
+			if(!user.getEmail().isEmpty())updateUser.setEmail(user.getEmail());
+			if(!user.getTelefon().isEmpty())updateUser.setTelefon(user.getTelefon());
 			//if(!user.getEsBotiguer().isBlank())updateUser.setEsBotiguer(user.getEsBotiguer());
-			if(!user.getEmail().isBlank())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
+			if(!user.getEmail().isEmpty())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
 			userRepository.save(updateUser);
 		}
 		else {
@@ -274,10 +274,10 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(Long.valueOf(userdto.getId()));
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
-			if(!userdto.getEmail().isBlank())updateUser.setEmail(userdto.getEmail());
-			if(!userdto.getNom().isBlank())updateUser.setNom(userdto.getNom());
-			if(!userdto.getTelefon().isBlank())updateUser.setTelefon(userdto.getTelefon());
-			if(!userdto.getNom().isBlank())updateUser.setNom(userdto.getNom());			
+			if(!userdto.getEmail().isEmpty())updateUser.setEmail(userdto.getEmail());
+			if(!userdto.getNom().isEmpty())updateUser.setNom(userdto.getNom());
+			if(!userdto.getTelefon().isEmpty())updateUser.setTelefon(userdto.getTelefon());
+			if(!userdto.getNom().isEmpty())updateUser.setNom(userdto.getNom());			
 			
 		}
 		else {
