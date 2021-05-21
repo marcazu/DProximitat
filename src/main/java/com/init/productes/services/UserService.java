@@ -81,7 +81,7 @@ public class UserService {
 			if(!user.getEmail().isBlank())updateUser.setEmail(user.getEmail());
 			if(!user.getTelefon().isBlank())updateUser.setTelefon(user.getTelefon());
 			//if(!user.getEsBotiguer().isBlank())updateUser.setEsBotiguer(user.getEsBotiguer());
-			//if(!user.getEmail().isBlank())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
+			if(!user.getEmail().isBlank())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
 			userRepository.save(updateUser);
 		}
 		else {
