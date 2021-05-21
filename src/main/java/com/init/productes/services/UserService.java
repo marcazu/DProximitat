@@ -270,4 +270,21 @@ public class UserService {
 		}
 	}
 
+	public void updateUserDto(UserDto userdto) {
+		Optional<User> optionalUser = userRepository.findById(Long.valueOf(userdto.getId()));
+		if(optionalUser.isPresent()) {
+			User updateUser = optionalUser.get();
+			if(!userdto.getEmail().isBlank())updateUser.setEmail(userdto.getEmail());
+			if(!userdto.getNom().isBlank())updateUser.setNom(userdto.getNom());
+			if(!userdto.getTelefon().isBlank())updateUser.setTelefon(userdto.getTelefon());
+			if(!userdto.getNom().isBlank())updateUser.setNom(userdto.getNom());			
+			
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userdto.getId();
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
 }
