@@ -112,13 +112,26 @@ public class UserController {
 		return ResponseEntity.ok(userService.getUserFireBase(userId));
 		
 	}
-	
-	@RequestMapping(value="/dto",method = RequestMethod.PUT)
-	public ResponseEntity<String> updateUserDto(@RequestBody UserDto userdto){
-		userService.updateUserDto(userdto);
-		exceptionResponse = "s'ha modificat el user amb ID: " + userdto.getId();
-		return ResponseEntity.ok(exceptionResponse);  
-
+	@RequestMapping(value="/{userId}/email", method = RequestMethod.PUT)
+	public ResponseEntity<String>modificarEmailById(@PathVariable("userId")Long userId,@RequestBody String email){
+		userService.modificarEmail(userId,email);
+		exceptionResponse = "S'ha linkat l'usuari amb Id:" +userId;
+		return ResponseEntity.ok(exceptionResponse);
 	}
+	
+	@RequestMapping(value="/{userId}/nom", method = RequestMethod.PUT)
+	public ResponseEntity<String>modificarNomById(@PathVariable("userId")Long userId,@RequestBody String nom){
+		userService.modificarNom(userId,nom);
+		exceptionResponse = "S'ha linkat l'usuari amb Id: " +userId;
+		return ResponseEntity.ok(exceptionResponse);
+	}
+	
+	@RequestMapping(value="/{userId}/telefon", method = RequestMethod.PUT)
+	public ResponseEntity<String>modificarTelefonById(@PathVariable("userId")Long userId,@RequestBody String telefon){
+		userService.modificarTelefon(userId,telefon);
+		exceptionResponse = "S'ha linkat l'usuari amb Id: "+userId;
+		return ResponseEntity.ok(exceptionResponse);
+	}
+	
 	
 }

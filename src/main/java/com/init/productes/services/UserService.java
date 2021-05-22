@@ -261,27 +261,50 @@ public class UserService {
 		if(optionalUser.isPresent()) {
 			UserDto userDto = new UserDto(optionalUser.get());
 			return userDto;
-			
-		}
-		
+		}	
 		else {
 			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
 		}
 	}
 
-	public void updateUserDto(UserDto userdto) {
-		Optional<User> optionalUser = userRepository.findById(Long.valueOf(userdto.getId()));
+	public void modificarEmail(Long userId, String email) {
+		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
-			if(!(userdto.getEmail() == null))updateUser.setEmail(userdto.getEmail());
-			if(!(userdto.getNom() == null))updateUser.setNom(userdto.getNom());
-			if(!(userdto.getTelefon() == null))updateUser.setTelefon(userdto.getTelefon());
+			updateUser.setEmail(email);
 			userRepository.save(updateUser);
-			
 		}
 		else {
-			exceptionString = "No hi ha cap user amb Id: " + userdto.getId();
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
+	public void modificarNom(Long userId, String nom) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User updateUser = optionalUser.get();
+			updateUser.setNom(nom);
+			userRepository.save(updateUser);	
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
+	public void modificarTelefon(Long userId, String telefon) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User updateUser = optionalUser.get();
+			updateUser.setTelefon(telefon);
+			userRepository.save(updateUser);
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
 			throw new ApiRequestException(exceptionString);
 		}
 		
