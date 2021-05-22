@@ -18,6 +18,7 @@ import com.init.productes.entity.Comanda;
 import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
+import com.init.productes.entity.UserDetailsRequestModel;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ComandaRepository;
@@ -301,6 +302,22 @@ public class UserService {
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
 			updateUser.setTelefon(telefon);
+			userRepository.save(updateUser);
+		}
+		else {
+			exceptionString = "No hi ha cap user amb Id: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+	}
+
+	public void modificarUserByDto(Long userId, UserDetailsRequestModel userDetailsRequestModel) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) {
+			User updateUser = optionalUser.get();
+			if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
+			if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
+			if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setEmail(userDetailsRequestModel.getTelefon());
 			userRepository.save(updateUser);
 		}
 		else {

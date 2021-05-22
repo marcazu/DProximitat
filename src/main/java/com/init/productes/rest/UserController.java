@@ -20,6 +20,7 @@ import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.User;
+import com.init.productes.entity.UserDetailsRequestModel;
 import com.init.productes.services.UserService;
 
 
@@ -115,21 +116,28 @@ public class UserController {
 	@RequestMapping(value="/{userId}/email", method = RequestMethod.PUT)
 	public ResponseEntity<String>modificarEmailById(@PathVariable("userId")Long userId,@RequestBody String email){
 		userService.modificarEmail(userId,email);
-		exceptionResponse = "S'ha linkat l'usuari amb Id:" +userId;
+		exceptionResponse = "S'ha canviat el mail del user :" +userId;
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
 	@RequestMapping(value="/{userId}/nom", method = RequestMethod.PUT)
 	public ResponseEntity<String>modificarNomById(@PathVariable("userId")Long userId,@RequestBody String nom){
 		userService.modificarNom(userId,nom);
-		exceptionResponse = "S'ha linkat l'usuari amb Id: " +userId;
+		exceptionResponse = "S'ha canviat el nom del user :" +userId;
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
 	@RequestMapping(value="/{userId}/telefon", method = RequestMethod.PUT)
 	public ResponseEntity<String>modificarTelefonById(@PathVariable("userId")Long userId,@RequestBody String telefon){
 		userService.modificarTelefon(userId,telefon);
-		exceptionResponse = "S'ha linkat l'usuari amb Id: "+userId;
+		exceptionResponse = "S'ha canviat el telefon del user :"+userId;
+		return ResponseEntity.ok(exceptionResponse);
+	}
+	
+	@RequestMapping(value="/{userId}/dto", method = RequestMethod.PUT)
+	public ResponseEntity<String>modificarUserByUserDto(@PathVariable ("userId")Long userId,@RequestBody UserDetailsRequestModel userDetailsRequestModel ){
+		userService.modificarUserByDto(userId,userDetailsRequestModel);
+		exceptionResponse = "S'ha modificat l'usuari amb id :"+userId;
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
