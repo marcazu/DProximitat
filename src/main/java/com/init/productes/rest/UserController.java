@@ -108,30 +108,9 @@ public class UserController {
 		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandes(userId));
 	}
-	@RequestMapping(value="/firebase/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<UserDto> getUserByFirebaseId(@PathVariable("userId")String userId){
-		return ResponseEntity.ok(userService.getUserFireBase(userId));
-		
-	}
-	@RequestMapping(value="/{userId}/email", method = RequestMethod.PUT)
-	public ResponseEntity<String>modificarEmailById(@PathVariable("userId")Long userId,@RequestBody String email){
-		userService.modificarEmail(userId,email);
-		exceptionResponse = "S'ha canviat el mail del user :" +userId;
-		return ResponseEntity.ok(exceptionResponse);
-	}
-	
-	@RequestMapping(value="/{userId}/nom", method = RequestMethod.PUT)
-	public ResponseEntity<String>modificarNomById(@PathVariable("userId")Long userId,@RequestBody String nom){
-		userService.modificarNom(userId,nom);
-		exceptionResponse = "S'ha canviat el nom del user :" +userId;
-		return ResponseEntity.ok(exceptionResponse);
-	}
-	
-	@RequestMapping(value="/{userId}/telefon", method = RequestMethod.PUT)
-	public ResponseEntity<String>modificarTelefonById(@PathVariable("userId")Long userId,@RequestBody String telefon){
-		userService.modificarTelefon(userId,telefon);
-		exceptionResponse = "S'ha canviat el telefon del user :"+userId;
-		return ResponseEntity.ok(exceptionResponse);
+	@RequestMapping(value="/firebase/{firebaseId}", method = RequestMethod.GET)
+	public ResponseEntity<UserDto> getUserByFirebaseId(@PathVariable("firebaseId")String userId){
+		return ResponseEntity.ok(userService.getUserFireBase(userId));	
 	}
 	
 	@RequestMapping(value="/{userId}/dto", method = RequestMethod.PUT)

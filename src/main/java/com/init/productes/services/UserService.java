@@ -269,55 +269,13 @@ public class UserService {
 		}
 	}
 
-	public void modificarEmail(Long userId, String email) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			updateUser.setEmail(email);
-			userRepository.save(updateUser);
-		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
-		
-	}
-
-	public void modificarNom(Long userId, String nom) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			updateUser.setNom(nom);
-			userRepository.save(updateUser);	
-		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
-		
-	}
-
-	public void modificarTelefon(Long userId, String telefon) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			updateUser.setTelefon(telefon);
-			userRepository.save(updateUser);
-		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
-		
-	}
-
 	public void modificarUserByDto(Long userId, UserDetailsRequestModel userDetailsRequestModel) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();
 			if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
 			if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
-			if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setEmail(userDetailsRequestModel.getTelefon());
+			if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setTelefon(userDetailsRequestModel.getTelefon());
 			userRepository.save(updateUser);
 		}
 		else {
