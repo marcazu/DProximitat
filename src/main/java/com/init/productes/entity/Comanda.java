@@ -48,6 +48,7 @@ public class Comanda {
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaCompra;
 	
+	//ara funciona
 
 	protected Comanda() {
 	}	
