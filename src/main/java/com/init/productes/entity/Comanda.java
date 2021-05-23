@@ -48,7 +48,7 @@ public class Comanda {
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaCompra;
 	
-	private List<String> quantitats;
+	private List<String> quantitats = new ArrayList<String>();
 	
 
 	protected Comanda() {
