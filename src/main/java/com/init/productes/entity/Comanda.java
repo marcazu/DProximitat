@@ -48,6 +48,8 @@ public class Comanda {
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaCompra;
 	
+	private List<String> quantitats;
+	
 
 	protected Comanda() {
 	}	
@@ -122,6 +124,17 @@ public class Comanda {
 		this.costTotal = this.costTotal + preu;
 		
 	}
+
+	public List<String> getQuantitats() {
+		return quantitats;
+	}
+
+	public void setQuantitats(List<String> quantitats) {
+		this.quantitats = quantitats;
+	}
 	
+	public void addQuantiat(String q) {
+		quantitats.add(q);
+	}
 	
 }

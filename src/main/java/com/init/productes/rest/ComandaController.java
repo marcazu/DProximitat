@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
+import com.init.productes.Dto.ProducteIdQuantitatDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
@@ -82,5 +83,14 @@ public class ComandaController {
 		exceptionString = "S'ha entregat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
-
+	@RequestMapping(value="{comandaId}/quantitat",method = RequestMethod.GET)
+	public ResponseEntity<List<String>> getQuantitats(@PathVariable("comandaId") Long comandaId){
+		return ResponseEntity.ok(comandaService.getQuantitats(comandaId));
+	}
+	@RequestMapping(value="{comandaId}/addProductes",method = RequestMethod.PUT)
+	public ResponseEntity<String> putQuantitats(@PathVariable("comandaId") Long comandaId, @RequestBody List<ProducteIdQuantitatDto> producteQuantitatDtoList){
+		comandaService.afegirProducteQuantitat(comandaId,producteQuantitatDtoList);
+		exceptionString = "s'ha afegit els productes a la comanda " + comandaId;
+		return ResponseEntity.ok(exceptionString);
+	}
 }

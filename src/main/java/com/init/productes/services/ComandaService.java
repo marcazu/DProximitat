@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
+import com.init.productes.Dto.ProducteIdQuantitatDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
@@ -158,5 +159,41 @@ public class ComandaService {
 		}
 		
 	}
+
+	public List<String> getQuantitats(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			return c.getQuantitats();
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+	}
+
+	public void afegirProducteQuantitat(Long comandaId, List<ProducteIdQuantitatDto> producteQuantitatDtoList) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) {
+			Comanda c = optionalComanda.get();
+			for(ProducteIdQuantitatDto pQ: producteQuantitatDtoList) {
+				c.addQuantiat(pQ.getQuantitat());
+				// no cal que busquem si existeix el producte ja existeix
+				Optional<Producte> optionalProducte = producteRepository.findById(Long.parseLong(pQ.getProducteId()));
+				Producte producte = optionalProducte.get();
+				c.addProducte(producte);
+				c.addPreuTotal(producte.getPreu());		
+			}
+			comandaRepository.save(c);	
+			
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+		
+	}
+	
 
 }
