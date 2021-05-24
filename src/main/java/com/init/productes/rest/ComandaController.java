@@ -83,5 +83,13 @@ public class ComandaController {
 		exceptionString = "S'ha entregat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
+	//utilitza el user Google id no el id del user
+	@RequestMapping(value="{comandaId}/botiga/{botigaId}/user/{userGuid}", method = RequestMethod.PUT)
+	public ResponseEntity<String>LinkarBotigaUser(@PathVariable("comandaId") Long comandaId,@PathVariable("botigaId") Long botigaId,
+			@PathVariable("userGuid") String userGuid){
+		//comandaService.linkarBotigaUser(comandaId,botigaId,userGuid);
+		exceptionString = "S'ha entregat la comanda: " + comandaId;
+		return ResponseEntity.ok(exceptionString);
+	}
 
 }

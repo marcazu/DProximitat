@@ -48,16 +48,8 @@ public class ComandaService {
 
 	public ComandaDto getProducteById(Long comandaId) {
 		
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);	
-		if(optionalComanda.isPresent()) {
-			ComandaDto comandaDto = new ComandaDto(optionalComanda.get());
-			return comandaDto;
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID:" + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}
-
+		ComandaDto comandaDto = new ComandaDto(obtenirComanda(comandaId));
+		return comandaDto;
 	}
 
 	public void createComanda(Comanda comanda) {
@@ -70,98 +62,64 @@ public class ComandaService {
 	
 
 	public UserDto getPropietari(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) {
-			Comanda c = optionalComanda.get();
-			UserDto userDto = new UserDto(c.getUserOwner());
-			return userDto;			
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}	
+		Comanda c = obtenirComanda(comandaId);
+		UserDto userDto = new UserDto(c.getUserOwner());
+		return userDto;		
 	}
 
 	public List<ProducteDto> getProductescomanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) {
-			Comanda c = optionalComanda.get();
-			List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
-			for(ProducteQuantitat pq: c.getProductesComanda()) {
-				productesDto.add(new ProducteDto(pq.getProducte()));
-			}
-			return productesDto;	
+		
+		Comanda c = obtenirComanda(comandaId);
+		List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
+		for(ProducteQuantitat pq: c.getProductesComanda()) {
+			productesDto.add(new ProducteDto(pq.getProducte()));
 		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}
+		return productesDto;	
 	}
 
 	public BotigaDto getBotiga(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) {
-			Comanda c = optionalComanda.get();
-			Botiga b = c.getBotigaCompra();
-			return new BotigaDto(b);
-			
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}
+		
+		Comanda c = obtenirComanda(comandaId);
+		Botiga b = c.getBotigaCompra();
+		return new BotigaDto(b);
 	}
 
 	public void prepararComanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) {
-			Comanda c = optionalComanda.get();
-			c.setPreparada(true);
-			comandaRepository.save(c);			
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}
 		
+		Comanda c = obtenirComanda(comandaId);
+		c.setPreparada(true);
+		comandaRepository.save(c);			
 	}
 
 	public void entregarComanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) {
-			Comanda c = optionalComanda.get();
-			c.setEntregada(true);
-			comandaRepository.save(c);			
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}
-		
+		Comanda c = obtenirComanda(comandaId);
+		c.setEntregada(true);
+		comandaRepository.save(c);				
 	}
 	
 	public void afegirProducteQuantitat(Long comandaId, Long producteId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteId);
-		if(optionalComanda.isPresent()) {
-			if(optionalProducteQuantitat.isPresent()) {
-				Comanda comanda = optionalComanda.get();
-				ProducteQuantitat producteQuantitat = optionalProducteQuantitat.get();
-				comanda.addProducteQuantitat(producteQuantitat);
-				comanda.addPreuTotal((producteQuantitat.getProducte()).getPreu());
-				comandaRepository.save(comanda);
-			}
-			else {
-				exceptionString = "No hi ha cap producteQuantitat amb ID: " + producteId;
-				throw new ApiRequestException(exceptionString);
-			}		
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}	
-	
+		
+		Comanda comanda = obtenirComanda(comandaId);
+		ProducteQuantitat producteQuantitat = obtenirProducteQuantitat(producteId);
+		comanda.addProducteQuantitat(producteQuantitat);
+		comanda.addPreuTotal((producteQuantitat.getProducte()).getPreu());
+		comandaRepository.save(comanda);
 		
 	}
+	
+	private Comanda obtenirComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) return optionalComanda.get();
+		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+		throw new ApiRequestException(exceptionString);
+		
+	}
+	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
+		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);
+		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
+		exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
+		throw new ApiRequestException(exceptionString);
+	}
+
 
 }
