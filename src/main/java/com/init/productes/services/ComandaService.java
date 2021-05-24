@@ -67,29 +67,7 @@ public class ComandaService {
 		comandaRepository.save(comanda);	
 	}
 
-	public void afegirProducte(Long comandaId, Long producteId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		Optional<ProducteQuantitat> optionalProducte = pqRepository.findById(producteId);
-		if(optionalComanda.isPresent()) {
-			if(optionalProducte.isPresent()) {
-				Comanda comanda = optionalComanda.get();
-				ProducteQuantitat producte = optionalProducte.get();
-				comanda.addProducte(producte);
-				comanda.addPreuTotal(producte.getProducte().getPreu());
-				comandaRepository.save(comanda);
-			}
-			else {
-				exceptionString = "No hi ha cap producte amb ID: " + producteId;
-				throw new ApiRequestException(exceptionString);
-			}		
-		}
-		else {
-			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-			throw new ApiRequestException(exceptionString);
-		}	
 	
-		
-	}
 
 	public UserDto getPropietari(Long comandaId) {
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
@@ -159,6 +137,30 @@ public class ComandaService {
 			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
 			throw new ApiRequestException(exceptionString);
 		}
+		
+	}
+	
+	public void afegirProducteQuantitat(Long comandaId, Long producteId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteId);
+		if(optionalComanda.isPresent()) {
+			if(optionalProducteQuantitat.isPresent()) {
+				Comanda comanda = optionalComanda.get();
+				ProducteQuantitat producteQuantitat = optionalProducteQuantitat.get();
+				comanda.addProducte(producteQuantitat);
+				comanda.addPreuTotal(producteQuantitat.getProducte().getPreu());
+				comandaRepository.save(comanda);
+			}
+			else {
+				exceptionString = "No hi ha cap producteQuantitat amb ID: " + producteId;
+				throw new ApiRequestException(exceptionString);
+			}		
+		}
+		else {
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}	
+	
 		
 	}
 

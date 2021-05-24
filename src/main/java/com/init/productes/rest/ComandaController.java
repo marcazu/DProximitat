@@ -18,6 +18,7 @@ import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
+import com.init.productes.entity.ProducteQuantitat;
 import com.init.productes.services.ComandaService;
 
 @RestController
@@ -48,10 +49,10 @@ public class ComandaController {
 		return ResponseEntity.ok(exceptionString);
 	}
 	
-	@RequestMapping(value="/{comandaId}/addProducte/{producteId}", method = RequestMethod.PUT)
-	public ResponseEntity<String>addProducteCarro(@PathVariable("comandaId") Long comandaId, @PathVariable("producteId") Long producteId){
-		comandaService.afegirProducte(comandaId,producteId);
-		exceptionString = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +comandaId;
+	@RequestMapping(value="/{comandaId}/addProducteQuantitat/{pqId}", method = RequestMethod.PUT)
+	public ResponseEntity<String>addProducteCarro(@PathVariable("comandaId") Long comandaId, @PathVariable("pqId") Long pqId){
+		comandaService.afegirProducteQuantitat(comandaId,pqId);
+		exceptionString = "S'ha afegit el producteQuantitat amb Id: " + pqId + "al usuari amb Id: " +comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
 	
