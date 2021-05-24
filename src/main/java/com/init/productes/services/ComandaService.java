@@ -147,8 +147,8 @@ public class ComandaService {
 			if(optionalProducteQuantitat.isPresent()) {
 				Comanda comanda = optionalComanda.get();
 				ProducteQuantitat producteQuantitat = optionalProducteQuantitat.get();
-				comanda.addProducte(producteQuantitat);
-				comanda.addPreuTotal(producteQuantitat.getProducte().getPreu());
+				comanda.addProducteQuantitat(producteQuantitat);
+				comanda.addPreuTotal((producteQuantitat.getProducte()).getPreu());
 				comandaRepository.save(comanda);
 			}
 			else {

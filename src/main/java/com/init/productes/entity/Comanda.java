@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -83,7 +84,7 @@ public class Comanda {
 		this.entregada = entregada;
 	}
 	
-	public void addProducte(ProducteQuantitat producteQuantitat) {
+	public void addProducteQuantitat(ProducteQuantitat producteQuantitat) {
 		productesComanda.add(producteQuantitat);
 	}
 

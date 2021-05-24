@@ -50,7 +50,7 @@ public class ComandaController {
 	}
 	
 	@RequestMapping(value="/{comandaId}/addProducteQuantitat/{pqId}", method = RequestMethod.PUT)
-	public ResponseEntity<String>addProducteCarro(@PathVariable("comandaId") Long comandaId, @PathVariable("pqId") Long pqId){
+	public ResponseEntity<String>addProducteQuantitat(@PathVariable("comandaId") Long comandaId, @PathVariable("pqId") Long pqId){
 		comandaService.afegirProducteQuantitat(comandaId,pqId);
 		exceptionString = "S'ha afegit el producteQuantitat amb Id: " + pqId + "al usuari amb Id: " +comandaId;
 		return ResponseEntity.ok(exceptionString);
