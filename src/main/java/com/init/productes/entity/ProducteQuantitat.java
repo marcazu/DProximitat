@@ -24,7 +24,6 @@ public class ProducteQuantitat {
 	private int quantitat;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id")
 	private Producte p;
 
 	
