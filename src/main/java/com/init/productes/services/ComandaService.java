@@ -13,9 +13,11 @@ import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
+import com.init.productes.entity.ProducteQuantitat;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.ComandaRepository;
+import com.init.productes.repository.ProducteQuantitatRepository;
 import com.init.productes.repository.ProductesRespository;
 
 @Service
@@ -25,6 +27,8 @@ public class ComandaService {
 	private ComandaRepository comandaRepository;
 	@Autowired
 	private ProductesRespository producteRepository;
+	@Autowired
+	private ProducteQuantitatRepository pqRepository;
 	
 	private String exceptionString;
 
@@ -65,13 +69,13 @@ public class ComandaService {
 
 	public void afegirProducte(Long comandaId, Long producteId) {
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
+		Optional<ProducteQuantitat> optionalProducte = pqRepository.findById(producteId);
 		if(optionalComanda.isPresent()) {
 			if(optionalProducte.isPresent()) {
 				Comanda comanda = optionalComanda.get();
-				Producte producte = optionalProducte.get();
+				ProducteQuantitat producte = optionalProducte.get();
 				comanda.addProducte(producte);
-				comanda.addPreuTotal(producte.getPreu());
+				comanda.addPreuTotal(producte.getProducte().getPreu());
 				comandaRepository.save(comanda);
 			}
 			else {
@@ -104,10 +108,9 @@ public class ComandaService {
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
 		if(optionalComanda.isPresent()) {
 			Comanda c = optionalComanda.get();
-			List<Producte> productes = c.getProductesComanda();
 			List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
-			for(Producte p : productes) {
-				productesDto.add(new ProducteDto(p));
+			for(ProducteQuantitat pq: c.getProductesComanda()) {
+				productesDto.add(new ProducteDto(pq.getProducte()));
 			}
 			return productesDto;	
 		}

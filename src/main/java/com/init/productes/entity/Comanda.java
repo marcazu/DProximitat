@@ -38,7 +38,7 @@ public class Comanda {
 	
 	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
 			orphanRemoval = false) // no borrem orfes
-	private List<Producte> productesComanda =  new ArrayList<Producte>();
+	private List<ProducteQuantitat> productesComanda =  new ArrayList<ProducteQuantitat>();
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -53,15 +53,15 @@ public class Comanda {
 	protected Comanda() {
 	}	
 
-	public List<Producte> getProductesComanda() {
+	public List<ProducteQuantitat> getProductesComanda() {
 		return productesComanda;
 	}
 
-	public void setProductesComanda(List<Producte> productesComanda) {
+	public void setProductesComanda(List<ProducteQuantitat> productesComanda) {
 		this.productesComanda = productesComanda;
 	}
 
-	public Comanda(Boolean entregada, List<Producte> productesComanda) {
+	public Comanda(Boolean entregada, List<ProducteQuantitat> productesComanda) {
 		super();
 		this.entregada = entregada;
 		this.productesComanda = productesComanda;
@@ -83,8 +83,8 @@ public class Comanda {
 		this.entregada = entregada;
 	}
 	
-	public void addProducte(Producte producte) {
-		productesComanda.add(producte);
+	public void addProducte(ProducteQuantitat producteQuantitat) {
+		productesComanda.add(producteQuantitat);
 	}
 
 	public User getUserOwner() {
