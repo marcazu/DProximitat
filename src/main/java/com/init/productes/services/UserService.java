@@ -54,15 +54,9 @@ public class UserService {
 	}
 
 	public UserDto getUser(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);		
-		if(optionalUser.isPresent()) {
-			UserDto userDto = new UserDto(optionalUser.get());
-			return userDto;
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID:" + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+		
+		UserDto userDto = new UserDto(obtenirUser(userId));
+		return userDto;
 	}
 
 	public void deleteUser(Long userId) {
@@ -75,20 +69,12 @@ public class UserService {
 	}
 
 	public void updateUser(User user) {
-		Optional<User> optionalUser = userRepository.findById(user.getId());		
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			if(!user.getNom().isEmpty())updateUser.setNom(user.getNom());
-			if(!user.getEmail().isEmpty())updateUser.setEmail(user.getEmail());
-			if(!user.getTelefon().isEmpty())updateUser.setTelefon(user.getTelefon());
+		User updateUser = obtenirUser(user.getId());
+		if(!user.getNom().isEmpty())updateUser.setNom(user.getNom());
+		if(!user.getEmail().isEmpty())updateUser.setEmail(user.getEmail());
+		if(!user.getTelefon().isEmpty())updateUser.setTelefon(user.getTelefon());
 			//if(!user.getEsBotiguer().isBlank())updateUser.setEsBotiguer(user.getEsBotiguer());
-			if(!user.getEmail().isEmpty())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
-			userRepository.save(updateUser);
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID:" + user.getId();
-			throw new ApiRequestException(exceptionString);
-		}
+		if(!user.getEmail().isEmpty())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
 	}
 
 	public void crearUser(User user) {
@@ -97,35 +83,21 @@ public class UserService {
 	}
 
 	public void linkarBotiga(Long userId, Long botigaId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId);
-		
-		if(optionalUser.isPresent()) {
-			if(optionalBotiga.isPresent()) {
-				User user = optionalUser.get();
-				Botiga botiga = optionalBotiga.get();
-				user.setEsBotiguer(true);
-				user.addBotigaUser(botiga);
-				botiga.setBotiguer(user);
-				userRepository.save(user);
-			}
-			else {
-				exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
-				throw new ApiRequestException(exceptionString);
-			}
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}	
+		User user = obtenirUser(userId);
+		Botiga botiga = obtenirBotiga(botigaId);
+		user.setEsBotiguer(true);
+		user.addBotigaUser(botiga);
+		botiga.setBotiguer(user);
+		userRepository.save(user);
 	}
 
+	//aquesta està per borrar
 	public void afegirProducteCarro(Long userId, Long producteId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
 		if(optionalUser.isPresent()) {
 			if(optionalProducte.isPresent()) {
-				User user = optionalUser.get();
+				User user = obtenirUser(userId);
 				Producte producte = optionalProducte.get();
 				user.addProducteCarro(producte);
 				userRepository.save(user);		
@@ -141,6 +113,7 @@ public class UserService {
 		}	
 	}
 
+	//aquesta la borraré
 	public void deleteProducteCarro(Long userId, Long producteId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
@@ -174,113 +147,87 @@ public class UserService {
 	}
 
 	public void linkcomanda(Long userId, Long comandaId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalUser.isPresent()) {
-			if(optionalComanda.isPresent()) {
-				User user = optionalUser.get();
-				Comanda comanda = optionalComanda.get();
-				comanda.setUserOwner(user);
-				user.addComanda(comanda);//potserfalla aqui
-				userRepository.save(user);
-				return;
-				
-			}
-			else {
-				exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-				throw new ApiRequestException(exceptionString);
-			}
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+			User user = obtenirUser(userId);
+			Comanda comanda = obtenirComanda(comandaId);
+			comanda.setUserOwner(user);
+			user.addComanda(comanda);//potserfalla aqui
+			userRepository.save(user);
 	}
 
 	public List<ProducteDto> getCarro(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User user = optionalUser.get();
-			List<Producte> carro = user.getCarro();
-			List<ProducteDto> carroDto = new ArrayList<ProducteDto>();
-			for(Producte p :carro) {
-				carroDto.add(new ProducteDto(p));
-			}
-			return carroDto;
-			
+		User user = obtenirUser(userId);
+		List<Producte> carro = user.getCarro();
+		List<ProducteDto> carroDto = new ArrayList<ProducteDto>();
+		for(Producte p :carro) {
+			carroDto.add(new ProducteDto(p));
 		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+		return carroDto;
 	}
 
 	public List<BotigaDto> getBotigues(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User user = optionalUser.get();
-			List<Botiga> botigues = user.getBotiguesUsuari();
-			List<BotigaDto> botiguesDto = new ArrayList<BotigaDto>();
-			for(Botiga b: botigues) {
-				botiguesDto.add(new BotigaDto(b));
-			}
-			return botiguesDto;
+		User user = obtenirUser(userId);
+		List<Botiga> botigues = user.getBotiguesUsuari();
+		List<BotigaDto> botiguesDto = new ArrayList<BotigaDto>();
+		for(Botiga b: botigues) {
+			botiguesDto.add(new BotigaDto(b));
 		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+		return botiguesDto;
 	}
 
 	public List<ComandaDto> getComandes(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User user = optionalUser.get();
-			List<Comanda> comandes = user.getComandesUsuari();
-			List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
-			for(Comanda c: comandes) {
-				comandesDto.add(new ComandaDto(c));
-			}
-			if (comandesDto.isEmpty()){
-				exceptionString = "no Hi ha coses ";
-				throw new ApiRequestException(exceptionString);
-			}
-			else {
-				System.out.println("retorno les comandesDto");	
-			return comandesDto;}
+		User user = obtenirUser(userId);
+		List<Comanda> comandes = user.getComandesUsuari();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		for(Comanda c: comandes) {
+			comandesDto.add(new ComandaDto(c));
 		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
+		if (comandesDto.isEmpty()){
+			exceptionString = "no Hi ha coses ";
 			throw new ApiRequestException(exceptionString);
 		}
+		else {
+			System.out.println("retorno les comandesDto");	
+		return comandesDto;}
 	}
 
 	public UserDto getUserFireBase(String userId) {
-		// TODO Auto-generated method stub
-		Optional<User> optionalUser = userRepository.findByfirebaseUId(userId);
-		if(optionalUser.isPresent()) {
-			UserDto userDto = new UserDto(optionalUser.get());
-			return userDto;
-		}	
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+		UserDto userDto = new UserDto(obtenirGuidUser(userId));
+		return userDto;
 	}
 
 	public void modificarUserByDto(Long userId, UserDetailsRequestModelDto userDetailsRequestModel) {
+		User updateUser = obtenirUser(userId);
+		if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
+		if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
+		if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setTelefon(userDetailsRequestModel.getTelefon());
+		userRepository.save(updateUser);
+	}
+	private User obtenirUser(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) {
-			User updateUser = optionalUser.get();
-			if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
-			if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
-			if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setTelefon(userDetailsRequestModel.getTelefon());
-			userRepository.save(updateUser);
-		}
-		else {
-			exceptionString = "No hi ha cap user amb Id: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}
+		if(optionalUser.isPresent()) return optionalUser.get();
+		String exceptionString = "No hi ha cap user amb ID: " + userId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private User obtenirGuidUser(String userGuId) {
+		Optional<User> optionalUser = userRepository.findByfirebaseUId(userGuId);
+		if(optionalUser.isPresent()) return optionalUser.get();
+		String exceptionString = "No hi ha cap user amb ID: " + userGuId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private Comanda obtenirComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) return optionalComanda.get();
+		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private Botiga obtenirBotiga(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId);
+		if(optionalBotiga.isPresent()) return optionalBotiga.get();
+		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+		throw new ApiRequestException(exceptionString);
 		
 	}
 

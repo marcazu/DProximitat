@@ -112,7 +112,6 @@ public class ComandaService {
 		if(optionalComanda.isPresent()) return optionalComanda.get();
 		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
 		throw new ApiRequestException(exceptionString);
-		
 	}
 	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
 		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);

@@ -19,7 +19,7 @@ public class ProducteQuantitatService {
 	@Autowired
 	private ProducteQuantitatRepository pqRepository;
 	@Autowired
-	private ProductesRespository producterepository;
+	private ProductesRespository productesrepository;
 
 	public List<ProducteQuantitat> getAll() {
 		List<ProducteQuantitat> pq = pqRepository.findAll();
@@ -43,41 +43,31 @@ public class ProducteQuantitatService {
 	}
 
 	public void updatePQ(ProducteQuantitat pq) {
-		Optional<ProducteQuantitat> optionalPQ = pqRepository.findById(pq.getId());		
-		if(optionalPQ.isPresent()) {
-			ProducteQuantitat updatePQ = optionalPQ.get();
-			updatePQ.setQuantitat(pq.getQuantitat());
-			updatePQ.setProducte(pq.getProducte());
-			pqRepository.save(updatePQ);
-		}
-		else {
-			String exceptionString = "No hi ha cap ProducteQuantitat amb ID:" + pq.getId();
-			throw new ApiRequestException(exceptionString);
-		}
-		
+		ProducteQuantitat updatePQ = obtenirProducteQuantitat(pq.getId());
+		updatePQ.setQuantitat(pq.getQuantitat());
+		updatePQ.setProducte(pq.getProducte());
+		pqRepository.save(updatePQ);		
 	}
 
 	public void linkarProducte(Long pqId, Long producteId) {
-		Optional<ProducteQuantitat> optionalPQ = pqRepository.findById(pqId);
-		Optional<Producte> optionalProducte = producterepository.findById(producteId);
-		if(optionalPQ.isPresent()) {
-			if(optionalProducte.isPresent()) {
-				ProducteQuantitat pq = optionalPQ.get();
-				pq.setProducte(optionalProducte.get());
-				pqRepository.save(pq);
-			}
-			else {
-				String exceptionString = "No hi ha cap Producte amb ID:" + producteId;
-				throw new ApiRequestException(exceptionString);
-			}
-		}
-		else {
-			String exceptionString = "No hi ha cap ProducteQuantitat amb ID:" + pqId;
-			throw new ApiRequestException(exceptionString);
-		}
-
-
 		
+		ProducteQuantitat pq = obtenirProducteQuantitat(pqId);
+		pq.setProducte(obtenirProducte(producteId));
+		pqRepository.save(pq);
+	}
+	
+	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
+		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);
+		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
+		String exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private Producte obtenirProducte(Long producteId) {
+		Optional<Producte> optionalProducte = productesrepository.findById(producteId);
+		if(optionalProducte.isPresent()) return optionalProducte.get();
+		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
+		throw new ApiRequestException(exceptionString);
 	}
 
 }

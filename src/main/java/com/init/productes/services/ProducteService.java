@@ -24,12 +24,7 @@ public class ProducteService {
 	
 	public Producte getProducteById(Long productId) {
 
-		Optional<Producte> optionalProduct = productRepository.findById(productId);	
-		if(optionalProduct.isPresent()) return optionalProduct.get();
-		else {
-			ExceptionString = "No hi ha cap producte amb ID:" + productId;
-			throw new ApiRequestException(ExceptionString);
-		}
+		return obtenirProducte(productId);
 		
 	}
 
@@ -48,19 +43,20 @@ public class ProducteService {
 	}
 
 	public void updateProducte(Producte producte) {
-		Optional<Producte> optionalProduct = productRepository.findById(producte.getId());		
-		if(optionalProduct.isPresent()) {
-			Producte updateProducte = optionalProduct.get();
-			updateProducte.setNom(producte.getNom());
-			updateProducte.setDescripcio(producte.getDescripcio());
-			updateProducte.setTipus(producte.getTipus());
-			updateProducte.setPreu(producte.getPreu());
-			productRepository.save(updateProducte);
-		}
-		else {
-			ExceptionString = "No hi ha cap producte amb ID:" + producte.getId();
-			throw new ApiRequestException(ExceptionString);
-		}
+		
+		Producte updateProducte = obtenirProducte(producte.getId());
+		updateProducte.setNom(producte.getNom());
+		updateProducte.setDescripcio(producte.getDescripcio());
+		updateProducte.setTipus(producte.getTipus());
+		updateProducte.setPreu(producte.getPreu());
+		productRepository.save(updateProducte);
+	}
+	
+	private Producte obtenirProducte(Long producteId) {
+		Optional<Producte> optionalProducte = productRepository.findById(producteId);
+		if(optionalProducte.isPresent()) return optionalProducte.get();
+		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
+		throw new ApiRequestException(exceptionString);
 	}
 
 }
