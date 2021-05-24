@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
+import com.init.productes.Dto.UserDetailsRequestModelDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.User;
-import com.init.productes.entity.UserDetailsRequestModel;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ComandaRepository;
@@ -93,8 +93,7 @@ public class UserService {
 
 	public void crearUser(User user) {
 		user.setEsBotiguer(false);
-		userRepository.save(user);
-		
+		userRepository.save(user);	
 	}
 
 	public void linkarBotiga(Long userId, Long botigaId) {
@@ -269,7 +268,7 @@ public class UserService {
 		}
 	}
 
-	public void modificarUserByDto(Long userId, UserDetailsRequestModel userDetailsRequestModel) {
+	public void modificarUserByDto(Long userId, UserDetailsRequestModelDto userDetailsRequestModel) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) {
 			User updateUser = optionalUser.get();

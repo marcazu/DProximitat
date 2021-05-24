@@ -1,6 +1,6 @@
-package com.init.productes.entity;
+package com.init.productes.Dto;
 
-public class UserDetailsRequestModel {
+public class UserDetailsRequestModelDto {
 	private String nom;
 	private String telefon;
 	private String email;

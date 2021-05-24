@@ -40,7 +40,7 @@ public class Comanda {
 			orphanRemoval = false) // no borrem orfes
 	private List<Producte> productesComanda =  new ArrayList<Producte>();
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User UserOwner;
 	

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ProducteDto;
+import com.init.productes.Dto.UserDetailsRequestModelDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.NomTelefon;
 import com.init.productes.entity.User;
-import com.init.productes.entity.UserDetailsRequestModel;
 import com.init.productes.services.UserService;
 
 
@@ -37,12 +37,12 @@ public class UserController {
 	public ResponseEntity<List<UserDto>> getUsers(){
 		return ResponseEntity.ok(userService.getUsers());
 	}
-	@RequestMapping(value ="{userId}",method =RequestMethod.GET) // get user concret
+	@RequestMapping(value ="/{userId}",method =RequestMethod.GET) // get user concret
 	public ResponseEntity<UserDto>getUserById(@PathVariable("userId")Long userId){
 		 return ResponseEntity.ok(userService.getUser(userId));
 	}
 	
-	@RequestMapping(value ="{userId}",method =RequestMethod.DELETE) // delete user
+	@RequestMapping(value ="/{userId}",method =RequestMethod.DELETE) // delete user
 	public ResponseEntity<String> deleteUser(@PathVariable("userId")Long userId){
 		userService.deleteUser(userId);
 		exceptionResponse = "s'ha eliminat el user amb ID: " + userId;
@@ -54,7 +54,6 @@ public class UserController {
 		userService.updateUser(user);
 		exceptionResponse = "s'ha modificat el user amb ID: " + user.getId();
 		return ResponseEntity.ok(exceptionResponse);  
-
 	}
 	
 	@RequestMapping(method =RequestMethod.POST)
@@ -114,7 +113,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{userId}/dto", method = RequestMethod.PUT)
-	public ResponseEntity<String>modificarUserByUserDto(@PathVariable ("userId")Long userId,@RequestBody UserDetailsRequestModel userDetailsRequestModel ){
+	public ResponseEntity<String>modificarUserByUserDto(@PathVariable ("userId")Long userId,@RequestBody UserDetailsRequestModelDto userDetailsRequestModel ){
 		userService.modificarUserByDto(userId,userDetailsRequestModel);
 		exceptionResponse = "S'ha modificat l'usuari amb id :"+userId;
 		return ResponseEntity.ok(exceptionResponse);
