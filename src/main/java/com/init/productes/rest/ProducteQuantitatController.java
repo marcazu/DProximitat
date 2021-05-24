@@ -18,7 +18,7 @@ import com.init.productes.services.ProducteQuantitatService;
 import com.init.productes.services.ProducteService;
 
 @RestController
-@RequestMapping("/pq")
+@RequestMapping("/producteQuantitat")
 public class ProducteQuantitatController {
 	
 	@Autowired
@@ -29,7 +29,7 @@ public class ProducteQuantitatController {
 		return ResponseEntity.ok(pqService.getAll());
 		
 	}
-	@RequestMapping(method =RequestMethod.GET)
+	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String>postPq(@RequestBody ProducteQuantitat pq){
 		pqService.crearPq(pq);
 		return ResponseEntity.ok("s'ha creat un nou producte quantitat");
