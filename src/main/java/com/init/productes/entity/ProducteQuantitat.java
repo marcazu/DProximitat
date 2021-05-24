@@ -32,13 +32,9 @@ public class ProducteQuantitat {
 		this.p = p;
 	}
 	
-	
-
 	public ProducteQuantitat() {
 		super();
 	}
-
-
 
 	public long getId() {
 		return id;
