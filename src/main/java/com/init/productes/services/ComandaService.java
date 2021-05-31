@@ -52,11 +52,12 @@ public class ComandaService {
 		return comandaDto;
 	}
 
-	public void createComanda(Comanda comanda) {
+	public String createComanda(Comanda comanda) {
 		comanda.setEntregada(false);
 		comanda.setPreparada(false);
 		comanda.setCostTotal(0.0);
 		comandaRepository.save(comanda);	
+		return String.valueOf(comanda.getId());
 	}
 
 	

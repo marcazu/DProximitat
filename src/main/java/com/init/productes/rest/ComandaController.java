@@ -44,9 +44,9 @@ public class ComandaController {
 	
 	@RequestMapping(method =RequestMethod.POST)
 	public ResponseEntity<String> createBotiga(@RequestBody Comanda comanda){
-		comandaService.createComanda(comanda);
+		String comandaId = comandaService.createComanda(comanda);
 		exceptionString ="S'ha creat la comanda amb Id: " + comanda.getId();
-		return ResponseEntity.ok(exceptionString);
+		return ResponseEntity.ok(comandaId);
 	}
 	
 	@RequestMapping(value="/{comandaId}/addProducteQuantitat/{pqId}", method = RequestMethod.PUT)
