@@ -17,17 +17,23 @@ import com.init.productes.entity.Producte;
 import com.init.productes.entity.ProducteQuantitat;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
+import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ComandaRepository;
 import com.init.productes.repository.ProducteQuantitatRepository;
 import com.init.productes.repository.ProductesRespository;
+import com.init.productes.repository.UserRepository;
 
 @Service
 public class ComandaService {
 	
 	@Autowired
+	private UserRepository userRepository;
+	@Autowired
 	private ComandaRepository comandaRepository;
 	@Autowired
 	private ProductesRespository producteRepository;
+	@Autowired
+	private BotiguesRepository botigaRepository;
 	@Autowired
 	private ProducteQuantitatRepository pqRepository;
 	
@@ -108,29 +114,12 @@ public class ComandaService {
 		comandaRepository.save(comanda);
 		
 	}
-	
-	private Comanda obtenirComanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) return optionalComanda.get();
-		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-		throw new ApiRequestException(exceptionString);
-	}
-	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
-		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);
-		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
-		exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
-		throw new ApiRequestException(exceptionString);
-	}
 
 	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
-		// creem una coamnda buida
 		Comanda c = new Comanda();
 		comandaRepository.save(c);
-		//linkem la comanda amb botiga
-		//linkem la comanda amb user
-		
-		
-		// TODO Auto-generated method stub
+		linkarComandaBotiga(c.getId(),Long.valueOf(comandaLinkarDto.getBotigaID()));
+		linkarComandaUser(c.getId(),Long.valueOf(comandaLinkarDto.getUserID()));
 		
 	}
 
@@ -139,6 +128,52 @@ public class ComandaService {
 		comandaRepository.save(c);
 		return c.getId();
 	}
+	
+	private Comanda obtenirComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) return optionalComanda.get();
+		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private Botiga obtenirBotiga(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId);
+		if(optionalBotiga.isPresent()) return optionalBotiga.get();
+		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private User obtenirUser(Long userId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if(optionalUser.isPresent()) return optionalUser.get();
+		String exceptionString = "No hi ha cap user amb ID: " + userId;
+		throw new ApiRequestException(exceptionString);
+	}
+	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
+		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);
+		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
+		exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
+	private void linkarComandaBotiga(Long comandaId, Long botigaId) {
+		Botiga botiga =  obtenirBotiga(botigaId);
+		Comanda comanda = obtenirComanda(botigaId);
+		botiga.addComanda(comanda);
+		comanda.setBotigaCompra(botiga);
+		botigaRepository.save(botiga);
+		
+	}
+	
+	private void linkarComandaUser(Long comandaID,Long userID) {
+		User user = obtenirUser(userID);
+		Comanda comanda = obtenirComanda(comandaID);
+		comanda.setUserOwner(user);
+		user.addComanda(comanda);//potserfalla aqui
+		userRepository.save(user);
+		
+	}
+	
 
 
 }
