@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.ComandaLinkarDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
@@ -43,10 +44,9 @@ public class ComandaController {
 	}
 	
 	@RequestMapping(method =RequestMethod.POST)
-	public ResponseEntity<String> createBotiga(@RequestBody Comanda comanda){
-		String comandaId = comandaService.createComanda(comanda);
-		exceptionString ="S'ha creat la comanda amb Id: " + comanda.getId();
-		return ResponseEntity.ok(comandaId);
+	public Long createComanda(){
+		Long comandaId = comandaService.createEmptyComanda();
+		return comandaId;
 	}
 	
 	@RequestMapping(value="/{comandaId}/addProducteQuantitat/{pqId}", method = RequestMethod.PUT)
@@ -90,6 +90,13 @@ public class ComandaController {
 		//comandaService.linkarBotigaUser(comandaId,botigaId,userGuid);
 		exceptionString = "S'ha entregat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
+	}
+	@RequestMapping(value="/crearlinkar", method = RequestMethod.POST)
+	public ResponseEntity<String>CrearLinkarComanda(@RequestBody ComandaLinkarDto comandaLinkarDto){
+		exceptionString = "S'ha creat i linkat una nova comanda";
+		comandaService.crearLinkarComanda(comandaLinkarDto);
+		return ResponseEntity.ok(exceptionString);
+		
 	}
 
 }

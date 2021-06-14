@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
+import com.init.productes.Dto.ComandaLinkarDto;
 import com.init.productes.Dto.ProducteDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
@@ -119,6 +120,24 @@ public class ComandaService {
 		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
 		exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
 		throw new ApiRequestException(exceptionString);
+	}
+
+	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
+		// creem una coamnda buida
+		Comanda c = new Comanda();
+		comandaRepository.save(c);
+		//linkem la comanda amb botiga
+		//linkem la comanda amb user
+		
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Long createEmptyComanda() {
+		Comanda c = new Comanda();
+		comandaRepository.save(c);
+		return c.getId();
 	}
 
 

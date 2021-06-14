@@ -51,8 +51,6 @@ public class Comanda {
 	
 	//ara funciona
 
-	protected Comanda() {
-	}	
 
 	public List<ProducteQuantitat> getProductesComanda() {
 		return productesComanda;
@@ -62,10 +60,24 @@ public class Comanda {
 		this.productesComanda = productesComanda;
 	}
 
-	public Comanda(Boolean entregada, List<ProducteQuantitat> productesComanda) {
+	public Comanda() {
+		// creem una coamnda buida
 		super();
+		this.entregada = false;
+		this.preparada = false;
+		this.costTotal = 0.0;
+	}
+
+	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
+			List<ProducteQuantitat> productesComanda, User userOwner, Botiga botigaCompra) {
+		super();
+		this.id = id;
+		this.preparada = preparada;
 		this.entregada = entregada;
+		this.costTotal = costTotal;
 		this.productesComanda = productesComanda;
+		UserOwner = userOwner;
+		this.botigaCompra = botigaCompra;
 	}
 
 	public long getId() {
