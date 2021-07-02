@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProducteQuantitatID implements Serializable{
 	
-	
+	//hello there
 	@Column(name = "producteId")
 	private Long producteId;
 	
