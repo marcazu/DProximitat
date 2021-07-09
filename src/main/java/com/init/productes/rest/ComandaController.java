@@ -49,22 +49,25 @@ public class ComandaController {
 		return comandaId;
 	}
 	
+	/*
 	@RequestMapping(value="/{comandaId}/addProducteQuantitat/{pqId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>addProducteQuantitat(@PathVariable("comandaId") Long comandaId, @PathVariable("pqId") Long pqId){
 		comandaService.afegirProducteQuantitat(comandaId,pqId);
 		exceptionString = "S'ha afegit el producteQuantitat amb Id: " + pqId + "al usuari amb Id: " +comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
+	*/
 	
 	@RequestMapping(value="{comandaId}/propietari", method = RequestMethod.GET)
 	public ResponseEntity<UserDto> getPropietariComanda(@PathVariable("comandaId")Long comandaId){
 		return ResponseEntity.ok(comandaService.getPropietari(comandaId));	
 	}
-	
+	/*
 	@RequestMapping(value="{comandaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<ProducteDto>> getProductesComandes(@PathVariable("comandaId")Long comandaId){
 		return ResponseEntity.ok(comandaService.getProductescomanda(comandaId));	
 	}
+	*/
 	@RequestMapping(value="{comandaId}/botiga",method = RequestMethod.GET)
 	public ResponseEntity<BotigaDto> getBotigaComanda(@PathVariable("comandaId") Long comandaId){
 		return ResponseEntity.ok(comandaService.getBotiga(comandaId));

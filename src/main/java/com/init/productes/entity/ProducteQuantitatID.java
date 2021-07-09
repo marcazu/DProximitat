@@ -15,18 +15,18 @@ import javax.persistence.Embeddable;
 public class ProducteQuantitatID implements Serializable{
 	
 	//hello there
-	@Column(name = "producteId")
-	private Long producteId;
-	
 	@Column(name = "comandaId")
 	private Long comandaId;
+	
+	@Column(name = "producteId")
+	private Long producteId;
 	
 
 	public ProducteQuantitatID() {
 		
 	}
 	
-public ProducteQuantitatID(Long producteId, Long comandaId ) {
+public ProducteQuantitatID(Long comandaId, Long producteId) {
 	this.producteId = producteId;
 	this.comandaId = comandaId;
 	}

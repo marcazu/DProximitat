@@ -74,7 +74,7 @@ public class ComandaService {
 		UserDto userDto = new UserDto(c.getUserOwner());
 		return userDto;		
 	}
-
+/*
 	public List<ProducteDto> getProductescomanda(Long comandaId) {
 		
 		Comanda c = obtenirComanda(comandaId);
@@ -84,6 +84,7 @@ public class ComandaService {
 		}
 		return productesDto;	
 	}
+	*/
 
 	public BotigaDto getBotiga(Long comandaId) {
 		
@@ -105,6 +106,7 @@ public class ComandaService {
 		comandaRepository.save(c);				
 	}
 	
+	/*
 	public void afegirProducteQuantitat(Long comandaId, Long producteId) {
 		
 		Comanda comanda = obtenirComanda(comandaId);
@@ -114,6 +116,7 @@ public class ComandaService {
 		comandaRepository.save(comanda);
 		
 	}
+	*/
 
 	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
 		Comanda c = new Comanda();
@@ -147,12 +150,6 @@ public class ComandaService {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) return optionalUser.get();
 		String exceptionString = "No hi ha cap user amb ID: " + userId;
-		throw new ApiRequestException(exceptionString);
-	}
-	private ProducteQuantitat obtenirProducteQuantitat(Long producteQuantitatId) {
-		Optional<ProducteQuantitat> optionalProducteQuantitat = pqRepository.findById(producteQuantitatId);
-		if(optionalProducteQuantitat.isPresent()) return optionalProducteQuantitat.get();
-		exceptionString = "No hi ha cap comandaQuantitat amb ID: " + producteQuantitatId;
 		throw new ApiRequestException(exceptionString);
 	}
 	
