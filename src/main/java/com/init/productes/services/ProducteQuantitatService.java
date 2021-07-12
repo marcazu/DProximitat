@@ -40,10 +40,9 @@ public class ProducteQuantitatService {
 		Comanda c = obtenirComanda(pqDto.getComandaId());
 		c.addProducteQuantitat(pq);
 		comandaRepository.save(c);
-		// hello there
 	}
 	public List<ProducteQuantitat> getByComandaId(Long comandaId) {
-		List<ProducteQuantitat> pq = pqRepository.findByproducteQuantitatID_comandaId(comandaId);
+		List<ProducteQuantitat> pq = pqRepository.findBycomandaId(comandaId);
 		if(pq.isEmpty()) throw new ApiRequestException("No hi ha cap producte quantitat a la BD");
 		return pq;
 	}
