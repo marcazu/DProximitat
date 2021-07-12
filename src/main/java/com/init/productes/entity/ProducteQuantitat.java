@@ -18,25 +18,25 @@ public class ProducteQuantitat {
 	//de productes amb la seva quantitat, fent més facil la relació amb el Front
 
 	@EmbeddedId
-	private ProducteQuantitatID producteQuantiatID;
+	private ProducteQuantitatID producteQuantitatID;
 	
 	@Column(name="quantitat")
 	private int quantitat;
 	
 	
-	public ProducteQuantitat(ProducteQuantitatID producteQuantiatID, int quantitat) {
-		this.producteQuantiatID = producteQuantiatID;
+	public ProducteQuantitat(ProducteQuantitatID producteQuantitatID, int quantitat) {
+		this.producteQuantitatID = producteQuantitatID;
 		this.quantitat = quantitat;
 	}
 
 
-	public ProducteQuantitatID getProducteQuantiatID() {
-		return producteQuantiatID;
+	public ProducteQuantitatID getproducteQuantitatID() {
+		return producteQuantitatID;
 	}
 
 
-	public void setProducteQuantiatID(ProducteQuantitatID producteQuantiatID) {
-		this.producteQuantiatID = producteQuantiatID;
+	public void setproducteQuantitatID(ProducteQuantitatID producteQuantitatID) {
+		this.producteQuantitatID = producteQuantitatID;
 	}
 
 

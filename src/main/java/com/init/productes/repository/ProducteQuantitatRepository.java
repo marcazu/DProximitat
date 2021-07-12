@@ -24,5 +24,4 @@ public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuan
 	// s'ha de ser molt meticulos amb el nom de la funcio ja que es lo que utlitza per mapejar
 	
 	List<ProducteQuantitat> findByProducteQuantitatID_comandaId(Long comandaId);
-
 }
