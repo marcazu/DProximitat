@@ -23,5 +23,5 @@ public interface ProducteQuantitatRepository extends JpaRepository<ProducteQuant
 	// retorna el conjunt de producte quantitat d'una comanda
 	// s'ha de ser molt meticulos amb el nom de la funcio ja que es lo que utlitza per mapejar
 	
-	List<ProducteQuantitat> findBycomandaId(Long comandaId);
+	List<ProducteQuantitat> findByProducteQuantitatIDcomandaId(Long comandaId);
 }
