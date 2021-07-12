@@ -13,7 +13,7 @@ import com.init.productes.entity.ProducteQuantitatID;
 // retorna un producte quantiat per la seva Id
 // s'ha de posar com a crudRepository no se pq
 @Repository
-public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuantitat, ProducteQuantitatID> {
+public interface ProducteQuantitatRepository extends JpaRepository<ProducteQuantitat, ProducteQuantitatID> {
 	
 	// donat una comanda ID i un producteID retorna el producteQuantitat corresponent
 	//ProducteQuantitat findByIdcomandaIdAndIdproducteId(Long comandaId, Long producteId);
