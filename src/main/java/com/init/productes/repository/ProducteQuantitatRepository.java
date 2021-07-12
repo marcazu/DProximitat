@@ -16,7 +16,7 @@ import com.init.productes.entity.ProducteQuantitatID;
 public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuantitat, ProducteQuantitatID> {
 	
 	// donat una comanda ID i un producteID retorna el producteQuantitat corresponent
-	ProducteQuantitat findByIdcomandaIdAndIdproducteId(Long comandaId, Long producteId);
+	//ProducteQuantitat findByIdcomandaIdAndIdproducteId(Long comandaId, Long producteId);
 	
 	// retorna el conjunt de producte quantitat d0una comanda
 	List<ProducteQuantitat> findByIdcomandaId(Long comandaId);
