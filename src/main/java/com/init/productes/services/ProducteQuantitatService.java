@@ -43,7 +43,7 @@ public class ProducteQuantitatService {
 		
 	}
 	public List<ProducteQuantitat> getByComandaId(Long comandaId) {
-		List<ProducteQuantitat> pq = pqRepository.findByIdcomandaId(comandaId);
+		List<ProducteQuantitat> pq = pqRepository.findBycomandaId(comandaId);
 		if(pq.isEmpty()) throw new ApiRequestException("No hi ha cap producte quantitat a la BD");
 		return pq;
 	}

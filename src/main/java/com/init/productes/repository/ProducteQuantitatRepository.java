@@ -19,6 +19,6 @@ public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuan
 	//ProducteQuantitat findByIdcomandaIdAndIdproducteId(Long comandaId, Long producteId);
 	
 	// retorna el conjunt de producte quantitat d0una comanda
-	List<ProducteQuantitat> findByIdcomandaId(Long comandaId);
+	List<ProducteQuantitat> findBycomandaId(Long comandaId);
 
 }
