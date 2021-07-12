@@ -12,7 +12,7 @@ import com.init.productes.entity.ProducteQuantitatID;
 
 // retorna un producte quantiat per la seva Id
 @Repository
-public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuantitat, ProducteQuantitatID> {
+public interface ProducteQuantitatRepository extends JpaRepository<ProducteQuantitat, ProducteQuantitatID> {
 	
 	// donat una comanda id retorna tots els seus productes quantitat
 	List<ProducteQuantitat> findProducteQuantiatByComandaId(Long comandaId);
