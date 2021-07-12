@@ -18,7 +18,9 @@ public interface ProducteQuantitatRepository extends CrudRepository<ProducteQuan
 	// donat una comanda ID i un producteID retorna el producteQuantitat corresponent
 	//ProducteQuantitat findByIdcomandaIdAndIdproducteId(Long comandaId, Long producteId);
 	
-	// retorna el conjunt de producte quantitat d0una comanda
-	List<ProducteQuantitat> findBycomandaId(Long comandaId);
+	// retorna el conjunt de producte quantitat d'una comanda
+	// s'ha de ser molt meticulos amb el nom de la funcio ja que es lo que utlitza per mapejar
+	
+	List<ProducteQuantitat> findByProducteQuantitatIDcomandaId(Long comandaId);
 
 }
