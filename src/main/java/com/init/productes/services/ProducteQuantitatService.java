@@ -50,8 +50,8 @@ public class ProducteQuantitatService {
 	}
 	public ProducteQuantitat getProducteQuantitat(Long comandaId, Long producteId) {
 		Optional<ProducteQuantitat> pq = pqRepository.findById(new ProducteQuantitatID(comandaId,producteId));
-		if(pq.isEmpty()) throw new ApiRequestException("No s'ha trobat el producte quantiat demanat");
-		return pq.get();
+		if(pq.isPresent()) return pq.get();
+		else throw new ApiRequestException("No s'ha trobat el producte quantiat demanat");
 	}
 
 	public void deletePQ(Long comandaId, Long producteId) {
