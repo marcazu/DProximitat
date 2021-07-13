@@ -34,6 +34,11 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
 	
+	@RequestMapping(value = "/districte", method =RequestMethod.GET)// get all botigues per districte
+	public ResponseEntity<List<BotigaDto>> getBotigaByDistricte(@RequestBody String districte){
+		return ResponseEntity.ok(botigaService.getBotigaByDistricte(districte));	
+	}
+	
 	@RequestMapping(value ="{botigaId}", method =RequestMethod.GET ) // get botiga concreta
 	public ResponseEntity<BotigaDto>getBotigaById(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getBotigaById(botigaId));
@@ -91,4 +96,6 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
 	}
+	
+	
 }

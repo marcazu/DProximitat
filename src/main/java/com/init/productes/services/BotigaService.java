@@ -41,6 +41,16 @@ public class BotigaService {
 		}
 		return botigaDto;
 	}
+	
+	public List<BotigaDto> getBotigaByDistricte(String districte) {
+		List<Botiga> botigues = botiguesRepository.findBydistricte(districte);
+		List<BotigaDto> botigaDto = new ArrayList<BotigaDto>();
+		if(botigues.isEmpty()) throw new ApiRequestException("No hi ha cap botiga insertada a la BD");
+		for(Botiga b : botigues) {
+			botigaDto.add(new BotigaDto(b));
+		}
+		return botigaDto;
+	}
 
 	public BotigaDto getBotigaById(Long botigaId) {
 		
@@ -140,6 +150,8 @@ public class BotigaService {
 		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
 		throw new ApiRequestException(exceptionString);
 	}
+
+
 		
 	
 	
