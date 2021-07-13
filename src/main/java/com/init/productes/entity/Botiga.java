@@ -30,6 +30,8 @@ public class Botiga {
 	private String email;
 	@Column(name="telefon", nullable = false, length = 9)
 	private String telefon;
+	@Column(name="districte")
+	private String districte;
 	@Column(name="longitud")
 	private double longitud;
 	@Column(name="latitud")
@@ -58,7 +60,7 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl) {
+			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -70,6 +72,7 @@ public class Botiga {
 		this.productesBotiga = productesBotiga;
 		this.iconUrl = iconUrl;
 		this.mainImageUrl = mainImageUrl;
+		this.districte = districte;
 	}
 
 
@@ -154,6 +157,14 @@ public class Botiga {
 
 	public void setMainImageUrl(String mainImageUrl) {
 		this.mainImageUrl = mainImageUrl;
+	}
+
+	public String getDistricte() {
+		return districte;
+	}
+
+	public void setDistricte(String districte) {
+		this.districte = districte;
 	}
 	
 	

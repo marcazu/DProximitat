@@ -15,6 +15,7 @@ public class BotigaDto {
 	private String descripcio;
 	private String email;
 	private String telefon;
+	private String districte;
 	private String longitud;
 	private String latitud;
 	private String iconUrl;
@@ -30,6 +31,7 @@ public class BotigaDto {
 		this.latitud = String.valueOf(botiga.getLatitud());
 		this.iconUrl = botiga.getIconUrl();
 		this.mainImageUrl = botiga.getMainImageUrl();
+		this.districte = botiga.getDistricte();
 
 	}
 	public String getId() {
@@ -85,6 +87,12 @@ public class BotigaDto {
 	}
 	public void setMainImageUrl(String mainImageUrl) {
 		this.mainImageUrl = mainImageUrl;
+	}
+	public String getDistricte() {
+		return districte;
+	}
+	public void setDistricte(String districte) {
+		this.districte = districte;
 	}
 	
 	//ja està crec
