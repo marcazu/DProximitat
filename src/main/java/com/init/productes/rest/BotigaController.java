@@ -34,8 +34,8 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getbotigues());	
 	}
 	
-	@RequestMapping(value = "/districte", method =RequestMethod.GET)// get all botigues per districte
-	public ResponseEntity<List<BotigaDto>> getBotigaByDistricte(@RequestBody String districte){
+	@RequestMapping(value = "/{districte}", method =RequestMethod.GET)// get all botigues per districte
+	public ResponseEntity<List<BotigaDto>> getBotigaByDistricte(@PathVariable("districte")String districte){
 		return ResponseEntity.ok(botigaService.getBotigaByDistricte(districte));	
 	}
 	
