@@ -19,7 +19,7 @@ import com.init.productes.services.ProducteQuantitatService;
 import com.init.productes.services.ProducteService;
 
 @RestController
-@RequestMapping("/producteQuantitat")
+@RequestMapping("/pq")
 public class ProducteQuantitatController {
 	
 	@Autowired
