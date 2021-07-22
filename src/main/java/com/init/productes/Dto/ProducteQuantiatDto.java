@@ -2,12 +2,12 @@ package com.init.productes.Dto;
 
 public class ProducteQuantiatDto {
 	
-	private long comandaId;
-	private long producteId;
-	private int quantitat;
+	private String comandaId;
+	private String producteId;
+	private String quantitat;
 	
 	
-	public ProducteQuantiatDto(long comandaId, long producteId, int quantitat) {
+	public ProducteQuantiatDto(String comandaId, String producteId, String quantitat) {
 		super();
 		this.comandaId = comandaId;
 		this.producteId = producteId;
@@ -16,22 +16,22 @@ public class ProducteQuantiatDto {
 	public ProducteQuantiatDto() {
 		super();
 	}
-	public long getComandaId() {
+	public String getComandaId() {
 		return comandaId;
 	}
-	public void setComandaId(long comandaId) {
+	public void setComandaId(String comandaId) {
 		this.comandaId = comandaId;
 	}
-	public long getProducteId() {
+	public String getProducteId() {
 		return producteId;
 	}
-	public void setProducteId(long producteId) {
+	public void setProducteId(String producteId) {
 		this.producteId = producteId;
 	}
-	public int getQuantitat() {
+	public String getQuantitat() {
 		return quantitat;
 	}
-	public void setQuantitat(int quantitat) {
+	public void setQuantitat(String quantitat) {
 		this.quantitat = quantitat;
 	}
 	
