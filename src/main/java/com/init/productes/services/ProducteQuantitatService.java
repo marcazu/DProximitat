@@ -32,7 +32,6 @@ public class ProducteQuantitatService {
 	
 	public void CrearProducteQuantiat(ProducteQuantiatDto pqDto) {
 		// crea un nou producte quantitat amb la id de comanda i producte, s'ha d'afegir també al llistat de la comanda
-		
 		ProducteQuantitat pq = new ProducteQuantitat(new ProducteQuantitatID(Long.parseLong(pqDto.getComandaId()),Long.parseLong(pqDto.getProducteId())),
 				Integer.parseInt(pqDto.getQuantitat()));
 		pqRepository.save(pq);

@@ -23,12 +23,14 @@ public class ProducteQuantitat {
 	@Column(name="quantitat")
 	private int quantitat;
 	
-	
 	public ProducteQuantitat(ProducteQuantitatID producteQuantitatID, int quantitat) {
 		this.producteQuantitatID = producteQuantitatID;
 		this.quantitat = quantitat;
 	}
 
+	public ProducteQuantitat() {
+		super();
+	}
 
 	public ProducteQuantitatID getproducteQuantitatID() {
 		return producteQuantitatID;

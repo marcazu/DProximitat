@@ -7,12 +7,6 @@ public class ProducteQuantiatDto {
 	private String quantitat;
 	
 	
-	public ProducteQuantiatDto(String comandaId, String producteId, String quantitat) {
-		super();
-		this.comandaId = comandaId;
-		this.producteId = producteId;
-		this.quantitat = quantitat;
-	}
 	public ProducteQuantiatDto() {
 		super();
 	}

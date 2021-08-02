@@ -25,8 +25,8 @@ public class ProducteQuantitatID implements Serializable{
 	}
 	
 public ProducteQuantitatID(Long comandaId, Long producteId) {
-	this.producteId = producteId;
 	this.comandaId = comandaId;
+	this.producteId = producteId;
 	}
 
 public Long getProducteId() {
