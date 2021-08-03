@@ -45,7 +45,6 @@ public class ProducteQuantitatController {
 		return ResponseEntity.ok("S'ha eliminat el producteQuantiat");
 	}
 	
-	
 	@RequestMapping(value ="/{comandaId}/{producteId}",method =RequestMethod.PUT)
 	public ResponseEntity<String> updateQuantiat(@PathVariable("comandaId")Long comandaId,@PathVariable("producteId")Long producteId,
 			@RequestBody int quantitat){

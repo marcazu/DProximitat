@@ -72,8 +72,8 @@ public class BotigaController {
 		botigaService.afegirProducte(botigaId, productId);
 		String result = "S'ha afegit el producte amb Id: "+ productId + " a la botiga amb Id: " + botigaId;
 		return ResponseEntity.ok(result);
-
 	}
+	
 	@RequestMapping(value = "/{botigaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<ProducteDto>> getProductesBotiga(@PathVariable("botigaId")Long botigaId) {
 		return ResponseEntity.ok(botigaService.getProductesBotiga(botigaId));
@@ -96,6 +96,10 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
 	}
-	
+	@RequestMapping(value="/{botigaId}/deleteProducte/{productId}",method = RequestMethod.PUT)
+	public ResponseEntity<String>DeleteProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
+		return ResponseEntity.ok(botigaService.deleteProducte(botigaId, productId));
+		
+	}
 	
 }

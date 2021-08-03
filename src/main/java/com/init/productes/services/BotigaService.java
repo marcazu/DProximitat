@@ -90,6 +90,15 @@ public class BotigaService {
 			botiguesRepository.save(botiga);
 			
 	}
+	
+	public String deleteProducte(Long botigaId, Long productId) {
+		Botiga botiga = obtenirBotiga(botigaId); //optenim la botiga
+		Producte producte = obtenirProducte(productId);
+		String retrn = botiga.deleteProducteBotiga(producte);
+		botiguesRepository.save(botiga);
+		return retrn;
+		
+	}
 	public List<ProducteDto> getProductesBotiga(Long botigaId) {
 		
 		Botiga botiga = obtenirBotiga(botigaId); //optenim la botiga
@@ -150,6 +159,8 @@ public class BotigaService {
 		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
 		throw new ApiRequestException(exceptionString);
 	}
+
+
 
 
 		

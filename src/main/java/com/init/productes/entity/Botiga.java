@@ -127,6 +127,18 @@ public class Botiga {
 	public void addProducteBotiga(Producte producte) {
 		productesBotiga.add(producte);
 	}
+	public String deleteProducteBotiga(Producte producte) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < productesBotiga.size(); i ++) {
+			Producte p = productesBotiga.get(i);
+			if(p.getId() == producte.getId()) {
+				productesBotiga.remove(i);
+				return "S'ha eliminat el producte amb Id:" + p.getId();
+			}
+		}
+		return "No s'ha trobat el producte amb Id:"+ producte.getId();
+		
+	}
 	public User getBotiguer() {
 		return Botiguer;
 	}
@@ -166,6 +178,8 @@ public class Botiga {
 	public void setDistricte(String districte) {
 		this.districte = districte;
 	}
+
+
 	
 	
 
