@@ -74,7 +74,7 @@ public class UserService {
 		if(!user.getEmail().isEmpty())updateUser.setEmail(user.getEmail());
 		if(!user.getTelefon().isEmpty())updateUser.setTelefon(user.getTelefon());
 			//if(!user.getEsBotiguer().isBlank())updateUser.setEsBotiguer(user.getEsBotiguer());
-		if(!user.getEmail().isEmpty())updateUser.setBotiguesUsuari(user.getBotiguesUsuari());
+		if(!user.getEmail().isEmpty())updateUser.setBotigaUsuari(user.getBotigaUsuari());
 	}
 
 	public void crearUser(User user) {
@@ -164,14 +164,11 @@ public class UserService {
 		return carroDto;
 	}
 
-	public List<BotigaDto> getBotigues(Long userId) {
+	public BotigaDto getBotigues(Long userId) {
 		User user = obtenirUser(userId);
-		List<Botiga> botigues = user.getBotiguesUsuari();
-		List<BotigaDto> botiguesDto = new ArrayList<BotigaDto>();
-		for(Botiga b: botigues) {
-			botiguesDto.add(new BotigaDto(b));
-		}
-		return botiguesDto;
+		Botiga botiga = user.getBotigaUsuari();
+		return new BotigaDto(botiga);
+		
 	}
 
 	public List<ComandaDto> getComandes(Long userId) {

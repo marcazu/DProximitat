@@ -63,6 +63,7 @@ public class UserController {
 		return ResponseEntity.ok(exceptionResponse);
 	}
 	
+	// Linkem la botiga que gestiona un usuari
 	@RequestMapping(value ="/{userId}/addBotiga/{botigaId}", method =RequestMethod.PUT)
 	public ResponseEntity<String>addBotiga(@PathVariable("userId")Long userId, @PathVariable("botigaId")Long botigaId) {
 		userService.linkarBotiga(userId,botigaId);
@@ -70,8 +71,9 @@ public class UserController {
 		return ResponseEntity.ok(exceptionResponse);
 		
 	}	
+	// Obtenim la botiga que gestiona l'usuari
 	@RequestMapping(value="/{userId}/botigues", method =RequestMethod.GET)
-	public ResponseEntity<List<BotigaDto>> getBotiguesUsuari(@PathVariable("userId")Long userId){
+	public ResponseEntity<BotigaDto> getBotiguesUsuari(@PathVariable("userId")Long userId){
 		
 		return ResponseEntity.ok(userService.getBotigues(userId));
 		

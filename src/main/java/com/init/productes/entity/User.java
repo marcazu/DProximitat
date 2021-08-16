@@ -38,7 +38,7 @@ public class User {
 			cascade = CascadeType.PERSIST, // propaga casi tottes les funciones menys la de borrar el producte
 			orphanRemoval = false // no volem eliminar orfes
 			)
-	private List<Botiga> botiguesUsuari = new ArrayList<Botiga>(); // futura llista de botigues que gestiona l'usuari  
+	private Botiga botigaUsuari = new Botiga(); // botiga que gestiona l'usuari  
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			orphanRemoval = false
@@ -53,14 +53,14 @@ public class User {
 	}
 	
 
-	public User(String nom, String telefon, String email, Boolean esBotiguer, List<Botiga> botiguesUsuari,
+	public User(String nom, String telefon, String email, Boolean esBotiguer,Botiga botigaUsuari,
 			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
 		this.email = email;
 		this.esBotiguer = esBotiguer;
-		this.botiguesUsuari = botiguesUsuari;
+		this.botigaUsuari = botigaUsuari;
 		this.carro = carro;
 		this.comandesUsuari = comandesUsuari;
 		this.firebaseUId = firebaseUId;
@@ -106,19 +106,20 @@ public class User {
 	public void setEsBotiguer(Boolean esBotiguer) {
 		this.esBotiguer = esBotiguer;
 	}
-
-	public List<Botiga> getBotiguesUsuari() {
-		return botiguesUsuari;
+	
+	public Botiga getBotigaUsuari() {
+		return botigaUsuari;
 	}
 
-	public void setBotiguesUsuari(List<Botiga> botiguesUsuari) {
-		this.botiguesUsuari = botiguesUsuari;
+	public void setBotigaUsuari(Botiga botigaUsuari) {
+		this.botigaUsuari = botigaUsuari;
+	}
+
+
+	public void addBotigaUser(Botiga botiga) {
+		this.botigaUsuari = botiga;
 	}
 	
-	public void addBotigaUser(Botiga botiga) {
-		botiguesUsuari.add(botiga);
-	}
-
 	public List<Producte> getCarro() {
 		return carro;
 	}
