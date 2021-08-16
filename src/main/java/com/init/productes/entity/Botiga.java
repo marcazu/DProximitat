@@ -41,7 +41,7 @@ public class Botiga {
 	@Column(name="mainImageUrl")
 	private String mainImageUrl;
 	
-	@OneToMany(cascade = CascadeType.PERSIST) // ha de ser one to many
+	@OneToMany(mappedBy ="botigaUsuari", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // ha de ser one to many
 	private List<User> botiguers;
 	
 	//La idea es que contingui els productes de la botiga

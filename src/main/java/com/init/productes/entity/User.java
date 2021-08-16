@@ -35,8 +35,8 @@ public class User {
 	@Column(name="fireBaseUId")
 	private String firebaseUId;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Botiga botigaUsuari = new Botiga(); // botiga que gestiona l'usuari  
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Botiga botigaPropietari;// botiga que gestiona l'usuari  
 	
 	@OneToMany(cascade = CascadeType.ALL,
 			orphanRemoval = false
@@ -58,7 +58,7 @@ public class User {
 		this.telefon = telefon;
 		this.email = email;
 		this.esBotiguer = esBotiguer;
-		this.botigaUsuari = botigaUsuari;
+		//this.botigaUsuari = botigaPropietari;
 		this.carro = carro;
 		this.comandesUsuari = comandesUsuari;
 		this.firebaseUId = firebaseUId;
@@ -106,16 +106,16 @@ public class User {
 	}
 	
 	public Botiga getBotigaUsuari() {
-		return botigaUsuari;
+		return botigaPropietari;
 	}
 
 	public void setBotigaUsuari(Botiga botigaUsuari) {
-		this.botigaUsuari = botigaUsuari;
+		this.botigaPropietari = botigaUsuari;
 	}
 
 
 	public void addBotigaUser(Botiga botiga) {
-		this.botigaUsuari = botiga;
+		this.botigaPropietari = botiga;
 	}
 	
 	public List<Producte> getCarro() {
