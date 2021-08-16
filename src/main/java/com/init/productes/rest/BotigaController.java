@@ -80,7 +80,7 @@ public class BotigaController {
 	}
 	
 	@RequestMapping(value="/{botigaId}/propietari", method = RequestMethod.GET)
-	public ResponseEntity<UserDto> getPropietari(@PathVariable("botigaId")Long botigaId){
+	public ResponseEntity<List<UserDto>> getPropietari(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getPropietari(botigaId));
 		
 	}

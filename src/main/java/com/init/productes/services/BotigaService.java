@@ -13,6 +13,7 @@ import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
+import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ComandaRepository;
@@ -110,10 +111,14 @@ public class BotigaService {
 		return productesDto;
 	}
 
-	public UserDto getPropietari(Long botigaId) {
+	public List<UserDto> getPropietari(Long botigaId) {
 			Botiga botiga = obtenirBotiga(botigaId);
-			UserDto userDto = new UserDto(botiga.getBotiguer());
-			return userDto;
+			List<User> propietaris = botiga.getBotiguers();
+			List<UserDto> propietarisDto = new ArrayList();
+			for (User u : propietaris) {
+				propietarisDto.add(new UserDto(u));
+			}
+			return propietarisDto;
 	}
 
 	public void afegirComanda(Long botigaId, Long comandaId) {

@@ -87,7 +87,7 @@ public class UserService {
 		Botiga botiga = obtenirBotiga(botigaId);
 		user.setEsBotiguer(true);
 		user.addBotigaUser(botiga);
-		botiga.setBotiguer(user);
+		botiga.addBotiguer(user);
 		userRepository.save(user);
 	}
 

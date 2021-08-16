@@ -41,9 +41,8 @@ public class Botiga {
 	@Column(name="mainImageUrl")
 	private String mainImageUrl;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST) // no borrem el producte al treurel de la botiga)
-	@JoinColumn(name = "user_id")
-	private User Botiguer;
+	@OneToMany(cascade = CascadeType.PERSIST) // ha de ser one to many
+	private List<User> botiguers;
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
@@ -60,7 +59,7 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte) {
+			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, List<User> botiguers) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -68,7 +67,7 @@ public class Botiga {
 		this.telefon = telefon;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		///this.botiguer = botiguer;
+		this.botiguers = botiguers;
 		this.productesBotiga = productesBotiga;
 		this.iconUrl = iconUrl;
 		this.mainImageUrl = mainImageUrl;
@@ -139,12 +138,18 @@ public class Botiga {
 		return "No s'ha trobat el producte amb Id:"+ producte.getId();
 		
 	}
-	public User getBotiguer() {
-		return Botiguer;
+
+	public List<User> getBotiguers() {
+		return botiguers;
 	}
-	public void setBotiguer(User botiguer) {
-		Botiguer = botiguer;
+
+	public void setBotiguers(List<User> botiguers) {
+		this.botiguers = botiguers;
 	}
+	public void addBotiguer(User botiguer) {
+		this.botiguers.add(botiguer);
+	}
+
 	public void addComanda(Comanda comanda) {
 		comandesBotiga.add(comanda);
 	}

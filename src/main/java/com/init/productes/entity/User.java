@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,11 +35,7 @@ public class User {
 	@Column(name="fireBaseUId")
 	private String firebaseUId;
 	
-	@OneToOne(
-			mappedBy = "Botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
-			cascade = CascadeType.PERSIST, // propaga casi tottes les funciones menys la de borrar el producte
-			orphanRemoval = false // no volem eliminar orfes
-			)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Botiga botigaUsuari = new Botiga(); // botiga que gestiona l'usuari  
 	
 	@OneToMany(cascade = CascadeType.ALL,
