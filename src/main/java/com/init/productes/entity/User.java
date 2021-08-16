@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +34,7 @@ public class User {
 	@Column(name="fireBaseUId")
 	private String firebaseUId;
 	
-	@OneToMany(
+	@OneToOne(
 			mappedBy = "Botiguer", //HA DE TENIR EL MATEIX NOM QUE EL CAMP DE LA BOTIGA!!!!
 			cascade = CascadeType.PERSIST, // propaga casi tottes les funciones menys la de borrar el producte
 			orphanRemoval = false // no volem eliminar orfes
