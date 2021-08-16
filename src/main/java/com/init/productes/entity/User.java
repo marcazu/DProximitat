@@ -35,7 +35,9 @@ public class User {
 	@Column(name="fireBaseUId")
 	private String firebaseUId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
+	@JoinColumn(name= "botiga_id")
 	private Botiga botigaPropietari;// botiga que gestiona l'usuari  
 	
 	@OneToMany(cascade = CascadeType.ALL,
