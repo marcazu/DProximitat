@@ -166,6 +166,19 @@ public class BotigaService {
 	}
 
 
+	public List<ComandaDto> getComandesAPreparar(Long botigaId) {
+		// obtenim la botifa
+		Botiga botiga = obtenirBotiga(botigaId);
+		if(botiga.getComandesBotiga().isEmpty()) throw new ApiRequestException("la botiga no té comandes");
+		List<ComandaDto> comandesAPreparar = new ArrayList<ComandaDto>();
+		for(Comanda c : botiga.getComandesBotiga()) {
+			if (!c.getPreparada()) comandesAPreparar.add(new ComandaDto(c));
+		}
+		if (comandesAPreparar.isEmpty()) throw new ApiRequestException("la botiga no té comandes");
+		return comandesAPreparar;
+	}
+
+
 
 
 		

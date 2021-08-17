@@ -102,4 +102,11 @@ public class BotigaController {
 		
 	}
 	
+	// Obtenim les comandes de la botiga que s'han de preparar
+	@RequestMapping(value="/{botigaId}/comandes/noves",method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>>ComandesAPreparar(@PathVariable("botigaId")Long botigaId){
+		return ResponseEntity.ok(botigaService.getComandesAPreparar(botigaId));
+		
+	}
+	
 }

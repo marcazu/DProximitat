@@ -20,6 +20,7 @@ public class BotigaDto {
 	private String latitud;
 	private String iconUrl;
 	private String mainImageUrl;
+	private String numComandes;
 	
 	public BotigaDto(Botiga botiga) {//Constructor de botiga Dto
 		this.id = String.valueOf(botiga.getId());
@@ -32,6 +33,8 @@ public class BotigaDto {
 		this.iconUrl = botiga.getIconUrl();
 		this.mainImageUrl = botiga.getMainImageUrl();
 		this.districte = botiga.getDistricte();
+		if(botiga.getComandesBotiga().isEmpty()) this.numComandes = "0";
+		else numComandes = String.valueOf(botiga.getComandesBotiga().size());
 
 	}
 	public String getId() {
@@ -93,6 +96,12 @@ public class BotigaDto {
 	}
 	public void setDistricte(String districte) {
 		this.districte = districte;
+	}
+	public String getNumComandes() {
+		return numComandes;
+	}
+	public void setNumComandes(String numComandes) {
+		this.numComandes = numComandes;
 	}
 	
 	//ja està crec
