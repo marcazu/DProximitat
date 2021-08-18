@@ -59,7 +59,8 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, List<User> botiguers) {
+			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, List<User> botiguers,
+			 List<Comanda> comandesBotiga) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -72,6 +73,7 @@ public class Botiga {
 		this.iconUrl = iconUrl;
 		this.mainImageUrl = mainImageUrl;
 		this.districte = districte;
+		this.comandesBotiga = comandesBotiga;
 	}
 
 

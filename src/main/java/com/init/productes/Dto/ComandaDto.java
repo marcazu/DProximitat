@@ -10,11 +10,12 @@ public class ComandaDto {
 	private String costTotal;
 	
 	
+	
 	public ComandaDto(Comanda comanda) {
 		this.id = String.valueOf(comanda.getId());
 		this.entregada = comanda.getEntregada();
 		this.preparada = comanda.getPreparada();
-		this.costTotal = String.valueOf(comanda.getCostTotal());
+		this.costTotal = "0";
 	}
 	
 	public String getId() {

@@ -120,9 +120,15 @@ public class ComandaService {
 
 	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
 		Comanda c = new Comanda();
+		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
+		User u = obtenirUser(Long.valueOf(comandaLinkarDto.getUserID()));
+		c.setBotigaCompra(b);
+		b.addComanda(c);
+		u.addComanda(c);
+
 		comandaRepository.save(c);
-		linkarComandaBotiga(c.getId(),Long.valueOf(comandaLinkarDto.getBotigaID()));
-		linkarComandaUser(c.getId(),Long.valueOf(comandaLinkarDto.getUserID()));
+		userRepository.save(u);
+		botigaRepository.save(b);
 		
 	}
 
@@ -139,10 +145,10 @@ public class ComandaService {
 		throw new ApiRequestException(exceptionString);
 	}
 	
-	private Botiga obtenirBotiga(Long botigaId) {
-		Optional<Botiga> optionalBotiga = botigaRepository.findById(botigaId);
+	private Botiga obtenirBotiga(Long string) {
+		Optional<Botiga> optionalBotiga = botigaRepository.findById(string);
 		if(optionalBotiga.isPresent()) return optionalBotiga.get();
-		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+		String exceptionString = "No hi ha cap botiga amb ID: " + string;
 		throw new ApiRequestException(exceptionString);
 	}
 	
