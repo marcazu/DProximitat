@@ -91,7 +91,7 @@ public class BotigaController {
 		return ResponseEntity.ok(result);
 	}
 	
-	@RequestMapping(value="/{botigaId}/Comandes",method = RequestMethod.GET)
+	@RequestMapping(value="/{botigaId}/comandes",method = RequestMethod.GET)
 	public ResponseEntity<List<ComandaDto>>getComandes(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
@@ -100,13 +100,6 @@ public class BotigaController {
 	public ResponseEntity<String>DeleteProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
 		return ResponseEntity.ok(botigaService.deleteProducte(botigaId, productId));
 		
-	}
-	
-	// Obtenim les comandes de la botiga que s'han de preparar
-	@RequestMapping(value="/{botigaId}/comandes/noves",method = RequestMethod.GET)
-	public ResponseEntity<List<ComandaDto>>ComandesAPreparar(@PathVariable("botigaId")Long botigaId){
-		return ResponseEntity.ok(botigaService.getComandesAPreparar(botigaId));
-		
-	}
+	}	
 	
 }
