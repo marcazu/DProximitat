@@ -171,6 +171,15 @@ public class UserService {
 		
 	}
 
+
+	public void modificarUserByDto(Long userId, UserDetailsRequestModelDto userDetailsRequestModel) {
+		User updateUser = obtenirUser(userId);
+		if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
+		if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
+		if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setTelefon(userDetailsRequestModel.getTelefon());
+		userRepository.save(updateUser);
+	}
+	
 	public List<ComandaDto> getComandes(Long userId) {
 		User user = obtenirUser(userId);
 		List<Comanda> comandes = user.getComandesUsuari();
@@ -192,13 +201,25 @@ public class UserService {
 		return userDto;
 	}
 
-	public void modificarUserByDto(Long userId, UserDetailsRequestModelDto userDetailsRequestModel) {
-		User updateUser = obtenirUser(userId);
-		if(!userDetailsRequestModel.getEmail().isEmpty()) updateUser.setEmail(userDetailsRequestModel.getEmail());
-		if(!userDetailsRequestModel.getNom().isEmpty())updateUser.setNom(userDetailsRequestModel.getNom());
-		if(!userDetailsRequestModel.getTelefon().isEmpty())updateUser.setTelefon(userDetailsRequestModel.getTelefon());
-		userRepository.save(updateUser);
+	// obte les comandes d'un usuari a partir de la seva firebaseId
+	public  List<ComandaDto> getComandesByFirebaseId(Long firebaseId) {
+		User user = obtenirGuidUser(String.valueOf(firebaseId));
+		List<Comanda> comandes = user.getComandesUsuari();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		for(Comanda c: comandes) {
+			comandesDto.add(new ComandaDto(c));
+		}
+		if (comandesDto.isEmpty()){
+			exceptionString = "no Hi ha coses ";
+			throw new ApiRequestException(exceptionString);
+		}
+		else {
+			System.out.println("retorno les comandesDto");	
+		return comandesDto;}
 	}
+	
+	
+	// FUNCIONS PER OBTENIR ENTITIES A PARTIR DE IDENTIFICADORS
 	private User obtenirUser(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) return optionalUser.get();
