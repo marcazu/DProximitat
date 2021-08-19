@@ -202,8 +202,8 @@ public class UserService {
 	}
 
 	// obte les comandes d'un usuari a partir de la seva firebaseId
-	public  List<ComandaDto> getComandesByFirebaseId(Long firebaseId) {
-		User user = obtenirGuidUser(String.valueOf(firebaseId));
+	public  List<ComandaDto> getComandesByFirebaseId(String firebaseId) {
+		User user = obtenirGuidUser(firebaseId);
 		List<Comanda> comandes = user.getComandesUsuari();
 		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
 		for(Comanda c: comandes) {

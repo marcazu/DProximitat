@@ -122,7 +122,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/firebase/{userId}/comandes", method = RequestMethod.GET)
-	public ResponseEntity<List<ComandaDto>> getComandesByFirebaseId(@PathVariable("userId")Long firebaseId){
+	public ResponseEntity<List<ComandaDto>> getComandesByFirebaseId(@PathVariable("userId")String firebaseId){
 		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandesByFirebaseId(firebaseId));
 	}
