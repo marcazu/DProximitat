@@ -20,7 +20,7 @@ public class ComandaDto {
 		this.entregada = comanda.getEntregada();
 		this.costTotal = "0";
 		this.botigaName = comanda.getBotigaName();
-		this.propietari = comanda.getUserName();
+		//this.propietari = comanda.getUserName();
 		this.dataDExpedicio = "encar no funciono :D";
 		
 	}
