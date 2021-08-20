@@ -123,6 +123,7 @@ public class ComandaService {
 		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
 		User u = obtenirUser(Long.valueOf(comandaLinkarDto.getUserID()));
 		c.setBotigaCompra(b);
+		c.setUserOwner(u);
 		b.addComanda(c);
 		u.addComanda(c);
 
