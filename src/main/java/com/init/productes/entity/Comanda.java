@@ -76,7 +76,7 @@ public class Comanda {
 		this.entregada = entregada;
 		this.costTotal = costTotal;
 		this.productesComanda = productesComanda;
-		userOwner = userOwner;
+		this.userOwner = userOwner;
 		this.botigaCompra = botigaCompra;
 	}
 
@@ -105,7 +105,7 @@ public class Comanda {
 	}
 
 	public void setUserOwner(User userOwner) {
-		userOwner = userOwner;
+		this.userOwner = userOwner;
 	}
 
 	public Botiga getBotigaCompra() {
