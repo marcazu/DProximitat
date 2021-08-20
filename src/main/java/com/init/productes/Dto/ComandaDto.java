@@ -19,8 +19,8 @@ public class ComandaDto {
 		this.id = String.valueOf(comanda.getId());
 		this.entregada = comanda.getEntregada();
 		this.costTotal = "0";
-		this.botigaName = comanda.getBotigaName();
-		this.propietari = comanda.getUserName();
+		//this.botigaName = comanda.getBotigaName();
+		//this.propietari = comanda.getUserName();
 		this.dataDExpedicio = "encar no funciono :D";
 		
 	}
