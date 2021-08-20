@@ -45,7 +45,7 @@ public class User {
 			) // no volem borrar productes de la BD si els eliminem del carro de la compra
 	private List<Producte> carro = new ArrayList<Producte>();
 
-	@OneToMany(mappedBy ="UserOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
+	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
 	
