@@ -49,6 +49,32 @@ public class ComandaDto {
 	public void setCostTotal(String costTotal) {
 		this.costTotal = costTotal;
 	}
+
+	public String getBotigaName() {
+		return botigaName;
+	}
+
+	public void setBotigaName(String botigaName) {
+		this.botigaName = botigaName;
+	}
+
+	public String getPropietari() {
+		return propietari;
+	}
+
+	public void setPropietari(String propietari) {
+		this.propietari = propietari;
+	}
+
+	public String getDataDExpedicio() {
+		return dataDExpedicio;
+	}
+
+	public void setDataDExpedicio(String dataDExpedicio) {
+		this.dataDExpedicio = dataDExpedicio;
+	}
+	
+	
 	
 
 }
