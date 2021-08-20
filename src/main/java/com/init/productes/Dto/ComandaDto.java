@@ -5,17 +5,24 @@ import com.init.productes.entity.Comanda;
 public class ComandaDto {
 	
 	private String id;
-	private Boolean preparada;
 	private Boolean entregada;
 	private String costTotal;
+	// noves variables
+	
+	private String botigaName;
+    private String propietari;
+    private String dataDExpedicio;
 	
 	
 	
 	public ComandaDto(Comanda comanda) {
 		this.id = String.valueOf(comanda.getId());
 		this.entregada = comanda.getEntregada();
-		this.preparada = comanda.getPreparada();
 		this.costTotal = "0";
+		this.botigaName = comanda.getBotigaName();
+		this.propietari = comanda.getUserName();
+		this.dataDExpedicio = "encar no funciono :D";
+		
 	}
 	
 	public String getId() {
@@ -29,14 +36,6 @@ public class ComandaDto {
 	}
 	public void setEntregada(Boolean entregada) {
 		this.entregada = entregada;
-	}
-
-	public Boolean getPreparada() {
-		return preparada;
-	}
-
-	public void setPreparada(Boolean preparada) {
-		this.preparada = preparada;
 	}
 
 	public String getCostTotal() {

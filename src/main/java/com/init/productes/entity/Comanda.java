@@ -43,7 +43,7 @@ public class Comanda {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User UserOwner;
+	private User userOwner;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name= "botiga_id")
@@ -76,7 +76,7 @@ public class Comanda {
 		this.entregada = entregada;
 		this.costTotal = costTotal;
 		this.productesComanda = productesComanda;
-		UserOwner = userOwner;
+		userOwner = userOwner;
 		this.botigaCompra = botigaCompra;
 	}
 
@@ -101,11 +101,11 @@ public class Comanda {
 	}
 
 	public User getUserOwner() {
-		return UserOwner;
+		return userOwner;
 	}
 
 	public void setUserOwner(User userOwner) {
-		UserOwner = userOwner;
+		userOwner = userOwner;
 	}
 
 	public Botiga getBotigaCompra() {
@@ -136,5 +136,12 @@ public class Comanda {
 		this.costTotal = this.costTotal + preu;
 		
 	}
+	public String getBotigaName() {
+		return botigaCompra.getNom();
+	}
+	public String getUserName() {
+		return userOwner.getNom();
+	}
+	
 	
 }
