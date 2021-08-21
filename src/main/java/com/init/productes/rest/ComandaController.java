@@ -63,12 +63,11 @@ public class ComandaController {
 	public ResponseEntity<UserDto> getPropietariComanda(@PathVariable("comandaId")Long comandaId){
 		return ResponseEntity.ok(comandaService.getPropietari(comandaId));	
 	}
-	/*
+	
 	@RequestMapping(value="{comandaId}/productes", method = RequestMethod.GET)
 	public ResponseEntity<List<ProducteDto>> getProductesComandes(@PathVariable("comandaId")Long comandaId){
 		return ResponseEntity.ok(comandaService.getProductescomanda(comandaId));	
 	}
-	*/
 	@RequestMapping(value="{comandaId}/botiga",method = RequestMethod.GET)
 	public ResponseEntity<BotigaDto> getBotigaComanda(@PathVariable("comandaId") Long comandaId){
 		return ResponseEntity.ok(comandaService.getBotiga(comandaId));
