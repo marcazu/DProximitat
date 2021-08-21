@@ -74,17 +74,17 @@ public class ComandaService {
 		UserDto userDto = new UserDto(c.getUserOwner());
 		return userDto;		
 	}
-/*
 	public List<ProducteDto> getProductescomanda(Long comandaId) {
 		
 		Comanda c = obtenirComanda(comandaId);
 		List<ProducteDto> productesDto = new ArrayList<ProducteDto>();
 		for(ProducteQuantitat pq: c.getProductesComanda()) {
-			productesDto.add(new ProducteDto(pq.getProducte()));
+			// obtenim el producte 
+			Producte p = obtenirProducte(pq.getproducteQuantitatID().getProducteId());
+			productesDto.add(new ProducteDto(String.valueOf(pq.getQuantitat()),p));
 		}
 		return productesDto;	
 	}
-	*/
 
 	public BotigaDto getBotiga(Long comandaId) {
 		
@@ -139,6 +139,8 @@ public class ComandaService {
 		return c.getId();
 	}
 	
+	// FUNCIONS PRIVADES
+	
 	private Comanda obtenirComanda(Long comandaId) {
 		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
 		if(optionalComanda.isPresent()) return optionalComanda.get();
@@ -160,6 +162,13 @@ public class ComandaService {
 		throw new ApiRequestException(exceptionString);
 	}
 	
+	private Producte obtenirProducte(Long producteId) {
+		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
+		if(optionalProducte.isPresent()) return optionalProducte.get();
+		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
+		throw new ApiRequestException(exceptionString);
+	}
+	
 	private void linkarComandaBotiga(Long comandaId, Long botigaId) {
 		Botiga botiga =  obtenirBotiga(botigaId);
 		Comanda comanda = obtenirComanda(botigaId);
@@ -177,6 +186,7 @@ public class ComandaService {
 		userRepository.save(user);
 		
 	}
+
 	
 
 
