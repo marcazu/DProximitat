@@ -131,6 +131,11 @@ public class UserController {
 		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandesByFirebaseId(firebaseId));
 	}
+	@RequestMapping(value="/firebase/{userId}/comandes/entregades", method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>> getComandesByFirebaseIdEntregades(@PathVariable("userId")String firebaseId){
+		System.out.println("crido la funcio");
+		return ResponseEntity.ok(userService.getComandesByFirebaseIdEntregades(firebaseId));
+	}
 	
 	
 }

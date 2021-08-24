@@ -207,7 +207,7 @@ public class UserService {
 		List<Comanda> comandes = user.getComandesUsuari();
 		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
 		for(Comanda c: comandes) {
-			comandesDto.add(new ComandaDto(c));
+			if(!c.getEntregada())comandesDto.add(new ComandaDto(c));
 		}
 		if (comandesDto.isEmpty()){
 			exceptionString = "no Hi ha coses ";
@@ -257,6 +257,22 @@ public class UserService {
 			if(c.getEntregada())comandesDto.add(new ComandaDto(c));
 		}
 		return comandesDto;
+	}
+
+	public List<ComandaDto>  getComandesByFirebaseIdEntregades(String firebaseId) {
+		User user = obtenirGuidUser(firebaseId);
+		List<Comanda> comandes = user.getComandesUsuari();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		for(Comanda c: comandes) {
+			if(c.getEntregada())comandesDto.add(new ComandaDto(c));
+		}
+		if (comandesDto.isEmpty()){
+			exceptionString = "no Hi ha coses ";
+			throw new ApiRequestException(exceptionString);
+		}
+		else {
+			System.out.println("retorno les comandesDto");	
+		return comandesDto;}
 	}
 
 }
