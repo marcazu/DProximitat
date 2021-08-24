@@ -48,7 +48,7 @@ public class User {
 	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
-	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
+	@OneToMany(mappedBy ="userOwnerEntregades", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuariEntregades = new ArrayList<Comanda>(); //futura llista de comandes
 	
 	
@@ -177,6 +177,8 @@ public class User {
 	public void setComandesUsuariEntregades(List<Comanda> comandesUsuariEntregades) {
 		this.comandesUsuariEntregades = comandesUsuariEntregades;
 	}
+	
+	
 
 
 	public void entregarComanda(Comanda c) {

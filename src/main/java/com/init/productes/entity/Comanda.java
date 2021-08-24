@@ -45,6 +45,14 @@ public class Comanda {
 	@JoinColumn(name = "user_id")
 	private User userOwner;
 	
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@JoinColumn(name = "user_id_entregada")
+	private User userOwnerEntregada;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name= "botiga_id_entregada")
+	private Botiga botigaCompraEntregada;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaCompra;

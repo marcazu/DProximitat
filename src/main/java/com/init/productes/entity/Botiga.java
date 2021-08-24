@@ -55,7 +55,7 @@ public class Botiga {
 	private List<Comanda> comandesBotiga = new ArrayList<Comanda>();
 
 	
-	@OneToMany(mappedBy ="botigaCompra",
+	@OneToMany(mappedBy ="botigaCompraEntregades",
 			cascade = CascadeType.PERSIST, // no borrem la comanda al treure la comanda
 			orphanRemoval = false)// no borrem orfes de moment
 	private List<Comanda> comandesBotigaEntregades = new ArrayList<Comanda>();

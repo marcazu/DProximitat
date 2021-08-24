@@ -254,7 +254,7 @@ public class UserService {
 		List<Comanda> comandes = u.getComandesUsuariEntregades();
 		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
 		for(Comanda c : comandes) {
-			comandesDto.add(new ComandaDto(c));
+			if(c.getEntregada())comandesDto.add(new ComandaDto(c));
 		}
 		return comandesDto;
 	}
