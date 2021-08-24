@@ -48,9 +48,6 @@ public class User {
 	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
-	@OneToMany(mappedBy ="userOwnerEntregades", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
-	private List<Comanda> comandesUsuariEntregades = new ArrayList<Comanda>(); //futura llista de comandes
-	
 	
 	
 	public User() {
@@ -167,29 +164,7 @@ public class User {
 	public void setBotigaPropietari(Botiga botigaPropietari) {
 		this.botigaPropietari = botigaPropietari;
 	}
-
-
-	public List<Comanda> getComandesUsuariEntregades() {
-		return comandesUsuariEntregades;
-	}
-
-
-	public void setComandesUsuariEntregades(List<Comanda> comandesUsuariEntregades) {
-		this.comandesUsuariEntregades = comandesUsuariEntregades;
-	}
 	
-	
-
-
-	public void entregarComanda(Comanda c) {
-		for (int i = 0; i < comandesUsuari.size(); i++) {
-			if(comandesUsuari.get(i).getId() == c.getId()) {
-				comandesUsuari.remove(i);
-				comandesUsuariEntregades.add(c);
-				break;
-			}
-        }
-	}
 
 	
 	

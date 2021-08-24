@@ -54,11 +54,7 @@ public class Botiga {
 			orphanRemoval = false)// no borrem orfes de moment
 	private List<Comanda> comandesBotiga = new ArrayList<Comanda>();
 
-	
-	@OneToMany(mappedBy ="botigaCompraEntregades",
-			cascade = CascadeType.PERSIST, // no borrem la comanda al treure la comanda
-			orphanRemoval = false)// no borrem orfes de moment
-	private List<Comanda> comandesBotigaEntregades = new ArrayList<Comanda>();
+
 	
 	protected Botiga() {
 		
@@ -66,7 +62,7 @@ public class Botiga {
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
 			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, List<User> botiguers,
-			 List<Comanda> comandesBotiga, List<Comanda> comandesBotigaEntregades) {
+			 List<Comanda> comandesBotiga) {
 		super();
 		this.nom = nom;
 		this.descripcio = descripcio;
@@ -80,7 +76,6 @@ public class Botiga {
 		this.mainImageUrl = mainImageUrl;
 		this.districte = districte;
 		this.comandesBotiga = comandesBotiga;
-		this.comandesBotigaEntregades = comandesBotigaEntregades;
 	}
 
 
@@ -193,25 +188,6 @@ public class Botiga {
 		this.districte = districte;
 	}
 
-	public List<Comanda> getComandesBotigaEntregades() {
-		return comandesBotigaEntregades;
-	}
-
-	public void setComandesBotigaEntregades(List<Comanda> comandesBotigaEntregades) {
-		this.comandesBotigaEntregades = comandesBotigaEntregades;
-	}
-
-	public void entregarComanda(Comanda c) {
-		// hem de borrarlo de la llista i ficarlo a l'altre
-		for (int i = 0; i < comandesBotiga.size(); i++) {
-			if(comandesBotiga.get(i).getId() == c.getId()) {
-				comandesBotiga.remove(i);
-				comandesBotigaEntregades.add(c);
-				break;
-			}
-        }
-		
-	}
 
 	
 	
