@@ -109,6 +109,11 @@ public class UserController {
 		System.out.println("crido la funcio");
 		return ResponseEntity.ok(userService.getComandes(userId));
 	}
+	
+	@RequestMapping(value="/{userId}/comandes/entregades", method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>> getComandesEntregades(@PathVariable("userId")Long userId){
+		return ResponseEntity.ok(userService.getComandesEntregades(userId));
+	}
 	@RequestMapping(value="/firebase/{firebaseId}", method = RequestMethod.GET)
 	public ResponseEntity<UserDto> getUserByFirebaseId(@PathVariable("firebaseId")String userId){
 		return ResponseEntity.ok(userService.getUserFireBase(userId));	

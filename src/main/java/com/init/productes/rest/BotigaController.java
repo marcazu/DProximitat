@@ -96,6 +96,7 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
 	}
+	
 	@RequestMapping(value="/{botigaId}/comandes/entegades",method = RequestMethod.GET)
 	public ResponseEntity<List<ComandaDto>>getComandesEntregades(@PathVariable("botigaId")Long botigaId){
 		return ResponseEntity.ok(botigaService.getComandesEntregades(botigaId));
