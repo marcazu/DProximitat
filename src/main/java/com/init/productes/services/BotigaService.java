@@ -178,6 +178,16 @@ public class BotigaService {
 		return comandesAPreparar;
 	}
 
+	public List<ComandaDto> getComandesEntregades(Long botigaId) {
+		Botiga botiga = obtenirBotiga(botigaId);
+		List<Comanda> comandes = botiga.getComandesBotigaEntregades();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		for(Comanda c : comandes) {
+			comandesDto.add(new ComandaDto(c));
+		}
+		return comandesDto;
+	}
+
 
 
 

@@ -96,6 +96,13 @@ public class BotigaController {
 		return ResponseEntity.ok(botigaService.getComandes(botigaId));
 		
 	}
+	@RequestMapping(value="/{botigaId}/comandes/entegades",method = RequestMethod.GET)
+	public ResponseEntity<List<ComandaDto>>getComandesEntregades(@PathVariable("botigaId")Long botigaId){
+		return ResponseEntity.ok(botigaService.getComandesEntregades(botigaId));
+		
+	}
+	
+	
 	@RequestMapping(value="/{botigaId}/deleteProducte/{productId}",method = RequestMethod.PUT)
 	public ResponseEntity<String>DeleteProducte(@PathVariable("botigaId")Long botigaId, @PathVariable("productId")Long productId) {
 		return ResponseEntity.ok(botigaService.deleteProducte(botigaId, productId));

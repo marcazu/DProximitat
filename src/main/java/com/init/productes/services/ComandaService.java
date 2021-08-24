@@ -103,6 +103,14 @@ public class ComandaService {
 	public void entregarComanda(Long comandaId) {
 		Comanda c = obtenirComanda(comandaId);
 		c.setEntregada(true);
+		// hem d'eliminar la comadna del user i la botiga i posar-ho com entregades.
+		Botiga b = c.getBotigaCompra();
+		b.entregarComanda(c);
+		User u = c.getUserOwner();
+		botigaRepository.save(b);
+		u.entregarComanda(c);
+		userRepository.save(u);
+
 		comandaRepository.save(c);				
 	}
 	

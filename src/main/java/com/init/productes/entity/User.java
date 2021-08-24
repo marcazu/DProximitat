@@ -48,13 +48,17 @@ public class User {
 	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
+	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
+	private List<Comanda> comandesUsuariEntregades = new ArrayList<Comanda>(); //futura llista de comandes
+	
+	
 	
 	public User() {
 	}
 	
 
 	public User(String nom, String telefon, String email, Boolean esBotiguer,Botiga botigaUsuari,
-			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId) {
+			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId,List<Comanda> comandesUsuariEntregades) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
@@ -64,12 +68,12 @@ public class User {
 		this.carro = carro;
 		this.comandesUsuari = comandesUsuari;
 		this.firebaseUId = firebaseUId;
+		this.comandesUsuari = comandesUsuariEntregades;
 	}
 
 	public long getId() {
 		return id;
 	}
-	
 	
 
 
@@ -153,6 +157,38 @@ public class User {
 	public void setFirebaseUId(String firebaseUId) {
 		this.firebaseUId = firebaseUId;
 	}
+
+
+	public Botiga getBotigaPropietari() {
+		return botigaPropietari;
+	}
+
+
+	public void setBotigaPropietari(Botiga botigaPropietari) {
+		this.botigaPropietari = botigaPropietari;
+	}
+
+
+	public List<Comanda> getComandesUsuariEntregades() {
+		return comandesUsuariEntregades;
+	}
+
+
+	public void setComandesUsuariEntregades(List<Comanda> comandesUsuariEntregades) {
+		this.comandesUsuariEntregades = comandesUsuariEntregades;
+	}
+
+
+	public void entregarComanda(Comanda c) {
+		for (int i = 0; i < comandesUsuari.size(); i++) {
+			if(comandesUsuari.get(i).getId() == c.getId()) {
+				comandesUsuari.remove(i);
+				comandesUsuariEntregades.add(c);
+				break;
+			}
+        }
+	}
+
 	
 	
 

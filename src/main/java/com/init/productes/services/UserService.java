@@ -249,4 +249,14 @@ public class UserService {
 		
 	}
 
+	public List<ComandaDto> getComandesEntregades(Long userId) {
+		User u = obtenirUser(userId);
+		List<Comanda> comandes = u.getComandesUsuariEntregades();
+		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();
+		for(Comanda c : comandes) {
+			comandesDto.add(new ComandaDto(c));
+		}
+		return comandesDto;
+	}
+
 }
