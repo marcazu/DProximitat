@@ -152,53 +152,89 @@ public class ComandaService {
 		return c.getId();
 	}
 	
+	
+
+	public void crearLinkarComandaFirebaseId(ComandaLinkarDto comandaLinkarDto) {
+		Comanda c = new Comanda();
+		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
+		User u = obtenirGuidUser(comandaLinkarDto.getUserID());
+		c.setBotigaCompra(b);
+		c.setUserOwner(u);
+		b.addComanda(c);
+		u.addComanda(c);
+		comandaRepository.save(c);
+		userRepository.save(u);
+		botigaRepository.save(b);
+		List<ProducteQuantitat> pqList = new ArrayList<>();
+		
+		for(ProducteQuantiatDto pqDto: comandaLinkarDto.getProducteQuantitat()) {
+			ProducteQuantitatID pqID = new ProducteQuantitatID(c.getId(),Long.parseLong(pqDto.getProducteId()));
+			ProducteQuantitat pq = new ProducteQuantitat(pqID,Integer.parseInt(pqDto.getQuantitat()));
+			pqList.add(pq);
+			pqRepository.save(pq);
+			
+		}
+		c.setProductesComanda(pqList);
+
+		comandaRepository.save(c);
+		
+		
+	}
+	
 	// FUNCIONS PRIVADES
 	
-	private Comanda obtenirComanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) return optionalComanda.get();
-		exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-		throw new ApiRequestException(exceptionString);
-	}
-	
-	private Botiga obtenirBotiga(Long string) {
-		Optional<Botiga> optionalBotiga = botigaRepository.findById(string);
-		if(optionalBotiga.isPresent()) return optionalBotiga.get();
-		String exceptionString = "No hi ha cap botiga amb ID: " + string;
-		throw new ApiRequestException(exceptionString);
-	}
-	
-	private User obtenirUser(Long userId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		if(optionalUser.isPresent()) return optionalUser.get();
-		String exceptionString = "No hi ha cap user amb ID: " + userId;
-		throw new ApiRequestException(exceptionString);
-	}
-	
-	private Producte obtenirProducte(Long producteId) {
-		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
-		if(optionalProducte.isPresent()) return optionalProducte.get();
-		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
-		throw new ApiRequestException(exceptionString);
-	}
-	
-	private void linkarComandaBotiga(Long comandaId, Long botigaId) {
-		Botiga botiga =  obtenirBotiga(botigaId);
-		Comanda comanda = obtenirComanda(botigaId);
-		botiga.addComanda(comanda);
-		comanda.setBotigaCompra(botiga);
-		botigaRepository.save(botiga);
+		private Comanda obtenirComanda(Long comandaId) {
+			Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+			if(optionalComanda.isPresent()) return optionalComanda.get();
+			exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+			throw new ApiRequestException(exceptionString);
+		}
 		
-	}
-	
-	private void linkarComandaUser(Long comandaID,Long userID) {
-		User user = obtenirUser(userID);
-		Comanda comanda = obtenirComanda(comandaID);
-		comanda.setUserOwner(user);
-		user.addComanda(comanda);//potserfalla aqui
-		userRepository.save(user);
+		private Botiga obtenirBotiga(Long string) {
+			Optional<Botiga> optionalBotiga = botigaRepository.findById(string);
+			if(optionalBotiga.isPresent()) return optionalBotiga.get();
+			String exceptionString = "No hi ha cap botiga amb ID: " + string;
+			throw new ApiRequestException(exceptionString);
+		}
 		
-	}
+		private User obtenirUser(Long userId) {
+			Optional<User> optionalUser = userRepository.findById(userId);
+			if(optionalUser.isPresent()) return optionalUser.get();
+			String exceptionString = "No hi ha cap user amb ID: " + userId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+		private Producte obtenirProducte(Long producteId) {
+			Optional<Producte> optionalProducte = producteRepository.findById(producteId);
+			if(optionalProducte.isPresent()) return optionalProducte.get();
+			String exceptionString = "No hi ha cap producte amb ID: " + producteId;
+			throw new ApiRequestException(exceptionString);
+		}
+		
+		private void linkarComandaBotiga(Long comandaId, Long botigaId) {
+			Botiga botiga =  obtenirBotiga(botigaId);
+			Comanda comanda = obtenirComanda(botigaId);
+			botiga.addComanda(comanda);
+			comanda.setBotigaCompra(botiga);
+			botigaRepository.save(botiga);
+			
+		}
+		
+		private void linkarComandaUser(Long comandaID,Long userID) {
+			User user = obtenirUser(userID);
+			Comanda comanda = obtenirComanda(comandaID);
+			comanda.setUserOwner(user);
+			user.addComanda(comanda);//potserfalla aqui
+			userRepository.save(user);
+			
+		}
+		
+		private User obtenirGuidUser(String userGuId) {
+			Optional<User> optionalUser = userRepository.findByfirebaseUId(userGuId);
+			if(optionalUser.isPresent()) return optionalUser.get();
+			String exceptionString = "No hi ha cap user amb ID: " + userGuId;
+			throw new ApiRequestException(exceptionString);
+		}
 
 	
 

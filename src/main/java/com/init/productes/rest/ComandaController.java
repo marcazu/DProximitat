@@ -102,5 +102,15 @@ public class ComandaController {
 		return ResponseEntity.ok(exceptionString);
 		
 	}
+	// crea i linka una comanda pero amb id de usuari de la firebase
+	@RequestMapping(value="/crearlinkar/firebaseid", method = RequestMethod.POST)
+	public ResponseEntity<String>CrearLinkarComandaFirebaseID(@RequestBody ComandaLinkarDto comandaLinkarDto){
+		exceptionString = "S'ha creat i linkat una nova comanda";
+		comandaService.crearLinkarComandaFirebaseId(comandaLinkarDto);
+		return ResponseEntity.ok(exceptionString);
+		
+	}
+	
+	
 
 }
