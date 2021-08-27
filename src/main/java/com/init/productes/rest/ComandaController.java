@@ -94,6 +94,7 @@ public class ComandaController {
 		exceptionString = "S'ha entregat la comanda: " + comandaId;
 		return ResponseEntity.ok(exceptionString);
 	}
+	// crea i linka una comanda i també afegeix els productesQuantitat corresponents
 	@RequestMapping(value="/crearlinkar", method = RequestMethod.POST)
 	public ResponseEntity<String>CrearLinkarComanda(@RequestBody ComandaLinkarDto comandaLinkarDto){
 		exceptionString = "S'ha creat i linkat una nova comanda";

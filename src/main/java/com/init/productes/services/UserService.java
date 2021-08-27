@@ -259,7 +259,7 @@ public class UserService {
 		return comandesDto;
 	}
 
-	public List<ComandaDto>  getComandesByFirebaseIdEntregades(String firebaseId) {
+	public List<ComandaDto> getComandesByFirebaseIdEntregades(String firebaseId) {
 		User user = obtenirGuidUser(firebaseId);
 		List<Comanda> comandes = user.getComandesUsuari();
 		List<ComandaDto> comandesDto = new ArrayList<ComandaDto>();

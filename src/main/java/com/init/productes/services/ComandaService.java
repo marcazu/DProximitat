@@ -10,11 +10,13 @@ import com.init.productes.Dto.BotigaDto;
 import com.init.productes.Dto.ComandaDto;
 import com.init.productes.Dto.ComandaLinkarDto;
 import com.init.productes.Dto.ProducteDto;
+import com.init.productes.Dto.ProducteQuantiatDto;
 import com.init.productes.Dto.UserDto;
 import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Comanda;
 import com.init.productes.entity.Producte;
 import com.init.productes.entity.ProducteQuantitat;
+import com.init.productes.entity.ProducteQuantitatID;
 import com.init.productes.entity.User;
 import com.init.productes.exception.ApiRequestException;
 import com.init.productes.repository.BotiguesRepository;
@@ -126,6 +128,15 @@ public class ComandaService {
 		c.setUserOwner(u);
 		b.addComanda(c);
 		u.addComanda(c);
+		List<ProducteQuantiatDto> productesComanda = comandaLinkarDto.getProducteQuantitat();
+		for(ProducteQuantiatDto pqDto: productesComanda) {
+			ProducteQuantitat pq = new ProducteQuantitat(new ProducteQuantitatID(Long.parseLong(pqDto.getComandaId()),Long.parseLong(pqDto.getProducteId())),
+					Integer.parseInt(pqDto.getQuantitat()));
+			//obtenim la comanda i afegim el producteQuantitat
+			c.addProducteQuantitat(pq);
+			pqRepository.save(pq);
+			
+		}
 
 		comandaRepository.save(c);
 		userRepository.save(u);
