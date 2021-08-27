@@ -128,18 +128,21 @@ public class ComandaService {
 		c.setUserOwner(u);
 		b.addComanda(c);
 		u.addComanda(c);
-		for(ProducteQuantiatDto pqDto: comandaLinkarDto.getProducteQuantitat()) {
-			ProducteQuantitat pq = new ProducteQuantitat(new ProducteQuantitatID(c.getId(),Long.parseLong(pqDto.getProducteId())),
-					Integer.parseInt(pqDto.getQuantitat()));
-			//obtenim la comanda i afegim el producteQuantitat
-			c.addProducteQuantitat(pq);
-			pqRepository.save(pq);
-			
-		}
-
 		comandaRepository.save(c);
 		userRepository.save(u);
 		botigaRepository.save(b);
+		List<ProducteQuantitat> pqList = new ArrayList<>();
+		
+		for(ProducteQuantiatDto pqDto: comandaLinkarDto.getProducteQuantitat()) {
+			ProducteQuantitatID pqID = new ProducteQuantitatID(c.getId(),Long.parseLong(pqDto.getProducteId()));
+			ProducteQuantitat pq = new ProducteQuantitat(pqID,Integer.parseInt(pqDto.getQuantitat()));
+			pqList.add(pq);
+			pqRepository.save(pq);
+			
+		}
+		c.setProductesComanda(pqList);
+
+		comandaRepository.save(c);
 		
 	}
 
