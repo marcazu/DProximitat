@@ -130,7 +130,7 @@ public class ComandaService {
 		u.addComanda(c);
 		List<ProducteQuantiatDto> productesComanda = comandaLinkarDto.getProducteQuantitat();
 		for(ProducteQuantiatDto pqDto: productesComanda) {
-			ProducteQuantitat pq = new ProducteQuantitat(new ProducteQuantitatID(Long.parseLong(pqDto.getComandaId()),Long.parseLong(pqDto.getProducteId())),
+			ProducteQuantitat pq = new ProducteQuantitat(new ProducteQuantitatID(c.getId(),Long.parseLong(pqDto.getProducteId())),
 					Integer.parseInt(pqDto.getQuantitat()));
 			//obtenim la comanda i afegim el producteQuantitat
 			c.addProducteQuantitat(pq);
