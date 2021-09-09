@@ -30,6 +30,8 @@ public class User {
 	private String telefon;
 	@Column(name="email")
 	private String email;
+	@Column(name="iconaUrl")
+	private String iconaUrl;
 	@Column(name="Botiguer",columnDefinition = "boolean default false") // no posa en false
 	private Boolean esBotiguer;
 	@Column(name="fireBaseUId")
@@ -55,7 +57,8 @@ public class User {
 	
 
 	public User(String nom, String telefon, String email, Boolean esBotiguer,Botiga botigaUsuari,
-			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId,List<Comanda> comandesUsuariEntregades) {
+			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId,List<Comanda> comandesUsuariEntregades,
+			String iconaUrl) {
 		super();
 		this.nom = nom;
 		this.telefon = telefon;
@@ -66,6 +69,7 @@ public class User {
 		this.comandesUsuari = comandesUsuari;
 		this.firebaseUId = firebaseUId;
 		this.comandesUsuari = comandesUsuariEntregades;
+		this.iconaUrl = iconaUrl;
 	}
 
 	public long getId() {
@@ -73,6 +77,7 @@ public class User {
 	}
 	
 
+	
 
 	public String getNom() {
 		return nom;
@@ -164,6 +169,15 @@ public class User {
 	public void setBotigaPropietari(Botiga botigaPropietari) {
 		this.botigaPropietari = botigaPropietari;
 	}
+
+	public String getIconaUrl() {
+		return iconaUrl;
+	}
+
+	public void setIconaUrl(String iconaUrl) {
+		this.iconaUrl = iconaUrl;
+	}
+	
 	
 
 	

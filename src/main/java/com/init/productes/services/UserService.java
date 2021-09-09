@@ -73,6 +73,7 @@ public class UserService {
 		if(!user.getNom().isEmpty())updateUser.setNom(user.getNom());
 		if(!user.getEmail().isEmpty())updateUser.setEmail(user.getEmail());
 		if(!user.getTelefon().isEmpty())updateUser.setTelefon(user.getTelefon());
+		if(!user.getIconaUrl().isEmpty())updateUser.setIconaUrl(user.getIconaUrl());
 			//if(!user.getEsBotiguer().isBlank())updateUser.setEsBotiguer(user.getEsBotiguer());
 		if(!user.getEmail().isEmpty())updateUser.setBotigaUsuari(user.getBotigaUsuari());
 	}
