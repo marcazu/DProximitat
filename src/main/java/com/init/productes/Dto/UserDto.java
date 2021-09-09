@@ -8,6 +8,7 @@ public class UserDto {
 	private String nom;
 	private String telefon;
 	private String email;
+	private String iconaUrl;
 	private Boolean esbotiguer;
 	
 
@@ -17,6 +18,7 @@ public class UserDto {
 		this.telefon = user.getTelefon();
 		this.email = user.getEmail();
 		this.esbotiguer = user.getEsBotiguer();
+		this.iconaUrl = user.getIconaUrl();
 	}
 
 	public String getId() {
@@ -58,6 +60,16 @@ public class UserDto {
 	public void setEsbotiguer(Boolean esbotiguer) {
 		this.esbotiguer = esbotiguer;
 	}
+
+	public String getIconaUrl() {
+		return iconaUrl;
+	}
+
+	public void setIconaUrl(String iconaUrl) {
+		this.iconaUrl = iconaUrl;
+	}
+	
+	
 	
 	
 
