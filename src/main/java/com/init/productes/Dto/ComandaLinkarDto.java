@@ -7,6 +7,7 @@ public class ComandaLinkarDto {
 	
 	private String userID;
 	private String botigaID;
+	private String dataExpedicio;
 	private List<ProducteQuantiatDto> producteQuantitat;
 	
 	
@@ -28,6 +29,14 @@ public class ComandaLinkarDto {
 	public void setProducteQuantitat(List<ProducteQuantiatDto> producteQuantitat) {
 		this.producteQuantitat = producteQuantitat;
 	}
+	public String getDataExpedicio() {
+		return dataExpedicio;
+	}
+	public void setDataExpedicio(String dataExpedicio) {
+		this.dataExpedicio = dataExpedicio;
+	}
+	
+	
 	
 	
 
