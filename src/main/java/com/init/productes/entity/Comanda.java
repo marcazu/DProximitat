@@ -1,6 +1,9 @@
 package com.init.productes.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -68,7 +71,7 @@ public class Comanda {
 		this.entregada = false;
 		this.preparada = false;
 		this.costTotal = 0.0;
-		this.dataExpedicio = "holis";
+		this.dataExpedicio = getDateTime();
 	}
 	
 	// no se pq he de fer aquesta guarrada, pero no agafar la data de el comandaLinkarDo
@@ -165,6 +168,12 @@ public class Comanda {
 	public void setDataExpedicio(String dataExpedicio) {
 		this.dataExpedicio = dataExpedicio;
 	}
+	
+	private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 	
 	
 	
