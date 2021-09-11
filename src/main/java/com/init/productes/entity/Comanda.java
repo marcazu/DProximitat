@@ -70,6 +70,16 @@ public class Comanda {
 		this.costTotal = 0.0;
 		this.dataExpedicio = "holis";
 	}
+	
+	// no se pq he de fer aquesta guarrada, pero no agafar la data de el comandaLinkarDo
+	public Comanda(String data) {
+		// creem una coamnda buida
+		super();
+		this.entregada = false;
+		this.preparada = false;
+		this.costTotal = 0.0;
+		this.dataExpedicio = data;
+	}
 
 	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
 			List<ProducteQuantitat> productesComanda, User userOwner, Botiga botigaCompra,

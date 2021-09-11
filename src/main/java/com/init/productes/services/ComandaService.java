@@ -121,7 +121,7 @@ public class ComandaService {
 	*/
 
 	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
-		Comanda c = new Comanda();
+		Comanda c = new Comanda(comandaLinkarDto.getDataExpedicio());
 		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
 		User u = obtenirUser(Long.valueOf(comandaLinkarDto.getUserID()));
 		c.setBotigaCompra(b);
@@ -141,7 +141,6 @@ public class ComandaService {
 			
 		}
 		c.setProductesComanda(pqList);
-		c.setDataExpedicio(comandaLinkarDto.getDataExpedicio());
 
 		comandaRepository.save(c);
 		
