@@ -49,6 +49,7 @@ public class ProducteService {
 		updateProducte.setDescripcio(producte.getDescripcio());
 		updateProducte.setTipus(producte.getTipus());
 		updateProducte.setPreu(producte.getPreu());
+		updateProducte.setIconaProducte(producte.getIconaProducte());
 		productRepository.save(updateProducte);
 	}
 	

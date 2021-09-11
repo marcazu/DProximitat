@@ -80,6 +80,7 @@ public class BotigaService {
 			updateBotiga.setLatitud(botiga.getLatitud());
 			updateBotiga.setLongitud(botiga.getLongitud());
 			updateBotiga.setTelefon(botiga.getTelefon());
+			updateBotiga.setIconUrl(botiga.getIconUrl());
 			botiguesRepository.save(updateBotiga);
 	}
 
