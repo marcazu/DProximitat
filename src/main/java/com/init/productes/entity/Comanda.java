@@ -30,6 +30,8 @@ public class Comanda {
 	private long id;
 	@Column(name="preparada")
 	private Boolean preparada;
+	@Column(name="dataExpedicio")
+	private String dataExpedicio;
 	
 	@Column(name="entregada")
 	private Boolean entregada;
@@ -69,13 +71,15 @@ public class Comanda {
 	}
 
 	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
-			List<ProducteQuantitat> productesComanda, User userOwner, Botiga botigaCompra) {
+			List<ProducteQuantitat> productesComanda, User userOwner, Botiga botigaCompra,
+			String dataExpedicio) {
 		super();
 		this.id = id;
 		this.preparada = preparada;
 		this.entregada = entregada;
 		this.costTotal = costTotal;
 		this.productesComanda = productesComanda;
+		this.dataExpedicio = dataExpedicio;
 		this.userOwner = userOwner;
 		this.botigaCompra = botigaCompra;
 	}
@@ -142,6 +146,15 @@ public class Comanda {
 	public String getUserName() {
 		return userOwner.getNom();
 	}
+
+	public String getDataExpedicio() {
+		return dataExpedicio;
+	}
+
+	public void setDataExpedicio(String dataExpedicio) {
+		this.dataExpedicio = dataExpedicio;
+	}
+	
 	
 	
 }
