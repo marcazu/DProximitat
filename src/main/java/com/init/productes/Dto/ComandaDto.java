@@ -11,7 +11,7 @@ public class ComandaDto {
 	
 	private String botigaName;
     private String propietari;
-    private String dataDExpedicio;
+    private String dataExpedicio;
 	
 	
 	
@@ -21,7 +21,7 @@ public class ComandaDto {
 		this.costTotal = "0";
 		this.botigaName = comanda.getBotigaName();
 		this.propietari = comanda.getUserName();
-		this.dataDExpedicio = "encar no funciono :D";
+		this.dataExpedicio = comanda.getDataExpedicio();
 		
 	}
 	
@@ -67,11 +67,11 @@ public class ComandaDto {
 	}
 
 	public String getDataDExpedicio() {
-		return dataDExpedicio;
+		return dataExpedicio;
 	}
 
 	public void setDataDExpedicio(String dataDExpedicio) {
-		this.dataDExpedicio = dataDExpedicio;
+		this.dataExpedicio = dataDExpedicio;
 	}
 	
 	
