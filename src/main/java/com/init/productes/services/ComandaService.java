@@ -179,8 +179,15 @@ public class ComandaService {
 
 		comandaRepository.save(c);
 		
-		
 	}
+	
+	
+	public void modificarComandaComentariById(Long comandaId, String comentari) {
+		Comanda c = obtenirComanda(comandaId);
+		c.setComentari(comentari);
+		comandaRepository.save(c);
+	}
+	
 	
 	// FUNCIONS PRIVADES
 	
@@ -236,6 +243,8 @@ public class ComandaService {
 			String exceptionString = "No hi ha cap user amb ID: " + userGuId;
 			throw new ApiRequestException(exceptionString);
 		}
+
+
 
 	
 
