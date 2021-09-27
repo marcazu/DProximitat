@@ -12,6 +12,7 @@ public class ComandaDto {
 	private String botigaName;
     private String propietari;
     private String dataExpedicio;
+    private String comentari;
 	
 	
 	
@@ -22,6 +23,7 @@ public class ComandaDto {
 		this.botigaName = comanda.getBotigaName();
 		this.propietari = comanda.getUserName();
 		this.dataExpedicio = comanda.getDataExpedicio();
+		this.comentari = comanda.getComentari();
 		
 	}
 	
@@ -72,6 +74,22 @@ public class ComandaDto {
 
 	public void setDataDExpedicio(String dataDExpedicio) {
 		this.dataExpedicio = dataDExpedicio;
+	}
+
+	public String getDataExpedicio() {
+		return dataExpedicio;
+	}
+
+	public void setDataExpedicio(String dataExpedicio) {
+		this.dataExpedicio = dataExpedicio;
+	}
+
+	public String getComentari() {
+		return comentari;
+	}
+
+	public void setComentari(String comentari) {
+		this.comentari = comentari;
 	}
 	
 	

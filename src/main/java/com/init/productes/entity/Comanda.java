@@ -39,10 +39,13 @@ public class Comanda {
 	@Column(name="entregada")
 	private Boolean entregada;
 	
+	@Column(name = "comentari")
+	private String comentari;
+	
 	@Column(name="costTotal")
 	private Double costTotal; 
 	
-	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
+	@OneToMany(cascade = CascadeType.ALL, // no borrem el producte al treurel de la botiga
 			orphanRemoval = false) // no borrem orfes
 	private List<ProducteQuantitat> productesComanda =  new ArrayList<ProducteQuantitat>();
 	
@@ -72,6 +75,7 @@ public class Comanda {
 		this.preparada = false;
 		this.costTotal = 0.0;
 		this.dataExpedicio = getDateTime();
+		this.comentari = "";
 	}
 	
 	// no se pq he de fer aquesta guarrada, pero no agafar la data de el comandaLinkarDo
@@ -82,11 +86,12 @@ public class Comanda {
 		this.preparada = false;
 		this.costTotal = 0.0;
 		this.dataExpedicio = data;
+		this.comentari = "";
 	}
 
 	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
 			List<ProducteQuantitat> productesComanda, User userOwner, Botiga botigaCompra,
-			String dataExpedicio) {
+			String dataExpedicio, String comentari) {
 		super();
 		this.id = id;
 		this.preparada = preparada;
@@ -96,6 +101,7 @@ public class Comanda {
 		this.dataExpedicio = dataExpedicio;
 		this.userOwner = userOwner;
 		this.botigaCompra = botigaCompra;
+		this.comentari = comentari;
 	}
 
 	public long getId() {
@@ -174,6 +180,16 @@ public class Comanda {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+	public String getComentari() {
+		return comentari;
+	}
+
+	public void setComentari(String comentari) {
+		this.comentari = comentari;
+	}
+	
+	
 	
 	
 	

@@ -37,7 +37,7 @@ public class User {
 	@Column(name="fireBaseUId")
 	private String firebaseUId;
 	
-	@ManyToOne(cascade = CascadeType.ALL,
+	@ManyToOne(cascade = CascadeType.PERSIST,
 			fetch = FetchType.LAZY)
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaPropietari;// botiga que gestiona l'usuari  
@@ -47,7 +47,7 @@ public class User {
 			) // no volem borrar productes de la BD si els eliminem del carro de la compra
 	private List<Producte> carro = new ArrayList<Producte>();
 
-	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.ALL,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
+	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.PERSIST,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
 	
