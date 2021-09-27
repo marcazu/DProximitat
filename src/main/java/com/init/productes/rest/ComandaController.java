@@ -110,8 +110,8 @@ public class ComandaController {
 		return ResponseEntity.ok(exceptionString);
 		
 	}
-	@RequestMapping(value="{comandaId}/modificarcomentari", method = RequestMethod.PUT)
-	public ResponseEntity<String>modificarComandaComentariById(@PathVariable("comandaId") Long comandaId,@RequestBody String comentari){
+	@RequestMapping(value="{comandaId}/comentari/{comentari}", method = RequestMethod.PUT)
+	public ResponseEntity<String>modificarComandaComentariById(@PathVariable("comandaId") Long comandaId,@PathVariable("comentari") String comentari){
 		exceptionString = "S'ha modificat el comentari de la comanda "+comandaId;
 		comandaService.modificarComandaComentariById(comandaId,comentari);
 		return ResponseEntity.ok(exceptionString);
