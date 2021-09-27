@@ -68,14 +68,6 @@ public class ComandaDto {
 		this.propietari = propietari;
 	}
 
-	public String getDataDExpedicio() {
-		return dataExpedicio;
-	}
-
-	public void setDataDExpedicio(String dataDExpedicio) {
-		this.dataExpedicio = dataDExpedicio;
-	}
-
 	public String getDataExpedicio() {
 		return dataExpedicio;
 	}
