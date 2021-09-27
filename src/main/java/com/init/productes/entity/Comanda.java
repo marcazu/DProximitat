@@ -31,8 +31,10 @@ public class Comanda {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
 	@Column(name="preparada")
 	private Boolean preparada;
+	
 	@Column(name="dataExpedicio")
 	private String dataExpedicio;
 	
@@ -160,9 +162,11 @@ public class Comanda {
 		this.costTotal = this.costTotal + preu;
 		
 	}
+	
 	public String getBotigaName() {
 		return botigaCompra.getNom();
 	}
+	
 	public String getUserName() {
 		return userOwner.getNom();
 	}
