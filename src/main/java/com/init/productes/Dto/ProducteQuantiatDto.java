@@ -5,6 +5,7 @@ public class ProducteQuantiatDto {
 	private String comandaId;
 	private String producteId;
 	private String quantitat;
+	private String comentari;
 	
 	
 	public ProducteQuantiatDto() {
@@ -27,6 +28,12 @@ public class ProducteQuantiatDto {
 	}
 	public void setQuantitat(String quantitat) {
 		this.quantitat = quantitat;
+	}
+	public String getComentari() {
+		return comentari;
+	}
+	public void setComentari(String comentari) {
+		this.comentari = comentari;
 	}
 	
 	

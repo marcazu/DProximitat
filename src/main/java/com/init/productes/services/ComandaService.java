@@ -160,6 +160,7 @@ public class ComandaService {
 		User u = obtenirGuidUser(comandaLinkarDto.getUserID());
 		c.setBotigaCompra(b);
 		c.setUserOwner(u);
+		c.setComentari(comandaLinkarDto.getComentari());
 		b.addComanda(c);
 		u.addComanda(c);
 		comandaRepository.save(c);
