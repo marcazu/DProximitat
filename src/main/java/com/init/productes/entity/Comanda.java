@@ -88,7 +88,8 @@ public class Comanda {
 		this.preparada = false;
 		this.costTotal = 0.0;
 		this.dataExpedicio = data;
-		this.comentari = comentari;
+		if(comentari == null) this.comentari = "";
+		else this.comentari = comentari;
 	}
 
 	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
