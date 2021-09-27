@@ -121,11 +121,12 @@ public class ComandaService {
 	*/
 
 	public void crearLinkarComanda(ComandaLinkarDto comandaLinkarDto) {
-		Comanda c = new Comanda(comandaLinkarDto.getDataExpedicio());
+		Comanda c = new Comanda(comandaLinkarDto.getDataExpedicio(),comandaLinkarDto.getComentari());
 		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
 		User u = obtenirUser(Long.valueOf(comandaLinkarDto.getUserID()));
 		c.setBotigaCompra(b);
 		c.setUserOwner(u);
+		c.setComentari(comandaLinkarDto.getComentari());
 		b.addComanda(c);
 		u.addComanda(c);
 		comandaRepository.save(c);
@@ -155,12 +156,11 @@ public class ComandaService {
 	
 
 	public void crearLinkarComandaFirebaseId(ComandaLinkarDto comandaLinkarDto) {
-		Comanda c = new Comanda();
+		Comanda c = new Comanda(comandaLinkarDto.getDataExpedicio(),comandaLinkarDto.getComentari());
 		Botiga b = obtenirBotiga(Long.valueOf(comandaLinkarDto.getBotigaID()));
 		User u = obtenirGuidUser(comandaLinkarDto.getUserID());
 		c.setBotigaCompra(b);
 		c.setUserOwner(u);
-		c.setComentari(comandaLinkarDto.getComentari());
 		b.addComanda(c);
 		u.addComanda(c);
 		comandaRepository.save(c);

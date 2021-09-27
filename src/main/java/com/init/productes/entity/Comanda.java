@@ -81,14 +81,14 @@ public class Comanda {
 	}
 	
 	// no se pq he de fer aquesta guarrada, pero no agafar la data de el comandaLinkarDo
-	public Comanda(String data) {
+	public Comanda(String data, String comentari) {
 		// creem una coamnda buida
 		super();
 		this.entregada = false;
 		this.preparada = false;
 		this.costTotal = 0.0;
 		this.dataExpedicio = data;
-		this.comentari = "";
+		this.comentari = comentari;
 	}
 
 	public Comanda(long id, Boolean preparada, Boolean entregada, Double costTotal,
