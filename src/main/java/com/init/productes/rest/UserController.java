@@ -79,6 +79,12 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/firebase/{userId}/botigues", method =RequestMethod.GET)
+	public ResponseEntity<BotigaDto>getBotigaByFirebaseId(@PathVariable("userId")String FirebaseId){
+		return ResponseEntity.ok(userService.getBotiguesByFirebaseID(FirebaseId));
+		
+	}
+	
 	@RequestMapping(value="/{userId}/addCarro/{producteId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>addProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
 		userService.afegirProducteCarro(userId,producteId);

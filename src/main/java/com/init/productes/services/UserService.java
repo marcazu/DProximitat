@@ -172,7 +172,13 @@ public class UserService {
 		return new BotigaDto(botiga);
 		
 	}
+	
 
+	public BotigaDto getBotiguesByFirebaseID(String firebaseId) {
+		User user = obtenirGuidUser(firebaseId);
+		Botiga botiga = user.getBotigaPropietari();
+		return new BotigaDto(botiga);
+	}
 
 	public void modificarUserByDto(Long userId, UserDetailsRequestModelDto userDetailsRequestModel) {
 		User updateUser = obtenirUser(userId);
@@ -222,6 +228,8 @@ public class UserService {
 	
 	
 	// FUNCIONS PER OBTENIR ENTITIES A PARTIR DE IDENTIFICADORS
+	
+	
 	private User obtenirUser(Long userId) {
 		Optional<User> optionalUser = userRepository.findById(userId);
 		if(optionalUser.isPresent()) return optionalUser.get();
@@ -276,5 +284,6 @@ public class UserService {
 			System.out.println("retorno les comandesDto");	
 		return comandesDto;}
 	}
+
 
 }
