@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import com.init.productes.entity.Botiga;
+import com.init.productes.entity.Comanda;
 import com.init.productes.entity.User;
 
 public class BotigaDto {
@@ -34,7 +35,13 @@ public class BotigaDto {
 		this.mainImageUrl = botiga.getMainImageUrl();
 		this.districte = botiga.getDistricte();
 		if(botiga.getComandesBotiga().isEmpty()) this.numComandes = "0";
-		else numComandes = String.valueOf(botiga.getComandesBotiga().size());
+		else {
+			int x = 0;
+			for (Comanda c : botiga.getComandesBotiga()) {
+				if(!c.getEntregada()) x += 1;
+			}
+			numComandes = String.valueOf(x);
+		}
 
 	}
 	public String getId() {
@@ -103,7 +110,6 @@ public class BotigaDto {
 	public void setNumComandes(String numComandes) {
 		this.numComandes = numComandes;
 	}
-	
 	//ja està crec
 }
 
