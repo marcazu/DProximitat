@@ -54,6 +54,13 @@ public class ProducteController {
 		String result = "S'ha modificat el producte amb Id: " + producte.getId();
 		return ResponseEntity.ok(result);  
 	}
+	
+	@RequestMapping(value ="{productId}/preu/{noupreu}",method =RequestMethod.PUT)
+	public ResponseEntity<String> modificarPreuProducte(@PathVariable("productId")Long productId, @PathVariable("noupreu")Double noupreu){
+		producteService.modificarPreu(productId,noupreu);
+		String result = "S'ha modificat el preu del producte amb Id: " + productId;
+		return ResponseEntity.ok(result);  
+	}
 
 
 }

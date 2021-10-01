@@ -53,11 +53,23 @@ public class ProducteService {
 		productRepository.save(updateProducte);
 	}
 	
+	public void modificarPreu(Long productId, Double noupreu) {
+		Producte p = obtenirProducte(productId);
+		p.setPreu(noupreu);
+		productRepository.save(p);
+
+		
+	}
+	
+	//funcions privades
+	
 	private Producte obtenirProducte(Long producteId) {
 		Optional<Producte> optionalProducte = productRepository.findById(producteId);
 		if(optionalProducte.isPresent()) return optionalProducte.get();
 		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
 		throw new ApiRequestException(exceptionString);
 	}
+
+
 
 }
