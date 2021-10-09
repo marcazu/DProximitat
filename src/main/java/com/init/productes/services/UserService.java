@@ -93,77 +93,12 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	//aquesta està per borrar
-	public void afegirProducteCarro(Long userId, Long producteId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
-		if(optionalUser.isPresent()) {
-			if(optionalProducte.isPresent()) {
-				User user = obtenirUser(userId);
-				Producte producte = optionalProducte.get();
-				user.addProducteCarro(producte);
-				userRepository.save(user);		
-			}
-			else {
-				exceptionString = "No hi ha cap producte amb ID: " + producteId;
-				throw new ApiRequestException(exceptionString);
-			}		
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}	
-	}
-
-	//aquesta la borraré
-	public void deleteProducteCarro(Long userId, Long producteId) {
-		Optional<User> optionalUser = userRepository.findById(userId);
-		Optional<Producte> optionalProducte = producteRepository.findById(producteId);
-		if(optionalUser.isPresent()) {
-			if(optionalProducte.isPresent()) {
-				User user = optionalUser.get();
-				Producte producte = optionalProducte.get();
-				List<Producte> carro = user.getCarro();
-				for(Producte p : carro)	{
-					if(p.getId() == producte.getId()) {
-						carro.remove(p);
-						userRepository.save(user);		
-						return;
-					}
-				}
-				// no ha trobaat l'objecte posar excepcio
-				exceptionString = " no s'ha trobat el producte al carro del user";
-				throw new ApiRequestException(exceptionString);
-			}
-			else {
-				exceptionString = "No hi ha cap producte amb ID: " + producteId;
-				throw new ApiRequestException(exceptionString);
-			}		
-		}
-		else {
-			exceptionString = "No hi ha cap user amb ID: " + userId;
-			throw new ApiRequestException(exceptionString);
-		}	
-		
-		
-	}
-
 	public void linkcomanda(Long userId, Long comandaId) {
 			User user = obtenirUser(userId);
 			Comanda comanda = obtenirComanda(comandaId);
 			comanda.setUserOwner(user);
 			user.addComanda(comanda);//potserfalla aqui
 			userRepository.save(user);
-	}
-
-	public List<ProducteDto> getCarro(Long userId) {
-		User user = obtenirUser(userId);
-		List<Producte> carro = user.getCarro();
-		List<ProducteDto> carroDto = new ArrayList<ProducteDto>();
-		for(Producte p :carro) {
-			carroDto.add(new ProducteDto(p));
-		}
-		return carroDto;
 	}
 
 	public BotigaDto getBotigues(Long userId) {

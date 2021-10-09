@@ -9,8 +9,6 @@ import com.init.productes.entity.Comanda;
 import com.init.productes.entity.User;
 
 public class BotigaDto {
-
-
 	private String id;
 	private String nom;
 	private String descripcio;
@@ -23,7 +21,7 @@ public class BotigaDto {
 	private String mainImageUrl;
 	private String numComandes;
 	
-	public BotigaDto(Botiga botiga) {//Constructor de botiga Dto
+	public BotigaDto(Botiga botiga) {//Constructor de botiga Dto a partir d'una botiga
 		this.id = String.valueOf(botiga.getId());
 		this.nom = botiga.getNom();
 		this.descripcio = botiga.getDescripcio();

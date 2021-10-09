@@ -42,11 +42,6 @@ public class User {
 	@JoinColumn(name= "botiga_id")
 	private Botiga botigaPropietari;// botiga que gestiona l'usuari  
 	
-	@OneToMany(cascade = CascadeType.ALL,
-			orphanRemoval = false
-			) // no volem borrar productes de la BD si els eliminem del carro de la compra
-	private List<Producte> carro = new ArrayList<Producte>();
-
 	@OneToMany(mappedBy ="userOwner", cascade = CascadeType.PERSIST,fetch=FetchType.LAZY) // cascade si borrem el user es borraran les seves comandes
 	private List<Comanda> comandesUsuari = new ArrayList<Comanda>(); //futura llista de comandes
 	
@@ -57,7 +52,7 @@ public class User {
 	
 
 	public User(String nom, String telefon, String email, Boolean esBotiguer,Botiga botigaUsuari,
-			List<Producte> carro, List<Comanda> comandesUsuari,String firebaseUId,List<Comanda> comandesUsuariEntregades,
+			 List<Comanda> comandesUsuari,String firebaseUId,List<Comanda> comandesUsuariEntregades,
 			String iconaUrl) {
 		super();
 		this.nom = nom;
@@ -65,7 +60,6 @@ public class User {
 		this.email = email;
 		this.esBotiguer = esBotiguer;
 		//this.botigaUsuari = botigaPropietari;
-		this.carro = carro;
 		this.comandesUsuari = comandesUsuari;
 		this.firebaseUId = firebaseUId;
 		this.comandesUsuari = comandesUsuariEntregades;
@@ -126,18 +120,6 @@ public class User {
 
 	public void addBotigaUser(Botiga botiga) {
 		this.botigaPropietari = botiga;
-	}
-	
-	public List<Producte> getCarro() {
-		return carro;
-	}
-
-	public void setCarro(List<Producte> carro) {
-		this.carro = carro;
-	}
-	
-	public void addProducteCarro(Producte producte) {
-		carro.add(producte);
 	}
 	
 	public void addComanda(Comanda comanda) {

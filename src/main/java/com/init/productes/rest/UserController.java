@@ -85,25 +85,6 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/{userId}/addCarro/{producteId}", method = RequestMethod.PUT)
-	public ResponseEntity<String>addProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
-		userService.afegirProducteCarro(userId,producteId);
-		exceptionResponse = "S'ha afegit el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
-		return ResponseEntity.ok(exceptionResponse);
-	}
-	
-	@RequestMapping(value="/{userId}/deleteCarro/{producteId}", method = RequestMethod.PUT)
-	public ResponseEntity<String>deleteProducteCarro(@PathVariable("userId") Long userId, @PathVariable("producteId") Long producteId){
-		userService.deleteProducteCarro(userId,producteId);
-		exceptionResponse = "S'ha esborrrat el producte amb Id: " + producteId + "al usuari amb Id: " +userId;
-		return ResponseEntity.ok(exceptionResponse);
-	}
-	
-	@RequestMapping(value="/{userId}/carro", method = RequestMethod.GET)
-	public ResponseEntity<List<ProducteDto>> getcarro(@PathVariable("userId") Long userId){
-		return ResponseEntity.ok(userService.getCarro(userId));
-	}
-	
 	@RequestMapping(value="/{userId}/linkComanda/{comandaId}", method = RequestMethod.PUT)
 	public ResponseEntity<String>linkarComanda(@PathVariable("userId") Long userId, @PathVariable("comandaId") Long comandaId){
 		userService.linkcomanda(userId,comandaId);
