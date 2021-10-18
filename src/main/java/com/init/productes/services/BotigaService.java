@@ -112,14 +112,12 @@ public class BotigaService {
 		return productesDto;
 	}
 
-	public List<UserDto> getPropietari(Long botigaId) {
+	public UserDto getPropietari(Long botigaId) {
 			Botiga botiga = obtenirBotiga(botigaId);
-			List<User> propietaris = botiga.getBotiguers();
-			List<UserDto> propietarisDto = new ArrayList();
-			for (User u : propietaris) {
-				propietarisDto.add(new UserDto(u));
-			}
-			return propietarisDto;
+			User propietari = botiga.getBotiguer();
+			UserDto userDto = new UserDto(propietari);
+
+			return userDto;
 	}
 
 	public void afegirComanda(Long botigaId, Long comandaId) {

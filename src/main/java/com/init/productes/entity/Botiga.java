@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,8 +42,8 @@ public class Botiga {
 	@Column(name="mainImageUrl")
 	private String mainImageUrl;
 	
-	@OneToMany(mappedBy ="botigaPropietari", cascade = CascadeType.PERSIST,fetch=FetchType.LAZY) // ha de ser one to many
-	private List<User> botiguers = new ArrayList<User>();
+	@OneToOne(mappedBy ="botigaPropietari", cascade = CascadeType.PERSIST,fetch=FetchType.LAZY) // ha de ser one to many
+	private User botiguer;
 	
 	//La idea es que contingui els productes de la botiga
 	@OneToMany(cascade = CascadeType.PERSIST, // no borrem el producte al treurel de la botiga
@@ -61,7 +62,7 @@ public class Botiga {
 	}
 	
 	public Botiga(String nom, String descripcio, String email, String telefon, double longitud, double latitud,
-			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, List<User> botiguers,
+			 List<Producte> productesBotiga, String iconUrl, String mainImageUrl, String districte, User botiguer,
 			 List<Comanda> comandesBotiga) {
 		super();
 		this.nom = nom;
@@ -70,7 +71,7 @@ public class Botiga {
 		this.telefon = telefon;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		this.botiguers = botiguers;
+		this.botiguer = botiguer;
 		this.productesBotiga = productesBotiga;
 		this.iconUrl = iconUrl;
 		this.mainImageUrl = mainImageUrl;
@@ -143,15 +144,12 @@ public class Botiga {
 		
 	}
 
-	public List<User> getBotiguers() {
-		return botiguers;
+	public User getBotiguer() {
+		return botiguer;
 	}
 
-	public void setBotiguers(List<User> botiguers) {
-		this.botiguers = botiguers;
-	}
-	public void addBotiguer(User botiguer) {
-		this.botiguers.add(botiguer);
+	public void setBotiguer(User botiguer) {
+		this.botiguer = botiguer;
 	}
 
 	public void addComanda(Comanda comanda) {
