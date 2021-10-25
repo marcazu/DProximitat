@@ -41,6 +41,13 @@ public class ProducteController {
 		return ResponseEntity.ok(result);
 	}
 	
+	@RequestMapping(value ="/botiga/{botigaId}",method =RequestMethod.POST)
+	public ResponseEntity<String> createProducteBotiga(@PathVariable ("botigaId")Long botigaId, @RequestBody Producte producte){
+		producteService.createProducteBotiga(botigaId,producte);
+		String result = "S'ha creat un producte amb id: " + producte.getId();
+		return ResponseEntity.ok(result);
+	}
+	
 	@RequestMapping(value ="{productId}", method =RequestMethod.DELETE)
 	public ResponseEntity<String> deleteProducte(@PathVariable("productId")Long productId){
 		producteService.deleteById(productId);

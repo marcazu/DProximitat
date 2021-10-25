@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.init.productes.entity.Botiga;
 import com.init.productes.entity.Producte;
 import com.init.productes.exception.ApiRequestException;
+import com.init.productes.repository.BotiguesRepository;
 import com.init.productes.repository.ProductesRespository;
 
 @Service
@@ -13,6 +16,8 @@ public class ProducteService {
 	
 	@Autowired
 	private ProductesRespository productRepository;
+	@Autowired
+	private BotiguesRepository botiguesRepository;
 	
 	private String ExceptionString;
 	
@@ -30,6 +35,14 @@ public class ProducteService {
 
 	public void createProducte(Producte producte) {
 		productRepository.save(producte);
+	}
+	public void createProducteBotiga(Long botigaId, Producte producte) {
+		
+		Botiga botiga = obtenirBotiga(botigaId); //optenim la botiga
+		botiga.addProducteBotiga(producte);
+		productRepository.save(producte);
+		botiguesRepository.save(botiga);
+		
 	}
 
 	public void deleteById(Long productId) {
@@ -69,6 +82,16 @@ public class ProducteService {
 		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
 		throw new ApiRequestException(exceptionString);
 	}
+	
+	private Botiga obtenirBotiga(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
+		if(optionalBotiga.isPresent()) return optionalBotiga.get();
+		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+		throw new ApiRequestException(exceptionString);
+		
+	}
+
+
 
 
 

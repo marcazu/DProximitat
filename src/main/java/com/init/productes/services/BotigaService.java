@@ -116,7 +116,6 @@ public class BotigaService {
 			Botiga botiga = obtenirBotiga(botigaId);
 			User propietari = botiga.getBotiguer();
 			UserDto userDto = new UserDto(propietari);
-
 			return userDto;
 	}
 
@@ -140,29 +139,6 @@ public class BotigaService {
 		return comandesDto;
 			
 	}
-	
-	private Botiga obtenirBotiga(Long botigaId) {
-		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
-		if(optionalBotiga.isPresent()) return optionalBotiga.get();
-		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
-		throw new ApiRequestException(exceptionString);
-		
-	}
-	
-	private Comanda obtenirComanda(Long comandaId) {
-		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
-		if(optionalComanda.isPresent()) return optionalComanda.get();
-		String exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
-		throw new ApiRequestException(exceptionString);
-		
-	}
-	
-	private Producte obtenirProducte(Long producteId) {
-		Optional<Producte> optionalProducte = productesRepository.findById(producteId);
-		if(optionalProducte.isPresent()) return optionalProducte.get();
-		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
-		throw new ApiRequestException(exceptionString);
-	}
 
 
 	public List<ComandaDto> getComandesAPreparar(Long botigaId) {
@@ -185,6 +161,32 @@ public class BotigaService {
 			if(c.getEntregada())comandesDto.add(new ComandaDto(c));
 		}
 		return comandesDto;
+	
+	}
+	
+	//funcions privades
+	
+	private Botiga obtenirBotiga(Long botigaId) {
+		Optional<Botiga> optionalBotiga = botiguesRepository.findById(botigaId);
+		if(optionalBotiga.isPresent()) return optionalBotiga.get();
+		String exceptionString = "No hi ha cap botiga amb ID: " + botigaId;
+		throw new ApiRequestException(exceptionString);
+		
+	}
+	
+	private Comanda obtenirComanda(Long comandaId) {
+		Optional<Comanda> optionalComanda = comandaRepository.findById(comandaId);
+		if(optionalComanda.isPresent()) return optionalComanda.get();
+		String exceptionString = "No hi ha cap comanda amb ID: " + comandaId;
+		throw new ApiRequestException(exceptionString);
+		
+	}
+	
+	private Producte obtenirProducte(Long producteId) {
+		Optional<Producte> optionalProducte = productesRepository.findById(producteId);
+		if(optionalProducte.isPresent()) return optionalProducte.get();
+		String exceptionString = "No hi ha cap producte amb ID: " + producteId;
+		throw new ApiRequestException(exceptionString);
 	}
 
 
